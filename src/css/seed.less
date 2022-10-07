@@ -1,0 +1,71 @@
+@import "base";
+
+.constrained {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 15px;
+
+  @media @tiny {
+    padding: 0 10px;
+  }
+}
+
+h1:focus,
+h2:focus {
+  outline: 0;
+}
+
+.alert {
+  .gotham();
+  color: #666;
+  padding-right: 10px;
+
+  b {
+    color: @rigorous;
+  }
+
+  @media @mobile {
+    padding-right: 0;
+  }
+}
+
+.source {
+	color: #9a9a9a;
+	font-style: italic;
+	font-size: 11px;
+  margin: 30px 0 10px;
+  a {
+    text-decoration: none;
+  }
+  .note {
+    margin-bottom: 10px;
+    font-style: normal;
+  }
+}
+
+@import "navbar";
+@import "about-box";
+@import "ads";
+@import "footer";
+@import "embeds";
+
+// components
+// kind of a pain but autoglobbing didn't work out
+@import "../js/components/balanceOfPower/balanceOfPower";
+@import "../js/components/boardKey/boardKey";
+@import "../js/components/boardPresident/boardPresident";
+@import "../js/components/boardSenate/senate";
+@import "../js/components/cartogram/cartogram";
+@import "../js/components/countyDataViz/countyData";
+@import "../js/components/countyMap/countyMap";
+@import "../js/components/electoralArc/electoralArc";
+@import "../js/components/electoralGrid/grid";
+@import "../js/components/electoralBubbles/electoralBubbles";
+@import "../js/components/nationalMap/nationalMap";
+@import "../js/components/resultsBoardNamed/resultsBoard";
+@import "../js/components/resultsTableCandidates/results";
+@import "../js/components/resultsTableCounty/resultsTableCounty";
+@import "../js/components/stateResults/state-results";
+@import "../js/components/stateViewKeyRaces/keyRaces";
+@import "../js/components/tabs/tabs";
+@import "../js/components/testBanner/testBanner";

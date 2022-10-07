@@ -1,0 +1,74 @@
+<%
+  var prefix;
+  if (typeof prefix == "undefined") {
+    prefix = "";
+  }
+%>
+
+<footer class="mega-nav" role="contentinfo">
+  <div class="constrained">
+
+    <h3 class="more-hed">2020 Election Resources</h3>
+
+    <div class="more-2020 link-block">
+      <ul>
+        <% for (var a of json.footer) { %>
+        <li><a href="<%= a.url %>"><%= a.label %></a></li>
+        <% } %>
+      </ul>
+    </div>
+
+    <h3 class="state-hed">2020 Election Results</h3>
+
+    <div class="state-nav link-block">
+      <div>
+        <a href="#/president">
+          President
+        </a>
+      </div>
+      <div>
+        <a href="#/house">
+          U.S. House
+        </a>
+      </div>
+      <div>
+        <a href="#/senate">
+          U.S. Senate
+        </a>
+      </div>
+      <div class="gov-link">
+        <a href="#/governor">
+          Governor
+        </a>
+      </div>
+
+      <% for (var s in json.states) { %>
+      <% if (json.states[s].district) continue; %>
+        <div>
+          <a href="#/states/<%= s %>">
+            <%= json.states[s].name == "District of Columbia" ? "D.C." : json.states[s].name %>
+          </a>
+        </div>
+      <% } %>
+    </div>
+
+</footer>
+
+<footer class="more" role="contentinfo">
+  <div class="constrained">
+    <div class="credits">
+      <h3>Credits</h3>
+      <%= t.renderMarkdown(json.strings.credits) %>
+    </div>
+
+    <div class="npr">
+      <ul>
+        <li><a href="https://www.npr.org/about-npr/179876898/terms-of-use" target="_blank">Terms of Use</a></li>
+        <li><a href="https://www.npr.org/about-npr/179878450/privacy-policy" target="_blank">Privacy</a></li>
+        <li><a href="https://www.npr.org/about-npr/179878450/privacy-policy#yourchoices" target="_blank">Your Privacy Choices</a></li>
+        <li><a href="https://text.npr.org/" target="_blank">Text Only</a></li>
+        <li>&copy; 2020 NPR</li>
+      </ul>
+    </div>
+  </div>
+</footer>

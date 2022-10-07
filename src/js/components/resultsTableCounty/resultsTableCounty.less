@@ -1,0 +1,329 @@
+@import "../../../css/values";
+
+.results-counties {
+  table.results-table {
+    border-collapse: collapse;
+    color: #666;
+    font-size: 12px;
+    table-layout: fixed;
+    width: 100%;
+    // display: block;
+
+    tbody.collapsed :nth-child(n + 11) {
+      .sr-only();
+    }
+    .leading {
+      color: @gray;
+      background-color: @indDim;
+
+      &.Dem {
+        background-color: @demDim;
+      }
+      &.GOP {
+        background-color: @gopDim;
+      }
+
+      &.allin {
+        color: #fff;
+        background-color: @ind;
+
+        &.Dem {
+          background-color: @dem;
+        }
+        &.GOP {
+          background-color: @gop;
+        }
+      }
+
+      .icon {
+        color: #fff;
+
+        &:before {
+          display: inline;
+          padding-left: 3px;
+        }
+      }
+    }
+
+    td {
+      position: relative;
+      vertical-align: middle;
+      padding: 8px;
+      border-bottom: 1px solid #eee;
+      border-right: 1px solid #eee;
+      &:last-child {
+        border-right: none;
+        text-align: center;
+      }
+      &:first-child {
+        @media @mobile-above {
+          border-right: none;
+        }
+      }
+
+      span.precincts {
+        display: none;
+        font-size: 9px;
+        font-style: italic;
+        color: #999;
+      }
+
+      @media @mobile {
+        padding: 2px;
+        word-wrap: break-word;
+
+        span.precincts {
+          display: block;
+        }
+      }
+    }
+
+    thead th {
+      vertical-align: bottom;
+
+      @media @mobile {
+        padding: 0 2px 5px 2px;
+      }
+    }
+
+    thead th,
+    tbody th {
+      border-bottom: 2px solid #eee;
+      font-family: @knockout;
+      font-weight: normal;
+      letter-spacing: 0.05em;
+      line-height: 1.2;
+      text-transform: uppercase;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+
+      &.county.sortable {
+        cursor: pointer;
+      }
+
+      &.vote,
+      &.comparison {
+        line-height: 1;
+        padding: 0 0 5px 0;
+
+        @media @mobile {
+          div {
+            position: relative;
+            height: 70px;
+            width: 100%;
+          }
+
+          span.title {
+            position: absolute;
+            bottom: 55%;
+            left: 50%;
+            -webkit-transform: translateX(-50%) translateY(50%) rotate(-90deg);
+            transform: translateX(-50%) translateY(50%) rotate(-90deg);
+            width: 70px;
+            text-align: left;
+          }
+        }
+
+        &.sortable {
+          span:nth-child(2) {
+            position: absolute;
+            right: 0;
+            bottom: 1px;
+
+            @media @mobile {
+              display: none;
+            }
+          }
+          padding-right: 15px;
+          cursor: pointer;
+
+          @media @mobile {
+            padding-right: 0;
+          }
+        }
+      }
+    }
+
+    th.county {
+      padding: 0 0 5px;
+    }
+    th.amt.precincts {
+      cursor: pointer;
+    }
+
+    th,
+    td {
+      border-left: 1px solid #eee;
+      text-align: center;
+
+      &.comparison {
+        width: 15%;
+      }
+      &.vote {
+        width: 11%;
+      }
+
+      @media @mobile {
+        font-size: 11px;
+        padding: 5px 2px;
+
+        &.comparison {
+          width: 18%;
+        }
+
+        &.county {
+          span {
+            max-width: 60px;
+          }
+        }
+
+        &.vote {
+          width: 12%;
+        }
+      }
+
+      @media @tiny {
+        &.vote {
+          width: 13%;
+        }
+      }
+
+      &:first-child {
+        padding-left: 0;
+      }
+      &:last-child {
+        padding-right: 0;
+      }
+
+      &.county {
+        border-left: none;
+        text-align: left;
+      }
+
+      &.precincts {
+        border-left: none;
+        border-right: 1px solid #ccc;
+        color: @gray-light;
+        font-size: 10px;
+        font-style: italic;
+        text-align: right;
+        white-space: nowrap;
+
+        @media @mobile {
+          display: none;
+        }
+      }
+
+      &.margin {
+        &.Dem {
+          color: @dem;
+        }
+        &.GOP {
+          color: @gop;
+        }
+        &.Ind {
+          color: @ind;
+        }
+        &.Other {
+          color: @gray;
+        }
+      }
+    }
+  }
+
+  .sorter {
+    font-family: @gotham;
+    font-size: 12px;
+    list-style-type: none;
+    margin-bottom: 15px;
+    padding: 0;
+
+    // @media screen and (max-width: @screen-xs) { text-align: center; }
+
+    > li {
+      color: @gray-medium;
+      white-space: nowrap;
+      line-height: 1.7em;
+      display: inline-block;
+      margin: 0 2px 0 0;
+
+      &.label {
+        color: #787878;
+        display: block;
+        font-size: 11px;
+        font-family: @knockout;
+        font-weight: normal;
+        text-transform: uppercase;
+        padding-top: 0;
+        line-height: 1.2;
+        letter-spacing: 0.05em;
+        -webkit-font-smoothing: antialiased;
+        margin-bottom: 6px;
+      }
+
+      &.sortButton {
+        .metric {
+          color: #4774cc;
+          padding: 0 5px;
+
+          &:hover {
+            color: @link-hover-color;
+            cursor: pointer;
+          }
+        }
+        .pipe {
+          color: @gray-medium;
+        }
+
+        &:last-child {
+          .pipe {
+            display: none;
+          }
+        }
+
+        &.selected {
+          .metric {
+            color: @gray-dark;
+            font-weight: bold;
+
+            &:hover {
+              color: @gray-dark;
+            }
+          }
+        }
+
+        &:nth-child(2) .metric {
+          padding-left: 0;
+        }
+      }
+    }
+  }
+
+  button {
+    .knockout-header();
+    background-color: #fff;
+    border: none;
+    box-shadow: none;
+    box-sizing: border-box;
+    color: #4774cc;
+    display: block;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 22px;
+    padding: 10px;
+    text-transform: uppercase;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:hover {
+      color: @link-hover-color;
+      cursor: pointer;
+    }
+
+    &.toggle-table.hidden {
+      display: none;
+    }
+  }
+}

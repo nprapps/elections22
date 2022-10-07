@@ -1,0 +1,44 @@
+@import "../../../css/values";
+
+.bop-wrapper {
+  width: 66%;
+  display: inline-block;
+
+  @media @mobile {
+    width: 100%;
+  }
+}
+
+.title-wrapper {
+  width: 33%;
+  float: left;
+  margin-top: 0.83em;
+  padding: 5px 10px 5px 0;
+
+  @media @mobile {
+    width: 100%;
+  }
+}
+
+.header {
+  margin-bottom: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.board-container {
+  width: 100%;
+
+  h2 {
+    width: 100%;
+    .knockout-header();
+    margin: 5px 0 5px 0;
+    // font-weight: bold;
+    border-top: 2px solid #ddd;
+    padding-top: 8px;
+    text-transform: uppercase;
+    color: #666;
+    font-size: 1.1em;
+  }
+}

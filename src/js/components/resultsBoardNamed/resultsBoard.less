@@ -1,0 +1,491 @@
+@import "values";
+
+@border: 1px solid #efefef;
+@background: #efefef;
+@wide-padding: 4px 8px;
+@thin-padding: 4px 5px;
+
+.board-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 30px;
+
+  &.Gov {
+    margin-top: 25px;
+  }
+
+  // @media @mobile {
+  //   display: block;
+  // }
+}
+
+.board-wrapper {
+  flex: 0 0 32%;
+  max-width: 100%;
+
+  &.first {
+    order: 1;
+  }
+  &.middle {
+    order: 2;
+  }
+  &.last {
+    order: 3;
+  }
+
+  &.Gov {
+    flex: 0 0 100%;
+
+    table {
+      width: 49%;
+      vertical-align: top;
+      display: inline-block;
+    }
+
+    table:nth-child(2) {
+      float: right;
+        
+      tr.index-0 td {
+        border-top: 1px solid #ddd;
+      }
+    }
+
+    @media @tablet {
+      table {
+        width: 100%;
+      }
+      table:nth-child(2) {
+        tr.index-0 td {
+          border-top: none;
+        }
+      }
+    }
+  }
+
+  &.House, &.Senate {
+    .board-inner {
+      table:nth-child(2) {
+        float: right;
+
+        tr.index-0 td {
+          border-top: none;
+        }
+      }
+    }
+
+    @media @full {
+      flex: 0 0 49%;
+
+      &.middle {
+        flex: 0 0 100%;
+        order: 1;
+        margin-bottom: 35px;
+
+        table {
+          width: 49%;
+          vertical-align: top;
+          display: inline-block;
+        }
+
+        table:nth-child(2) {
+          tr.index-0 td {
+            border-top: 1px solid #ddd;
+          }
+        }
+      }
+    }
+
+    @media @tablet {
+      flex: 0 0 100%;
+      margin-bottom: 20px;
+
+      &.middle {
+        margin-bottom: 20px;
+        table {
+          width: 100%;
+        }
+        table:nth-child(2) {
+          tr.index-0 td {
+            border-top: none;
+          }
+        }
+      }
+    }
+  }
+
+  &.Ballot {
+    flex: 0 0 100%;
+  }
+}
+
+.board-hed {
+  font-family: "Gotham SSm", Helvetica, Arial, sans-serif;
+  color: #444;
+  display: block;
+
+  &.none {
+    display: none;
+  }
+}
+
+table.results {
+  // margin-bottom: 20px;
+  width: 100%;
+  font-family: "Gotham SSm", Helvetica, Arial, sans-serif;
+  color: #666;
+  font-size: 11px;
+  display: block;
+  // border-collapse: collapse;
+
+  @media @tiny {
+    font-size: 10px;
+  }
+
+  tr {
+    display: flex;
+
+    &.index-0 td {
+      border-top: 1px solid #ddd;
+    }
+
+    td {
+      overflow: hidden;
+    }
+
+    .state,
+    .state-hed {
+      flex: 0 0 60px;
+
+      .x-small { display: none; }
+
+      @media @tiny {
+        flex: 0 0 39px;
+        .x-small { display: inline; }
+        .not-small { display: none; }
+      }
+    }
+    .electoral,
+    .electoral-hed {
+      flex: 0 0 23px;
+    }
+    .open-label {
+      flex: 1;
+    }
+    .candidate,
+    .party-hed {
+      flex: 1;
+    }
+    .reporting,
+    .reporting-hed {
+      flex: 0 0 58px;
+
+      @media @mobile {
+        flex: 0 0 44px;
+
+        .in {
+          display: none;
+        }
+      }
+
+      @media @tiny {
+        flex: 0 0 38px;
+      }
+    }
+    .little-label,
+    .little-hed {
+      flex: 0 0 19px;
+
+      .no-flips & {
+        display: none;
+      }
+
+      @media @tiny {
+        // display: none;
+      }
+    }
+  }
+
+  th {
+    font-size: 11px;
+    font-family: "Knockout 31 4r", "Helvetica Neue", "Helvetica", "Arial",
+      sans-serif;
+    text-transform: uppercase;
+    font-weight: normal;
+    letter-spacing: 0.05em;
+    -webkit-font-smoothing: antialiased;
+    padding: @wide-padding;
+
+    @media @tiny {
+      padding: @thin-padding;
+    }
+
+    &.state-hed,
+    &.reporting-hed,
+    &.name-hed {
+      text-align: left;
+    }
+    &.state-hed {
+      padding-left: 0;
+    }
+    &.electoral-hed {
+      text-align: left;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .open-label {
+    display: none;
+    font-style: italic;
+    font-size: 10px;
+    color: #9a9a9a;
+    padding-top: 4px;
+    padding-right: 0;
+    // border-left: @border;
+  }
+
+  tr.open {
+    .candidate,
+    .reporting {
+      display: none;
+    }
+
+    .open-label {
+      display: table-cell;
+    }
+  }
+
+  td {
+    padding: @wide-padding;
+    border-bottom: @border;
+
+    @media @tiny {
+      padding: @thin-padding;
+    }
+  }
+
+  td.state a {
+    text-decoration: none;
+    color: #444;
+  }
+
+  td.state {
+    padding-left: 0;
+    text-decoration: none;
+    color: #444;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  td.reporting {
+    font-size: 10px;
+    font-style: italic;
+    color: #9a9a9a;
+    padding-top: 4px;
+  }
+  td.candidate {
+    background: @background;
+    border-bottom: 1px solid white;
+    border-right: 1px solid white;
+    display: flex;
+
+    .name {
+      flex: 1 1 0;
+      display: flex;
+      min-width: 0;
+
+      .last {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+
+      .incumbent {
+        margin-left: 4px;
+      }
+    }
+
+    .perc {
+      flex: 0 0 25px;
+      margin-left: 8px;
+
+      @media @tiny {
+        margin-left: 5px;
+      }
+    }
+
+    &.leading {
+      color: #666;
+      background: @indDim;
+    }
+
+    &.winner {
+      color: white;
+      background: @ind;
+    }
+    &.GOP,
+    &.No {
+      &.leading {
+        color: #666;
+        background: @gopDim;
+      }
+      &.winner {
+        color: white;
+        background: @gop;
+      }
+    }
+    &.Dem {
+      &.leading {
+        color: #666;
+        background: @demDim;
+      }
+      &.winner {
+        color: white;
+        background: @dem;
+      }
+    }
+    &.runoff, &.loser {
+      background: @background !important;
+    }
+  }
+  td.little-label {
+    font-size: 8px;
+    text-transform: uppercase;
+    font-weight: bold;
+    width: 28px;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 6px;
+
+    .flip-label {
+      color: @ind;
+    }
+    &.Dem .flip-label {
+      color: @dem;
+    }
+    &.GOP .flip-label,
+    &.No.flip-label {
+      color: @gop;
+    }
+  }
+}
+
+.Senate table.results tr {
+  .state,
+  th.state-hed {
+    flex: 0 0 46px;
+
+    @media @tiny {
+      flex: 0 0 32px;
+    }
+  }
+}
+.Gov table.results tr {
+  .state,
+  th.state-hed {
+    @media @tiny {
+      flex: 0 0 24px;
+    }
+  }
+}
+.Ballot table.results tr {
+  .state,
+  th.state-hed {
+    flex: 3;
+  }
+
+  .candidate,
+  th.candidate-hed {
+    flex: 0 0 150px;
+  }
+}
+.President table.results tr {
+  .state,
+  th.state-hed {
+    flex: 0 0 53px;
+  }
+}
+
+.President .board-wrapper {
+  .board-inner {
+    table:nth-child(2) {
+      float: right;
+
+      tr:nth-child(1) {
+        display: none;
+      }
+      tr.index-0 td {
+        border-top: none;
+      }
+    }
+  }
+
+  @media @desktop {
+    flex: 0 0 49%;
+
+    &.middle {
+      flex: 0 0 100%;
+      order: 1;
+      margin-bottom: 35px;
+
+      table {
+        width: 49%;
+        vertical-align: top;
+        display: inline-block;
+      }
+
+      table:nth-child(2) {
+        tr.index-0 td {
+          border-top: 1px solid #ddd;
+          margin-top: 23px;
+        }
+      }
+    }
+  }
+
+  @media @mobile {
+    flex: 0 0 100%;
+    margin-bottom: 20px;
+
+    &.middle {
+      margin-bottom: 20px;
+      table {
+        width: 100%;
+      }
+      table:nth-child(2) {
+        tr.index-0 td {
+          border-top: none;
+          margin-top: 0;
+        }
+      }
+    }
+  }
+}
+
+.President table.results {
+  td {
+    text-align: left;
+  }
+  td.electoral {
+    padding-left: 0;
+    text-align: center;
+    color: #9a9a9a;
+  }
+  td.candidate {
+    text-align: center;
+    color: #666;
+
+    .perc {
+      margin: auto;
+    }
+  }
+}
+
+.theme-hed {
+  .gotham();
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 5px;
+}

@@ -1,0 +1,61 @@
+.electoral-grid {
+  .grids-container {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .column {
+    text-align: center;
+    line-height: 1;
+
+    &.R .counts {
+      color: @rigorous;
+    }
+
+    &.D .counts {
+      color: @true;
+    }
+  }
+
+  h4 {
+    margin: 0;
+    .knockout();
+    font-size: 32px;
+  }
+
+  .count {
+    .gotham();
+    font-size: 48px;
+  }
+
+  .minor { fill: lighten(@true, 20%); }
+  .major { fill: @true; }
+  .landslide { fill: darken(@true, 10%); }
+
+  .R {
+    .minor { fill: lighten(@rigorous, 20%); }
+    .major { fill: @rigorous; }
+    .landslide { fill: darken(@rigorous, 10%); }
+  }
+
+  svg {
+    display: block;
+    width: 100%;
+
+    text {
+      .knockout();
+      fill: white;
+      text-anchor: middle;
+    }
+
+    .grid {
+      stroke: #DDD;
+      // stroke-dasharray: 2 2;
+
+      &.victory {
+        stroke: black;
+        stroke-dasharray: 10 10;
+      }
+    }
+  }
+}

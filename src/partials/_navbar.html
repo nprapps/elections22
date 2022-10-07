@@ -1,0 +1,71 @@
+<!-- Hide the navbar by default, for station sites -->
+<!-- See information in the `navbar.js` file on why this is done -->
+<% 
+var { nav, states } = grunt.data.json;
+%>
+
+<nav class="results-nav">
+
+  <div class="constrained">
+
+    <div class="results-logo">
+      <a href="https://npr.org"><img src="./assets/logo.svg" alt="NPR" /></a>
+      <hr aria-hidden="true" />
+      <a href="https://www.npr.org/sections/elections/">
+        <img src="./assets/logo-2020-election.svg" class="full" alt="2020 Elections" />
+        <img src="./assets/logo-2020-e.svg" class="short" alt="2020 Elections" />
+      </a>
+    </div>
+
+    <button class="menu-toggle" aria-controls="main-menu">
+      More live results
+      <svg viewBox="0 0 5 5" preserveAspectRatio="none" aria-hidden="true">
+        <path fill="currentColor" d="M1,1.5 L4,1.5 L2.5,4 Z" />
+      </svg>
+    </button>
+
+    <ul class="menu-contents" id="main-menu">
+
+      <li> <a href="https://www.npr.org/sections/live-updates-2020-election-results">
+        <span class="full label">Live Coverage</span>
+        <span class="abbrev label">Live</span>
+      </a> </li>
+      <li> <a href="#/president">
+        <span class="full label">President</span>
+        <span class="abbrev label">Pres.</span>
+      </a> </li>
+      <li> <a href="#/house">House</a> </li>
+      <li> <a href="#/senate">Senate</a> </li>
+      <li> <a href="#/governor">
+        <span class="full label">Governor</span>
+        <span class="abbrev label">Gov.</span>
+      </a> </li>
+
+      <li class="state-nav">
+        <button class="menu-toggle" aria-controls="states-menu">
+          State <span class="full label">results</span>
+          <svg viewBox="0 0 5 5" preserveAspectRatio="none" aria-hidden="true">
+            <path fill="currentColor" d="M1,1.5 L4,1.5 L2.5,4 Z" />
+          </svg>
+        </button>
+
+        <ul class="states menu-contents" id="states-menu">
+          <% for (var state of Object.keys(states)) {%>
+          <% if (states[state].district) continue; %>
+          <li>
+            <a href="#/states/<%= state %>"><%= states[state].name == "District of Columbia" ? "D.C." : states[state].name %></a>
+          </li>
+          <%}%>
+        </ul>
+      </li>
+
+    </ul>
+
+    <div class="donate">
+      <a href="https://www.npr.org/donations/support">
+        Donate
+      </a>
+    </div>
+
+  </div>
+</nav>

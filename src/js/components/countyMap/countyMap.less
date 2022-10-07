@@ -1,0 +1,270 @@
+@import "../../../css/values";
+
+.county-map {
+  display: block;
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+
+    &.horizontal {
+      flex-direction: row;
+
+      @media @mobile {
+        flex-direction: column;
+      }
+
+      .key {
+        order: 1;
+        margin-left: 30px;
+
+        @media @mobile {
+          order: 0;
+          margin-left: 0;
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+  .tooltip {
+    position: absolute;
+    border: 1px solid #eee;
+    background-color: white;
+    padding: 8px 8px 5px 8px;
+    display: none;
+    pointer-events: none;
+    z-index: 1;
+
+    &.shown {
+      display: block;
+    }
+
+    .name {
+      font-size: 11px;
+      margin: 0 0 3px 0;
+      font-family: "Knockout 31 4r", "Helvetica Neue", Helvetica, Arial,
+        sans-serif;
+      font-weight: normal;
+      text-transform: uppercase;
+      line-height: 1.2;
+      letter-spacing: 0.05em;
+      -webkit-font-smoothing: antialiased;
+      color: #333;
+    }
+
+    .row {
+      .gotham();
+      padding: 3px 0;
+      min-width: 120px;
+      font-size: 10px;
+      color: #666;
+
+      border-top: 1px solid #eee;
+
+      &.reporting {
+        .gotham();
+        margin: 0;
+        padding-top: 3px;
+        font-size: 10px;
+        color: #9a9a9a;
+        font-style: italic;
+        text-transform: none;
+      }
+
+      .amt {
+        text-align: right;
+        float: right;
+        padding-left: 5px;
+      }
+
+      span.party {
+        height: 6px;
+        width: 6px;
+        margin-right: 4px;
+        margin-top: 5px;
+        background: @ind;
+        float: left;
+
+        &.Dem {
+          background: @dem;
+        }
+        &.GOP {
+          background: @gop;
+        }
+        &.i1 {
+          background: @overflow1;
+        }
+        &.i2 {
+          background: @overflow2;
+        }
+        &.i3 {
+          background: @overflow3;
+        }
+        &.i4 {
+          background: @overflow4;
+        }
+      }
+
+      &:empty {
+        display: none;
+      }
+    }
+  }
+
+  .map-container {
+    position: relative;
+    max-width: 100%;
+
+    @media @mobile-above {
+      margin-bottom: 20px;
+    }
+  }
+
+  .key {
+    margin-bottom: 10px;
+  }
+
+  .map path {
+    stroke: white;
+    fill: #e1e1e1;
+    stroke-width: 1;
+
+    &.painted {
+      &.leading {
+        fill: @indDim;
+        &.allin {
+          fill: @ind;
+        }
+      }
+
+      &.leading.GOP {
+        fill: @gopDim;
+
+        &.allin {
+          fill: @gop;
+        }
+      }
+
+      &.leading.Dem {
+        fill: @demDim;
+
+        &.allin {
+          fill: @dem;
+        }
+      }
+
+      &.leading.i1 {
+        fill: @overflowDim1;
+
+        &.allin {
+          fill: @overflow1;
+        }
+      }
+      &.leading.i2 {
+        fill: @overflowDim2;
+
+        &.allin {
+          fill: @overflow2;
+        }
+      }
+
+      &.leading.i3 {
+        fill: @overflowDim3;
+
+        &.allin {
+          fill: @overflow3;
+        }
+      }
+
+      &.leading.i4 {
+        fill: @overflowDim4;
+
+        &.allin {
+          fill: @overflow4;
+        }
+      }
+    }
+
+    &:hover {
+      stroke: black;
+      fill-opacity: 1;
+      stroke-width: 2;
+      /*transition-duration: 0s !important;*/
+      paint-order: fill stroke;
+    }
+
+    &.clicked {
+      stroke: #787878;
+      stroke-width: 2;
+      paint-order: fill stroke;
+      fill-opacity: 1;
+    }
+  }
+
+  .key-row {
+    display: inline-block;
+    line-height: 1em;
+
+    .name {
+      font-family: "Gotham SSm", Helvetica, Arial, sans-serif;
+      font-weight: normal;
+      font-size: 0.9em;
+      display: inline-block;
+      vertical-align: top;
+      margin: 1px 8px 0 1px;
+      padding-left: 5px;
+    }
+  }
+
+  .horizontal .key-row {
+    display: block;
+    white-space: nowrap;
+    margin-bottom: 8px;
+
+    @media @mobile {
+      display: inline-block;
+    }
+  }
+
+  .label {
+    font-family: "Knockout 31 4r", "Helvetica Neue", "Helvetica", "Arial",
+      sans-serif;
+    font-weight: normal;
+    color: #787878;
+    letter-spacing: 0.025em;
+    line-height: 1.2em;
+  }
+
+  .swatch {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    background: @ind;
+    opacity: 1;
+
+    &.Dem {
+      background: @dem;
+    }
+
+    &.GOP {
+      background: @gop;
+    }
+
+    &.i1 {
+      background: @overflow1;
+    }
+    &.i2 {
+      background: @overflow2;
+    }
+    &.i3 {
+      background: @overflow3;
+    }
+    &.i4 {
+      background: @overflow4;
+    }
+  }
+}

@@ -1,0 +1,40 @@
+<!doctype html>
+<%
+  var doc = archieml.longform;
+  var social = {
+    title: doc.socialPages.defaultTitle,
+    description: doc.socialPages.defaultDescription
+  };
+  Object.assign(grunt.data.json.project, social);
+%><html lang="en-US">
+  <head>
+    <%= t.include("partials/_head.html", grunt.data.json) %>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <script>
+      // detect embed
+      var search = new URLSearchParams(window.location.search);
+      if (window.top != window || search.has("embedded")) {
+        document.body.classList.add("embedded");
+      }
+      window.addEventListener("unhandledrejection", function(err) {
+        // on errors, convert hashchanges into reloads
+        console.log(`Unhandled framework error: ${err.reason}`);
+        window.addEventListener("hashchange", function() {
+          window.location.reload();
+        });
+      });
+    </script>
+    <%= t.include("partials/_navbar.html") %> 
+    <%= t.include("partials/_about-box.html") %> 
+
+    <main class="app constrained"></main>
+
+    <google-ad id="bottom" data-size="wide"></google-ad>
+
+    <script src="app.js" async></script>
+    <%= t.include("partials/_footer.html") %>
+    <%= t.include("partials/_analytics.html") %>
+  </body>
+</html>

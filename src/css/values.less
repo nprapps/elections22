@@ -1,0 +1,138 @@
+/*
+ * Media queries
+ */
+@tiny: ~"(max-width: 400px)";
+@tiny-above: ~"(min-width: 401px)";
+@mobile: ~"(max-width: 650px)";
+@mobile-above: ~"(min-width: 651px)";
+@tablet: ~"(max-width: 768px)";
+@tablet-above: ~"(min-width: 769px)";
+@desktop: ~"(max-width: 875px)";
+@wide: ~"(max-width: 950px)";
+@full: ~"(max-width: 1200px)";
+
+/*
+ * Fonts
+ */
+@gotham: "Gotham SSm", Helvetica, Arial, sans-serif;
+@knockout: "Knockout 31 4r", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+@sans: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+@serif: Georgia, "Times New Roman", Times, serif;
+
+.gotham() {
+  font-family: @gotham;
+  font-weight: normal;
+  font-weight: 400;
+}
+
+// Normal Knockout
+.knockout() {
+  font-family: @knockout;
+  font-weight: normal;
+}
+
+// Knockout, uppercased
+.knockout-upper() {
+  .knockout();
+  text-transform: uppercase;
+}
+
+// Knockout for headings
+.knockout-header() {
+  .knockout-upper();
+  letter-spacing: 0.05em;
+  -webkit-font-smoothing: antialiased;
+}
+
+/*
+ * Colors
+ */
+@accent-dark: #4774cc;
+@accent-light: #bccae5;
+
+@rigorous: #d62021;
+@unbiased: #000005;
+@true: #237bbd;
+
+.sr-only {
+  opacity: 0;
+  position: absolute;
+  left: -1000px;
+  clip: inset(0, 0, 0, 0);
+  width: 1px;
+  height: 1px;
+}
+
+// Primary colors
+// -------------------------
+@gop: #d61f21;
+@gopDim: #F8D6D4;
+@gopDim2: fade(@gop, 50%);
+@gopDim3: lighten(@gopDim, 30%);
+
+@dem: #237bbd;
+@demDim: #D5E5F2;
+@demDim2: fade(@dem, 50%);
+@demDim3: lighten(@demDim, 30%);
+
+@overflow1: #9999cb;
+@overflowDim1: fade(@overflow1, 50%);
+@overflow2: #e88c4e;
+@overflowDim2: fade(@overflow2, 50%);
+@overflow3: #b7ce59;
+@overflowDim3: fade(@overflow3, 50%);
+@overflow4: #cc6699;
+@overflowDim4: fade(@overflow4, 50%);
+
+@ind: #15b16e;
+@indDim: #D7F0E2;
+@indDim2: fade(@ind, 30%);
+@indDim3: lighten(@indDim, 30%);
+
+@winnerCheck: #f19e14;
+@yellow: @ind;
+
+@demSafe: #3d7fa6;
+@demLean: #7dbfe6;
+@gopLean: #eca395;
+@gopSafe: #a23520;
+
+@updateHighlight: fade(@yellow, 80%);
+
+// Grays
+// -------------------------
+@gray-darker: lighten(#000, 13.5%); // #222
+@gray-dark: lighten(#000, 20%); // #333
+@gray: #666;
+@gray-medium: #a0a0a0;
+@gray-light: lighten(#000, 60%); // #999
+@gray-lighter: lighten(#000, 93.5%); // #eee
+@white: #fff;
+
+// Links
+// -------------------------
+@link-color: #5076b8;
+@link-hover-color: #bccae5;
+@link-hp-color: #444;
+
+// TODO: should these live here?
+:root {
+  --foreground: #333;
+  --secondary: #787878;
+  --background: white;
+  --shaded: #efefef;
+  --outline: var(--background);
+  --accent: var(--secondary);
+  --accent-fade: fade(#888, 30%);
+  --link: @true;
+  --link-secondary: var(--foreground);
+  --font-size: 14px;
+  --side-margin: 15px;
+  --divider: #999;
+  --divider-minor: #dadada;
+  --background-faded: rgba(255, 255, 255, 0);
+
+  @media @mobile-above {
+    --side-margin: 20px;
+  }
+}

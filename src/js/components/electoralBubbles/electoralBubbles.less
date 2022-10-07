@@ -1,0 +1,296 @@
+.electoral-bubbles {
+  position: relative;
+  margin-bottom: 30px;
+
+  @media @mobile {
+    margin-bottom: 0px;
+  }
+  
+  // .key-above {
+  //   text-align: center;
+  //   .knockout();
+  //   color: @gray-darker;
+  //   text-transform: uppercase;
+  //   font-size: 16px;
+  // }
+
+  .aspect-ratio {
+    position: relative;
+
+    svg.bubble-svg {
+      display: block;
+      width: 100%;
+
+      circle {
+        stroke-width: 1px;
+        cursor: pointer;
+
+        &.Dem {
+          fill: @demDim;
+          stroke: darken(@demDim,8%);
+
+          &.called {
+            fill: @dem;
+            stroke: darken(@dem,8%);
+          }
+        }
+
+        &.GOP {
+          fill: @gopDim;
+          stroke: darken(@gopDim,8%);
+
+          &.called {
+            fill: @gop;
+            stroke: darken(@gop,8%);
+          }
+        }
+
+        &.pending {
+          // stroke-dasharray: 7 4;
+          // stroke: gray;
+        }
+
+        &:hover {
+          stroke: black !important;
+          stroke-width: 2px;
+          stroke-dasharray: 0;
+        }
+      }
+
+      text {
+        text-anchor: middle;
+        fill: white;
+        .knockout-header();
+        pointer-events: none;
+        line-height: 1;
+        text-transform: uppercase;
+
+        &.pending {
+          fill: @gray;
+        }
+
+        &.tied {
+          fill: @gray;
+          .gotham();
+          text-transform: none;
+          font-style: italic;
+          line-spacing: 0.05em;
+
+          @media @mobile {
+            font-size: 12px;
+          }
+        }
+
+        &.leading-cue {
+          font-size: 16px;
+          fill: darken(@gop, 10%);
+          text-anchor: start;
+
+          &.dem {
+            text-anchor: end;
+            fill: darken(@dem, 10%);
+          }
+
+          &.mobile {
+            display: none;
+          }
+
+          @media @mobile {
+            font-size: 12px;
+          }
+
+          @media @tiny {
+            &.mobile {
+              display: block;
+            }
+            &.desktop {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+
+    .separator {
+      stroke-dasharray: 2 2;
+      // stroke-width: 4px;
+      stroke: fade(@gray, 60%);
+    }
+  }
+
+  .disclaimer {
+    max-width: 600px;
+    margin: 10px auto;
+    .gotham();
+    text-align: center;
+    font-style: italic;
+    font-size: 12px;
+    color: #787878;
+  }
+
+  .uncalled {
+    flex: 1;
+    text-align: center;
+    .knockout-header();
+    text-transform: uppercase;
+
+    text {
+      .knockout-header();
+      fill: #666;
+    }
+
+    @media @mobile {
+      display: none;
+    }
+
+    .embed-homepage & {
+      display: none;
+    }
+
+    h3 {
+      margin-bottom: 0;
+      font-size: 16px;
+      color: #444;
+      font-weight: normal;
+    }
+
+    h4 {
+      font-size: 14px;
+      color: #787878;
+      font-weight: normal;
+    }
+
+    .triplets {
+      display: flex;
+      justify-content: space-around;
+
+      @media @mobile {
+        display: block;
+      }
+
+      .circles {
+        // max-width: 400px;
+        margin: 0 20px;
+        list-style-type: none;
+        padding: 0;
+      }
+    }
+
+    li {
+      display: inline-block;
+    }
+
+    svg {
+      margin: 4px;
+      vertical-align: middle;
+    }
+
+    circle {
+      cursor: pointer;
+      fill: #e1e1e1;
+      stroke: darken(#e1e1e1,8%);
+      // stroke-dasharray: 7 3;
+
+      &.early {
+        fill: #e1e1e1;
+        stroke: darken(#e1e1e1,8%);
+      }
+      &:hover {
+          stroke: black;
+          stroke-width: 2px;
+          stroke-dasharray: 0;
+        }
+    }
+
+    text {
+      text-anchor: middle;
+      pointer-events: none;
+      .knockout();
+      fill: @gray;
+    }
+  }
+
+  .tooltip {
+    position: absolute;
+    border: 1px solid #eee;
+    background-color: white;
+    padding: 8px 8px 5px 8px;
+    display: none;
+    pointer-events: none;
+
+    &.show {
+      display: block;
+    }
+
+    h3 {
+      font-size: 11px;
+      margin: 0 0 3px 0;
+      font-family: "Knockout 31 4r","Helvetica Neue",Helvetica,Arial,sans-serif;
+      font-weight: normal;
+      text-transform: uppercase;
+      line-height: 1.2;
+      letter-spacing: .05em;
+      -webkit-font-smoothing: antialiased;
+      color: #333;
+
+      span {
+        color: #666;
+      }
+    }
+
+    .candidates {
+      .gotham();
+      min-width: 120px;
+      font-size: 10px;
+      color: #666;
+
+      .row {
+        border-top: 1px solid #eee;
+        padding: 3px 0 3px 0;
+      }
+
+      .name, .perc {
+        font-weight: normal;
+        display: inline-block;
+      }
+      .perc {
+        text-align: right;
+        float: right;
+      }
+      .party {
+        height: 6px;
+        width: 6px;
+        margin-right: 4px;
+        margin-top: 5px;
+        background: @ind;
+        float: left;
+
+        &.Dem {
+          background: @dem;
+        }
+        &.GOP {
+          background: @gop;
+        }
+        &.Other {
+          display: none;
+        }
+      }
+    }
+
+    .reporting {
+      .gotham();
+      margin: 0;
+      padding-top: 3px;
+      font-size: 10px;
+      color: #9a9a9a;
+      font-style: italic;
+      border-top: 1px solid #eee;
+    }
+
+    .winner-icon {
+      color: #666;
+      margin-left: 2px;
+      font-size: 8px;
+    }
+  }
+}
