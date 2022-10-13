@@ -155,7 +155,7 @@ class Customizer extends Component {
     var { url } = free;
     var src = new URL(url + `embedBOP.html`);
     if (state.dark) src.searchParams.set("theme", "dark");
-    if (state.showPresident) src.searchParams.set("president", true);
+    if (state.showPresident) src.searchParams.set("president", false); // Never show the president in 22
     if (state.inline) src.searchParams.set("inline", true)
     if (state.onlyPresident) src.searchParams.set("onlyPresident", true);
     return (<>
@@ -211,7 +211,6 @@ class Customizer extends Component {
   render(props, state) {
     var postals = Object.keys(stateSheet).filter(s => !stateSheet[s].district);
     var modes = [
-      ["president", "President"],
       ["governor", "Governor"],
       ["senate", "Senate"],
       ["house", "House"],
@@ -223,7 +222,6 @@ class Customizer extends Component {
 
     var offices = [
       ["", "Key Races"],
-      ["P", "President"],
       ["S", "Senate"],
       ["G", "Governor"],
       ["H", "House"],
