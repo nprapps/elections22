@@ -25,10 +25,10 @@ export default class App extends Component {
     // this.router.onhit = () => {};
     this.router.onmiss = e => {
       console.log(`Route for "/${e}" does not exist, resetting app location...`);
-      window.location = "#/";
+      window.location = "#/house";
     }
 
-    this.addView(["/", "/president"], BoardPresident);
+    //this.addView(["/", "/president"], BoardPresident);
     this.addView("/house", BoardHouse);
     this.addView("/governor", BoardGovernor);
     this.addView("/senate", BoardSenate);

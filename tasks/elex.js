@@ -25,18 +25,34 @@ module.exports = function(grunt) {
 
     // probably move this into a sheet to be safe
     // also, should we use the ticket merging system?
+    // var tickets = [{
+    //     date: "2020-11-03",
+    //     params: {
+    //       officeID: "P,G,S",
+    //       level: "FIPSCode"
+    //     }
+    //   },
+    //   {
+    //     date: "2020-11-03",
+    //     params: {
+    //       officeID: "P",
+    //       level: "district"
+    //     }
+    //   },
+    //   {
+    //     date: "2020-11-03",
+    //     params: {
+    //       officeID: "H,I",
+    //       level: "state"
+    //     }
+    //   }
+    // ];
+
     var tickets = [{
         date: "2020-11-03",
         params: {
-          officeID: "P,G,S",
+          officeID: "G,S",
           level: "FIPSCode"
-        }
-      },
-      {
-        date: "2020-11-03",
-        params: {
-          officeID: "P",
-          level: "district"
         }
       },
       {
@@ -65,8 +81,13 @@ module.exports = function(grunt) {
     }
     // turn AP into normalized race objects
     var results = normalize(rawResults, grunt.data.json);
+    grunt.log.writeln("results");
 
-    // filter generator for district-based EC votes
+    // for (var result of results) {
+    //   grunt.log.writeflags(result);
+    // };
+
+    // filter generator for states that split their electoral college votes. 
     var stateOrDistrictFilter = function(level) {
       return function(result) {
         if (result.id != "0") return true;
@@ -82,7 +103,8 @@ module.exports = function(grunt) {
 
     var { longform } = grunt.data.archieml;
 
-    grunt.log.writeln("Generating data files...");
+    grunt.log.writeln("Generating data files ");
+
 
     // ensure the data folder exists
     await fs.mkdir("build/data", { recursive: true });
@@ -94,6 +116,10 @@ module.exports = function(grunt) {
       state: results.filter(r => r.level == "state" || r.level == "district"),
       county: results.filter(r => r.level == "county")
     };
+
+    //grunt.log.writeln("Geo.national: ");
+    //grunt.log.writeflags(geo.national);
+
 
     // national results
     await fs.writeFile("build/data/national.json", serialize({ test, results: geo.national }));
@@ -107,10 +133,20 @@ module.exports = function(grunt) {
       states[state].push(result);
     });
     for (var state in states) {
+      grunt.log.writeln("iterating states");
+      grunt.log.writeln(state);
       var stateOutput = {
         test,
         results: states[state]
       };
+
+
+      // grunt.log.writeln("longform");
+      // grunt.log.writeflags(longform);
+
+
+
+
       var stateChatter = longform.statePages[state.toLowerCase()];
       if (stateChatter) {
         stateOutput.chatter = grunt.template.renderMarkdown(stateChatter);

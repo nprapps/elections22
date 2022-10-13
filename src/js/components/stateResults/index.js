@@ -57,6 +57,12 @@ export default class StateResults extends Component {
     let stateName = stateLookup[this.props.state].name;
 
     let office = props.subview || "key";
+
+    console.log("\n\noffice: ");
+    console.log(office);
+
+
+
     let viewTitle =
       office == "key"
         ? "Key Results"
@@ -177,6 +183,11 @@ export default class StateResults extends Component {
   }
 
   getRaceWithCountyResults(race, oneOfMultiple) {
+
+    console.log("race.office");
+    console.log(race.office);
+
+
     var order = race.candidates;
     var isSpecial = !!race.seat;
 
@@ -217,7 +228,7 @@ export default class StateResults extends Component {
     var { results } = this.state.data;
     if (!results) return false;
     var available = new Set(results.map(r => r.office));
-    var tabs = "PGSHI"
+    var tabs = "GSHI"
       .split("")
       .filter(o => available.has(o))
       .map(function (data) {
