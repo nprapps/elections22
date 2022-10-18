@@ -1,4 +1,4 @@
-elections20-interactive
+elections22
 ======================================================
 
 This news app is built on our `interactive template <https://github.com/nprapps/interactive-template>`_. Check the readme for that template for more details about the structure and mechanics of the app, as well as how to start your own project.
@@ -35,6 +35,10 @@ Common tasks that you may want to run include:
 
   * ``publish:live`` uploads to production
   * ``publish:simulated`` does a dry run of uploaded files and their compressed sizes
+
+**Notable combinations of tasks:**
+
+* ``grunt clean sheets docs static publish:live`` — republishes assets + code to the live server but doesn’t touch the data (helpful when results are live)
 
 Tracked events
 --------------
