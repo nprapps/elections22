@@ -119,7 +119,7 @@ export default function ResultsBoardNamed(props) {
                       <td class={"reporting"} role="cell">{percentIn}</td>
 
                       {/* Runoff or Flip */}
-                      {props.office !== "Ballot" && <>
+                      {props.office !== "Ballot" && props.office !== "House" && <>
                         <td class={"little-label " + (flipped ? winner.party : "")} role="cell">
                           <span class={r.runoff ? "runoff-label" : ""}>{r.runoff ? "R.O." : ""}</span>
                           <span class={flipped ? "flip-label" : ""}>{flipped ? "Flip" : ""}</span>
