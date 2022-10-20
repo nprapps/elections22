@@ -41,7 +41,9 @@ export default class BoardHouse extends Component {
       parseInt(a.seatNumber) < parseInt(b.seatNumber) ? -1 : 0
     );
 
-    sorted = sorted.filter(r => r.keyRace || (r.winnerParty && r.winnerParty != r.previousParty));
+    // Don't show flipped races in '22 after redistricting. 
+    //sorted = sorted.filter(r => r.keyRace || (r.winnerParty && r.winnerParty != r.previousParty));
+    sorted = sorted.filter(r => r.keyRace );
 
     var buckets = {
       likelyD: [],
