@@ -10,7 +10,7 @@ module.exports = function(grunt) {
   var path = require("path").posix;
   var shell = require("shelljs");
   var mime = require("mime");
-  
+
   grunt.registerTask("sync", "Sync to S3 using the AWS CLI", function(target = "stage") {
     var done = this.async();
 
@@ -18,6 +18,9 @@ module.exports = function(grunt) {
 
     var config = require("../project.json");
     var dest = config.s3[target];
+    if (target == "stage") {
+      dest = require("../stage-elections22.json");
+    }
     var localSynced = "src/assets/synced";
     var remoteSynced = path.join(dest.path, "assets/synced");
 
