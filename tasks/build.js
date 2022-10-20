@@ -65,7 +65,7 @@ module.exports = function(grunt) {
 
     // generate office share pages
     var officeTemplate = grunt.file.read("src/_office_social.html");
-    for (var office of ["president", "governor", "house", "senate"]) {
+    for (var office of ["governor", "house", "senate"]) {
       var output = process(officeTemplate, { office });
       grunt.file.write(`build/share/${office}.html`, output);
     }
