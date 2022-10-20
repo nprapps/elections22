@@ -38,6 +38,7 @@ Common tasks that you may want to run include:
 
 **Notable combinations of tasks:**
 
+* ``grunt local --test`` - run an AP test on your local machine on a 60-second cron
 * ``grunt clean sheets docs static publish:live`` — republishes assets + code to the live server but doesn’t touch the data (helpful when results are live)
 
 Tracked events
@@ -55,9 +56,9 @@ Additional links and params
 --------------
 
 * Homepage embed: ``/homepage.html``
-   
+
   * ``display=margins,cartogram,map`` controls which viz displays on load
-   
+
 * Balance of Power embed (House and Senate bars): ``/embedBOP.html``
 
   * ``president=true`` adds electoral totals to the top (for use on homepage)
@@ -65,7 +66,7 @@ Additional links and params
   * ``onlyPresident=true`` hides House and Senate bars on all views
   * ``inline=true`` for side-by-side display (for use on liveblog)
   * ``theme=dark`` for dark theme
-    
+
 * Internal ballot initiative board: ``/#/ballots``
 * Results embed customizer: ``/customizer.html``
 * Share pages, with metadata for social cards

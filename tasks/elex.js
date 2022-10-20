@@ -49,14 +49,14 @@ module.exports = function(grunt) {
     // ];
 
     var tickets = [{
-        date: "2020-11-03",
+        date: "2022-11-08",
         params: {
           officeID: "G,S",
           level: "FIPSCode"
         }
       },
       {
-        date: "2020-11-03",
+        date: "2022-11-08",
         params: {
           officeID: "H,I",
           level: "state"
@@ -87,7 +87,7 @@ module.exports = function(grunt) {
     //   grunt.log.writeflags(result);
     // };
 
-    // filter generator for states that split their electoral college votes. 
+    // filter generator for states that split their electoral college votes.
     var stateOrDistrictFilter = function(level) {
       return function(result) {
         if (result.id != "0") return true;
