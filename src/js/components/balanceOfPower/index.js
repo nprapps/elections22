@@ -28,17 +28,22 @@ export default class BalanceOfPower extends Component {
     return (
       <div class="leaderboard">
         <div class="results-header-group net-gain">
-          <h2 class={"party " + results.netGainParty.toLowerCase()} title="">
-            <label>
-              Net gain
-            </label>
-            <abbr title="">
-              {results.netGainParty != "none"
-                ? results.netGainParty + " +" + results.netGain
-                : "No change"}
-            </abbr>
-          </h2>
+
+          { this.isSenate ?
+            <h2 class={"party " + results.netGainParty.toLowerCase()} title="">
+              <label>
+                Net gain
+              </label>
+              <abbr title="">
+                {results.netGainParty != "none" 
+                  ? results.netGainParty + " +" + results.netGain
+                  : "No change"}
+              </abbr>
+            </h2>
+           : <></>
+          }
         </div>
+
         <div class="results-header-group dem">
           <h2 class="party">
             <label> Dem. {this.getWinnerIcon(results.Dem.total)}</label>
