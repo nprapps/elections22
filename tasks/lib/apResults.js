@@ -5,7 +5,7 @@ var crypto = require("crypto");
 
 var etags = {};
 
-var resultsURL = "https://api.ap.org/v2/elections/";
+var resultsURL = "https://api.ap.org/v3/elections/";
 var resultsParams = {
   apikey: process.env.AP_API_KEY,
   format: "JSON",
