@@ -77,6 +77,18 @@ Additional links and params
   * ``/share/senate.html`` - Senate big board
   * ``/share/house.html`` - House big board
   * ``/share/governor.html`` - Governors big board
+  
+Social share pages
+------------------
+
+The way the results rig is built, links shared over social always show an image / headline that have to do with the overall project, not the particular view of the page you were looking at. (It’s a similar case with the `annotations rig <https://github.com/nprapps/anno-docs>`_ and the `News Apps liveblog <https://github.com/nprapps/liveblog-standalone>`_.)
+
+To address this, there are “share links” generated for all the top-level pages (house/senate/gov boards, each state) that have appropriate headlines/teasers/images and redirect.
+
+* Example: https://apps.npr.org/elections20-interactive/share/CO.html
+* Which redirects to: https://apps.npr.org/elections20-interactive/#/states/CO
+
+The templates for them live in the `src folder <https://github.com/nprapps/elections22/tree/main/src>`_ as ``_office_social.html`` and ``_state_social.html``. The text lives in the longform text doc. The pages are rendered as part of the `build task <https://github.com/nprapps/elections22/blob/main/tasks/build.js#L66-L80>`_.
 
 Troubleshooting
 ---------------
