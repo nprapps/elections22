@@ -46,7 +46,7 @@
       </div>
 
       <% for (var s in json.states) { %>
-      <% if (json.states[s].district) continue; %>
+      <% if (json.states[s]["district-unused22"]) continue; %>
         <div>
           <a href="#/states/<%= s %>">
             <%= json.states[s].name == "District of Columbia" ? "D.C." : json.states[s].name %>

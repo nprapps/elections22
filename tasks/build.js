@@ -74,7 +74,7 @@ module.exports = function(grunt) {
     var stateTemplate = grunt.file.read("src/_state_social.html");
     for (var state in grunt.data.json.states) {
       var meta = grunt.data.json.states[state];
-      if (meta.district) continue;
+      if (meta["district-unused22"]) continue;
       var output = process(stateTemplate, { state });
       grunt.file.write(`build/share/${state}.html`, output);
     }
