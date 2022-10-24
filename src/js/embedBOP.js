@@ -199,12 +199,16 @@ async function init(results) {
           <div class="chatter"><strong>218</strong> seats for majority </div>
 
           <div class="full-link"><a>See full results ›</a></div>
+
+          {/*  Ignore net gain after redistricting. 
           <div class="net-gain-container">
             <div class="gain-label">Net gain</div>
             <div class={"net-gain " + house.netGainParty}>{house.netGainParty != "none"
                 ? house.netGainParty + " +" + house.netGain
                 : "No change"}</div>
           </div>
+          */}
+
         </a>
         <div class="second divider" />
 
