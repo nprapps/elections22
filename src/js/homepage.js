@@ -1,5 +1,5 @@
 import { h, Fragment, Component, render } from "preact";
-import { ElectoralBars, Leaderboard } from "./components/boardPresident";
+//import { ElectoralBars, Leaderboard } from "./components/boardPresident";
 import NationalMap from "./components/nationalMap";
 import ElectoralBubbles from "./components/electoralBubbles";
 import Cartogram from "./components/cartogram";
@@ -26,13 +26,13 @@ export default class Homepage extends Component {
     this.setState({ ...data, latest });
   }
 
-  componentDidMount() {
-    gopher.watch(`./data/president.json`, this.onData);
-  }
+  // componentDidMount() {
+  //   gopher.watch(`./data/president.json`, this.onData);
+  // }
 
-  componentWillUnmount() {
-    gopher.unwatch(`./data/president.json`, this.onData);
-  }
+  // componentWillUnmount() {
+  //   gopher.unwatch(`./data/president.json`, this.onData);
+  // }
 
   render(props, state) {
     var { results = [], test, latest } = this.state;
