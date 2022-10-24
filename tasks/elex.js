@@ -87,6 +87,15 @@ module.exports = function(grunt) {
     // They won't be populated until 14 days so ignore now. 
     results = results.filter(race => race.type != 'RCV General Election');
 
+    
+    // Ignore 2016 contest held during 2022
+    // https://www.capradio.org/articles/2022/10/17/us-sen-alex-padilla-will-appear-on-californias-june-primary-ballot-twice-heres-why/
+    results = results.filter(race => race.id != 8964);
+
+    // for (var i=0; i<results.length; i++) {
+    //   grunt.log.writeflags(results[i]);
+    // }
+
     // filter generator for states that split their electoral college votes.
     var stateOrDistrictFilter = function(level) {
       return function(result) {
