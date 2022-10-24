@@ -81,11 +81,11 @@ module.exports = function(grunt) {
     }
     // turn AP into normalized race objects
     var results = normalize(rawResults, grunt.data.json);
-    grunt.log.writeln("results");
 
-    // for (var result of results) {
-    //   grunt.log.writeflags(result);
-    // };
+    // Systematically exclude the results of ranked choice contests
+    // As of '22 these are returned on election night from Alaska (possibly as empty)
+    // They won't be populated until 14 days so ignore now. 
+    results = results.filter(race => race.type != 'RCV General Election');
 
     // filter generator for states that split their electoral college votes.
     var stateOrDistrictFilter = function(level) {
@@ -133,8 +133,6 @@ module.exports = function(grunt) {
       states[state].push(result);
     });
     for (var state in states) {
-      grunt.log.writeln("iterating states");
-      grunt.log.writeln(state);
       var stateOutput = {
         test,
         results: states[state]
