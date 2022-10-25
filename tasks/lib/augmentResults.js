@@ -57,16 +57,17 @@ module.exports = function (results, data) {
       past_margin.margin = top.votepct - second.votepct;
 
       var census = data.csv.census_data[r.fips];
-      var covid = data.csv.covid_county_cases[r.fips]
-        ? (data.csv.covid_county_cases[r.fips] / census.population * 1000)
-        : null;
+      // var covid = data.csv.covid_county_cases[r.fips]
+      //   ? (data.csv.covid_county_cases[r.fips] / census.population * 1000)
+      //   : null;
 
       var bls = data.csv.unemployment_data[r.fips] || {};
       var { unemployment } = bls;
 
       var countyName = data.csv.county_names[r.fips] || "At large";
 
-      r.county = { past_margin, ...census, unemployment, covid, countyName };
+      //r.county = { past_margin, ...census, unemployment, covid, countyName };
+      r.county = { past_margin, ...census, unemployment, countyName };
     }
   });
 
