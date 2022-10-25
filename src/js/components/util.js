@@ -130,10 +130,6 @@ const availableMetrics = {
     name: "% College-Educated",
     format: formatters.percent,
   },
-  covid: {
-    name: "COVID-19 Cases Per 1,000",
-    format: formatters.comma,
-  },
   countyName: {
     name: "County",
     alpha: true,
