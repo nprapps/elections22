@@ -109,12 +109,7 @@ export default class StateResults extends Component {
             Source: AP (as of <DateFormatter value={state.latest} />
             ). Candidates receiving less than 5% support not shown individually.
             Demographic, income and education data from the Census Bureau.
-            COVID-19 case data from{" "}
-            <a href="https://github.com/CSSEGISandData/COVID-19">
-              Center for Systems Science and Engineering at Johns Hopkins
-              University
-            </a>
-            . Unemployment rates from the Bureau of Labor Statistics. 2016
+            Unemployment rates from the Bureau of Labor Statistics. 2020
             presidential margins from the AP and may vary slightly from
             state-certified final results.
           </div>
