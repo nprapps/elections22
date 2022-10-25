@@ -92,7 +92,7 @@ export default class StateResults extends Component {
           )}
           <div class="source">
             <div class="note">
-              Note: <em>% in</em> for presidential, U.S. Senate and governor
+              Note: <em>% in</em> for U.S. Senate and governor
               races represents expected vote, an Associated Press estimate of
               the share of total ballots cast in an election that have been
               counted.{" "}
