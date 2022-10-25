@@ -4,6 +4,9 @@ import censusdata
 detail_tables = {'B01003_001E' : 'population', "B02001_001E": "race_total", "B02001_003E": "black_total", "B03002_001E": "race_hispanic_total", "B03002_003E": "white_alone", "B03002_012E" : "hispanic_total"}
 subject_tables = {"S1501_C02_015E": "percent_bachelors", "S1901_C01_012E": "median_income"}
 
+# 5-year ACS data is often two years behind the calendar year
+CENSUS_YEAR = 2020
+
 columns = ['key']
 columns.extend(list(detail_tables.values()) + list(subject_tables.values()))
 pd.set_option('max_colwidth', 800)
@@ -18,7 +21,7 @@ def main():
   processed_data.to_csv('data/census_data.csv', index=False)
 
 def getAllCounties():
-  states = censusdata.geographies(censusdata.censusgeo([('state', '*')]), 'acs5', 2018)
+  states = censusdata.geographies(censusdata.censusgeo([('state', '*')]), 'acs5', CENSUS_YEAR)
 
   all_states = pd.DataFrame() 
 
@@ -26,13 +29,13 @@ def getAllCounties():
   for state in states:
     print("getting: ", state)
     state_fips = states[state].geo[0][1]
-    counties = censusdata.geographies(censusdata.censusgeo([('state', state_fips), ('county', '*')]), 'acs5', 2018)
+    counties = censusdata.geographies(censusdata.censusgeo([('state', state_fips), ('county', '*')]), 'acs5', CENSUS_YEAR)
 
-    subject_data = censusdata.download('acs5', 2018,
+    subject_data = censusdata.download('acs5', CENSUS_YEAR,
              censusdata.censusgeo([('state', state_fips),
                                    ('county', '*')]),
             list(subject_tables.keys()), tabletype='subject').reset_index()
-    detail_data = censusdata.download('acs5', 2018,
+    detail_data = censusdata.download('acs5', CENSUS_YEAR,
              censusdata.censusgeo([('state', state_fips),
                                    ('county', '*')]),
             list(detail_tables.keys())).reset_index()
