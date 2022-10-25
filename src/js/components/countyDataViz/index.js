@@ -143,7 +143,7 @@ export class CountyDataViz extends Component {
 
 // Source: https://gist.github.com/matt-west/6500993//
 /**
- *  Calculate the person correlation score between two items in a dataset.
+ *  Calculate the Pearson correlation score between two items in a dataset.
  *
  *  @param  {object}  prefs The dataset containing data about both items that
  *                    are being compared.
