@@ -4,9 +4,10 @@ export default function BoardKey(props) {
 	var full = !props.simple;
   var race = props.race;
 	var hasParties = race !== "ballot";
-  var hasPickup = race == "house" || race == "senate";
+  var hasPickup = race == "senate"; // suppress flips in house '22 race b/c redistricting
 	var hasIncumbent = race == "house" || race == "senate" || race == "gov";
 	var hasEEVP = race !== "house" && race !== "ballot";
+
 
   return <div class="board-key">
     {full && <h3>Key</h3>}
@@ -16,7 +17,7 @@ export default function BoardKey(props) {
 	      	<li class="gop">{full ? "Republican" : "Trump"} / <span class="leading">Leading</span> <span class="winner">Winner</span></li>
 	      	{full && <li class="ind">Independent / <span class="leading">Leading</span> <span class="winner">Winner</span></li>}
       </>}
-      {full && hasParties && <li class="pickup"><span>FLIP</span> {hasPickup ? "Seat pickup" : "Change in winning party"} (party color)</li>}
+      {hasPickup  && <li class="pickup"><span>FLIP</span> {hasPickup ? "Seat pickup" : "Change in winning party"} (party color)</li>}
       {full && hasParties && <li class="runoff"><span>R.O.</span> Going to a runoff election</li>}
       {full && !hasParties && <>
       	<li class="yes">Yes / <span class="leading">Leading</span> <span class="winner">Winner</span></li>
