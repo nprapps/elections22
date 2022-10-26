@@ -2,6 +2,7 @@ import { h, Component, Fragment } from "preact";
 import gopher from "../gopher.js";
 import Results from "../resultsBoardNamed";
 import BalanceOfPower from "../balanceOfPower";
+import BarsHouse from "../barsHouse";
 import TestBanner from "../testBanner";
 import DateFormatter from "../dateFormatter";
 import BoardKey from "../boardKey";
@@ -79,7 +80,7 @@ export default class BoardHouse extends Component {
             <div class="alert" dangerouslySetInnerHTML={({ __html: alert })} />
           </div>
           <div class="bop-wrapper">
-            <BalanceOfPower race="house" data={results}/>
+            <BarsHouse race="house" data={results}/>
           </div>
         </div>
         <div class="board-container House">
