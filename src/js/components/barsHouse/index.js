@@ -27,13 +27,11 @@ export default class BarsHouse extends Component {
 
   // Lifecycle: Called whenever our component is created
   async componentDidMount() {
-    gopher.watch(`./data/bop.json`, this.onData);
   }
 
   // Lifecycle: Called just before our component will be destroyed
   componentWillUnmount() {
     // stop when not renderable
-    gopher.unwatch(`./data/bop.json`, this.onData);
   }
 
   render() {
