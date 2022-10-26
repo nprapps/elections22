@@ -83,13 +83,15 @@ module.exports = function(grunt) {
     var results = normalize(rawResults, grunt.data.json);
 
     // Systematically exclude the results of ranked choice contests
-    // As of '22 these are returned on election night from Alaska (possibly as empty)
-    // They won't be populated until 14 days so ignore now. 
+    // As of '22 these are returned on from Alaska and Maine. 
+    // AK won't be populated until 14 days after the race.
+    // Not clear on Maine. 
     results = results.filter(race => race.type != 'RCV General Election');
 
     // Ignore contest for end of 2016 CA term held during 2022
     // https://www.capradio.org/articles/2022/10/17/us-sen-alex-padilla-will-appear-on-californias-june-primary-ballot-twice-heres-why/
-    results = results.filter(race => race.id != 8964);
+    // And ignore contest for unexpired term in Indiana, House seat 2
+    results = results.filter(race => race.id != 8964 && race.id != 15766);
 
     // filter generator for states that split their electoral college votes.
     var stateOrDistrictFilter = function(level) {
