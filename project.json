@@ -6,7 +6,7 @@
     },
     "live": {
       "bucket": "apps.npr.org",
-      "path": "election-2022-results"
+      "path": "election-results-live-2022"
     }
   },
   "styles": {
