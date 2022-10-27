@@ -38,7 +38,7 @@ async function init() {
         {!params.linkless && <a 
           class="see-full"
           target="_blank"
-          href={`https://apps.npr.org/elections20-interactive/#/states/${r.state}/${r.office}`}>
+          href={`https://apps.npr.org/election-results-live-2022/#/states/${r.state}/${r.office}`}>
             See full results &rsaquo;
         </a>}
       </>);
