@@ -166,21 +166,7 @@ class Customizer extends Component {
           value={state.dark} 
           onInput={() => this.setFlag("dark", !state.dark)} />
         <label for="bop_dark">Dark theme</label>
-
-        <input 
-          id="bop_showPresident" 
-          type="checkbox" 
-          value={state.showPresident} 
-          onInput={() => this.setFlag("showPresident", !state.showPresident)} />
-        <label for="bop_showPresident">Show president</label>
-
-        <input 
-          id="bop_onlyPresident" 
-          type="checkbox" 
-          value={state.onlyPresident} 
-          onInput={() => this.setFlag("onlyPresident", !state.onlyPresident)} />
-        <label for="bop_onlyPresident">Only president</label>
-
+        
         <input 
           id="bop_triplet" 
           type="checkbox" 
