@@ -112,7 +112,7 @@ export default class BalanceOfPower extends Component {
       if (winner) {
         var winnerParty = getParty(winner.party);
         var previousWinner = getParty(race.previousParty);
-        results[winner.party].total += 1;
+        results[winnerParty].total += 1;
         if (winnerParty != previousWinner) {
           results[winnerParty].gains += 1;
           results[previousWinner].gains -= 1;
