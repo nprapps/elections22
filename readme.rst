@@ -90,6 +90,44 @@ To address this, there are “share links” generated for all the top-level pag
 
 The templates for them live in the `src folder <https://github.com/nprapps/elections22/tree/main/src>`_ as ``_office_social.html`` and ``_state_social.html``. The text lives in the longform text doc. The pages are rendered as part of the `build task <https://github.com/nprapps/elections22/blob/main/tasks/build.js#L66-L80>`_.
 
+Setting overrides
+-----------------
+
+**Candidate-specific medatadata** — ``candidates`` tab
+
+You can use this to override metadata like party affiliation or name.
+
+For a given row, fill in the `key` for the candidate's AP identifier. (Make sure this cell is cast as a NUMBER.) And then fill in the column (or create one if it doesn't exist) that corresponds to the data attribute from AP that you want to override. For example, Candidate X is reported with party affiliation "Una" (for "unaffiliated") and you want to override that to "Ind" ("independent").  Add a comment in the spreadsheet so others know what this is for.
+
+.. list-table::
+   :widths: 50 50
+   :header-rows: 1
+
+   * - key
+     - party
+   * - 12345
+     - Ind
+
+
+**Race rosters** — ``rosters`` tab
+
+You can use this to specify which candidates appear by default in results tables. Relevant use cases:
+
+* Specify who appears in the results table when there's no data yet
+* Ensure, once data starts coming in, that a candidate always appears in the data regardless of the vote. (Note: Once data starts coming in, any candidate who receives above a set threshold of the vote will appear in the table. But those below the threshold will be grouped into "other" unless explicitly added to a roster.)
+
+For a given row, fill in the `key` for AP race ID. (Make sure this cell is cast as a NUMBER.) And then fill in the candidate IDs for the candidates you want to make sure display, comma-delimited. Add a comment in the spreadsheet so others know what this is for.
+
+.. list-table::
+   :widths: 50 50
+   :header-rows: 1
+
+   * - key
+     - value
+   * - 12345
+     - 456, 2345, 2359
+
+
 Troubleshooting
 ---------------
 
