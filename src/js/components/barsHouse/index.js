@@ -77,7 +77,7 @@ export default class BarsHouse extends Component {
     return (
         <div id="embed-bop-on-page">
 
-          <a class="link-container house" href="http://apps.npr.org/elections20-interactive/#/house" target="_top">
+          <a class="link-container house" href="http://apps.npr.org/election-results-live-2022/#/house" target="_top">
             
           <div class="number-container">
             <div class="candidate dem">

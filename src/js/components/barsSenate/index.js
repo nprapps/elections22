@@ -87,7 +87,7 @@ export default class BarsSenate extends Component {
     return (
       <div id="embed-bop-on-page">
 
-        <a class="link-container senate" href="http://apps.npr.org/elections20-interactive/#/senate" target="_top">
+        <a class="link-container senate" href="http://apps.npr.org/election-results-live-2022/#/senate" target="_top">
                     
           <div class="number-container">
             <div class="candidate dem">
