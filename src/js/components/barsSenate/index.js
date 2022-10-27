@@ -102,7 +102,7 @@ export default class BarsSenate extends Component {
             : ""}
             {100 - senate.Dem.total - senate.GOP.total - senate.Other.total ?
               <div class="candidate uncalled">
-                <div class="name">Undecided</div>
+                <div class="name">Not yet called</div>
                 <div class="votes">{100 - senate.Dem.total - senate.GOP.total - senate.Other.total}</div>
               </div>
             : ""}

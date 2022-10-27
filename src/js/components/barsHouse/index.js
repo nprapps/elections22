@@ -92,7 +92,7 @@ export default class BarsHouse extends Component {
             : ""}
             {435 - house.Dem.total - house.GOP.total - house.Other.total ?
               <div class="candidate uncalled">
-                <div class="name">Undecided</div>
+                <div class="name">Not yet called</div>
                 <div class="votes">{435 - house.Dem.total - house.GOP.total - house.Other.total}</div>
               </div>
             : ""}
