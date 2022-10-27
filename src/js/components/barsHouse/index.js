@@ -75,7 +75,7 @@ export default class BarsHouse extends Component {
 
     
     return (
-        <main class="embed-bop">
+        <div id="embed-bop-on-page">
 
           <a class="link-container house" href="http://apps.npr.org/elections20-interactive/#/house" target="_top">
             
@@ -90,12 +90,12 @@ export default class BarsHouse extends Component {
                 <div class="votes">{house.Other.total}</div>
               </div>
             : ""}
-           {/* {435 - house.Dem - house.GOP - house.Other ?
+            {435 - house.Dem.total - house.GOP.total - house.Other.total ?
               <div class="candidate uncalled">
-                <div class="name">Not Yet Called</div>
-                <div class="votes">{435 - house.Dem - house.GOP - house.Other}</div>
+                <div class="name">Undecided</div>
+                <div class="votes">{435 - house.Dem.total - house.GOP.total - house.Other.total}</div>
               </div>
-            : ""}*/}
+            : ""}
             <div class="candidate gop">
               <div class="name">GOP {house.GOP.total >= 218 ? winnerIcon : ""}</div>
               <div class="votes">{house.GOP.total}</div>
@@ -127,7 +127,7 @@ export default class BarsHouse extends Component {
           */}
 
         </a>
-      </main>
+      </div>
 
       );
 	}

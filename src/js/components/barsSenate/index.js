@@ -82,9 +82,10 @@ export default class BarsSenate extends Component {
         </svg>
       </span>;
 
-    
+    console.log("senate");
+    console.log(senate);
     return (
-      <main class="embed-bop">
+      <div id="embed-bop-on-page">
 
         <a class="link-container senate" href="http://apps.npr.org/elections20-interactive/#/senate" target="_top">
                     
@@ -99,12 +100,12 @@ export default class BarsSenate extends Component {
                 <div class="votes">{senate.Other.total}</div>
               </div>
             : ""}
-            {/*{100 - senate.Dem - senate.GOP - senate.Other ?
+            {100 - senate.Dem.total - senate.GOP.total - senate.Other.total ?
               <div class="candidate uncalled">
-                <div class="name">Not Yet Called</div>
-                <div class="votes">{435 - senate.Dem - senate.GOP - senate.Other}</div>
+                <div class="name">Undecided</div>
+                <div class="votes">{100 - senate.Dem.total - senate.GOP.total - senate.Other.total}</div>
               </div>
-            : ""}*/}
+            : ""}
             <div class="candidate gop">
               <div class="name">GOP {senate.GOP.total >= 51 ? winnerIcon : ""}</div>
               <div class="votes">{senate.GOP.total}</div>
@@ -135,7 +136,7 @@ export default class BarsSenate extends Component {
 
         </a>
          
-      </main>
+      </div>
 
       );
 	}
