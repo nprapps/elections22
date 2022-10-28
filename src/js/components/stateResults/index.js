@@ -92,14 +92,12 @@ export default class StateResults extends Component {
           )}
           <div class="source">
             <div class="note">
-              Note: <em>% in</em> for U.S. Senate and governor
-              races represents expected vote, an Associated Press estimate of
+              <strong>Notes:</strong> <em>% in</em> is an Associated Press estimate of
               the share of total ballots cast in an election that have been
               counted.{" "}
-              <a href="https://www.ap.org/en-us/topics/politics/elections/counting-the-vote">
+              <a href="https://www.ap.org/about/our-role-in-elections/counting-the-vote">
                 Read more about how EEVP is calculated.
               </a>{" "}
-              <em>% in</em> for U.S. House, state ballot and county-level results represents percent of precincts reporting.
             </div>
             {stateName !== "Alaska" && props.subview && (
               <div class="note">

@@ -26,7 +26,7 @@ export default function ResultsTableCandidates(props) {
   }
 
   var isUncontested = results.candidates.length < 2;
-  var reporting = `${reportingPercentage(
+  var reporting = `AP estimate: ${reportingPercentage(
     (notStatewide ? props.data.reportingPercent : props.data.eevp) || 0
   )}% in`;
 

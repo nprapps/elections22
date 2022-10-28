@@ -36,13 +36,13 @@ export default class BoardHouse extends Component {
     var { results = [], test, latest, alert } = this.state;
 
     var sorted = results.slice().sort((a, b) =>
-      a.state > b.state ? 1 : 
-      a.state < b.state ? -1 : 
-      parseInt(a.seatNumber) > parseInt(b.seatNumber) ? 1 : 
+      a.state > b.state ? 1 :
+      a.state < b.state ? -1 :
+      parseInt(a.seatNumber) > parseInt(b.seatNumber) ? 1 :
       parseInt(a.seatNumber) < parseInt(b.seatNumber) ? -1 : 0
     );
 
-    // Don't show flipped races in '22 after redistricting. 
+    // Don't show flipped races in '22 after redistricting.
     //sorted = sorted.filter(r => r.keyRace || (r.winnerParty && r.winnerParty != r.previousParty));
     sorted = sorted.filter(r => r.keyRace );
 
@@ -111,8 +111,18 @@ export default class BoardHouse extends Component {
         </div>
         <BoardKey race="house"/>
 
-        <div class="source">Source: AP (as of <DateFormatter value={latest} />). U.S. House race ratings from the nonpartisan <a href="https://cookpolitical.com/ratings/house-race-ratings">Cook Political Report</a>.</div> 
-        <div class="source">Seat flips are not shown for House races. Districts were redrawn during redistricting, so comparison to prior seatholders is meaningless. </div>
+        <div class="source">
+          <div class="note">
+            <strong>Note:</strong> <em>% in</em> is an Associated Press estimate of
+            the share of total ballots cast in an election that have been
+            counted. <a href="https://www.ap.org/about/our-role-in-elections/counting-the-vote">Read more about how EEVP is calculated</a>.
+          </div>
+          <div class="note">
+            Seat flips are not shown for House races. Districts were redrawn during redistricting, so comparison to prior seatholders is meaningless.
+          </div>
+
+          <div class="source">Source: AP (as of <DateFormatter value={latest} />). U.S. House race ratings come from the nonpartisan <a href="https://cookpolitical.com/ratings/house-race-ratings">Cook Political Report</a>.</div>
+        </div>
 
       </>
     );
