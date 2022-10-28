@@ -72,6 +72,27 @@
 }
 </script>
 
+<!-- Ugly canonical URL hack  -->
+<script type="text/javascript">
+// hack canonical link tags
+  var canonicalurl = String(window.location.href);
+  var canonicalurl = canonicalurl.replace("index.html", "");
+  canonicalurl = canonicalurl.replace("apps.npr.org.s3.amazonaws.com", "apps.npr.org");
+  // localhost shouldn't ever appear in what google is indexing, but...
+  canonicalurl = canonicalurl.replace("localhost:8000/", "apps.npr.org/election-results-live-2022/");
+  canonicalurl = canonicalurl.split("?")[0];
+
+  const canonical = document.querySelector('link[rel="canonical"]');
+  if (canonical) {
+    canonical.href = canonicalurl;
+  } else {
+    const linkTag = document.createElement('link');
+    linkTag.setAttribute('rel', 'canonical');
+    linkTag.href=canonicalurl;
+    document.head.appendChild(linkTag);
+  };
+</script>
+
 <!-- Chartbeat top -->
 <script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
 
