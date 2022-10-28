@@ -559,10 +559,10 @@ main.embed-homepage {
 
 // Use #embed-bop-on-page to target the bars at the top of the H/S boards
 // While these look similar to the embed, they are tweaked somewhat
-// This may be substantially refactorable later. 
+// This may be substantially refactorable later.
 
 @thick-height: @height * 1.3;
-@height: 20px;
+@height: 10px;
 @thin-height: @height * 0.7;
 
 #embed-bop-on-page {
@@ -570,9 +570,9 @@ main.embed-homepage {
   // background: #333;
 
   // DELETE THIS HEINOUS BORDER, STAT!
-  //border:10px solid papayawhip;
-  //border-style: outset dotted;
-  //border-radius: 30px 10px;
+  // border:10px solid papayawhip;
+  // border-style: outset dotted;
+  // border-radius: 30px 10px;
 
   .full-link {
     font-size: 12px;
@@ -895,30 +895,42 @@ main.embed-homepage {
   .number-container {
     display: flex;
     justify-content: center;
-    align-items: stretch;
+    // align-items: stretch;
+    gap: 20px;
 
     .candidate {
       flex: 1;
-      text-align: center;
-      max-width: 90px;
+      // max-width: 90px;
       color: #666;
       display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
+      // flex-direction: column;
+      // justify-content: flex-end;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
 
       .name {
         .knockout-header();
-        line-height: 1.2em;
+        line-height: 1.1em;
         text-transform: uppercase;
+        font-size: 14px;
+        margin-bottom: -1px;
+        text-align: right;
 
         @media @sidebar {
-          font-size: 12px;
+          font-size: 10px;
         }
       }
       .votes {
         .gotham();
-        font-size: 30px;
+        font-size: 20px;
         font-weight: bold;
+        text-align: left;
+      }
+
+      &.uncalled {
+        .name { font-size: 12px; }
+        .votes { font-size: 13px; }
       }
     }
 
@@ -1058,4 +1070,3 @@ main.embed-homepage {
     margin-top: 55px;
   }
 }
-
