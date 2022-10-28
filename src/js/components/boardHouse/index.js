@@ -2,6 +2,7 @@ import { h, Component, Fragment } from "preact";
 import gopher from "../gopher.js";
 import Results from "../resultsBoardNamed";
 import BalanceOfPower from "../balanceOfPower";
+import BarsHouse from "../barsHouse";
 import TestBanner from "../testBanner";
 import DateFormatter from "../dateFormatter";
 import BoardKey from "../boardKey";
@@ -79,7 +80,7 @@ export default class BoardHouse extends Component {
             <div class="alert" dangerouslySetInnerHTML={({ __html: alert })} />
           </div>
           <div class="bop-wrapper">
-            <BalanceOfPower race="house" data={results}/>
+            <BarsHouse race="house" data={results}/>
           </div>
         </div>
         <div class="board-container House">
@@ -109,7 +110,10 @@ export default class BoardHouse extends Component {
           )}
         </div>
         <BoardKey race="house"/>
-        <div class="source">Source: AP (as of <DateFormatter value={latest} />). U.S. House race ratings from the nonpartisan <a href="https://cookpolitical.com/ratings/house-race-ratings">Cook Political Report</a>.</div>
+
+        <div class="source">Source: AP (as of <DateFormatter value={latest} />). U.S. House race ratings from the nonpartisan <a href="https://cookpolitical.com/ratings/house-race-ratings">Cook Political Report</a>.</div> 
+        <div class="source">Seat flips are not shown for House races. Districts were redrawn during redistricting, so comparison to prior seatholders is meaningless. </div>
+
       </>
     );
   }
