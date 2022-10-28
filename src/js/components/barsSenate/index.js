@@ -1,13 +1,11 @@
 
 import { h, Component, Fragment } from "preact";
 import gopher from "../gopher.js";
-
 import $ from "../../lib/qsa";
-
-
 import InactiveSenateRaces from "inactive_senate_races.sheet.json";
-
 import DateFormatter from "../dateFormatter";
+import {getParty} from "../util.js"
+
 
 export default class BarsSenate extends Component {
   constructor(props) {
@@ -18,8 +16,6 @@ export default class BarsSenate extends Component {
   }
 
   onData(data) {
-    console.log("onData");
-    console.log(data);
     var latest = Math.max(...data.results.map((r) => r.updated));
     this.setState({ ...data, latest });
   }
@@ -40,14 +36,11 @@ export default class BarsSenate extends Component {
       return;
     }
     var results = (this.props.data);
-    console.log("Results::: ");
-    console.log(results);
-
 
     var senate = {
       Dem:  {total: InactiveSenateRaces.Dem, gains: 0},
       GOP: {total: InactiveSenateRaces.GOP, gains: 0},
-      Other: {total: InactiveSenateRaces.Other, gains: 0}
+      Ind: {total: InactiveSenateRaces.Other, gains: 0}
     }
 
     // Tally vote/seat totals and gains (TODO: clean up the grossness)
@@ -55,7 +48,8 @@ export default class BarsSenate extends Component {
   
     results.forEach(function(r) {
       if ( r.hasOwnProperty('called')  && r.called == true ) {
-          senate[r.winnerParty].total += 1;  
+          var winnerParty = getParty(r.winnerParty);
+          senate[winnerParty].total += 1;  
       } 
     });
 
@@ -82,8 +76,6 @@ export default class BarsSenate extends Component {
         </svg>
       </span>;
 
-    console.log("senate");
-    console.log(senate);
     return (
       <div id="embed-bop-on-page">
 
@@ -94,16 +86,16 @@ export default class BarsSenate extends Component {
               <div class="name">Dem. {senate.Dem.total >= 51 ? winnerIcon : ""}</div>
               <div class="votes">{senate.Dem.total}</div>
             </div>
-            {senate.Other.total ?
+            {senate.Ind.total ?
               <div class="candidate other">
-                <div class="name">Ind. {senate.Other.total >= 51 ? winnerIcon : ""}</div>
-                <div class="votes">{senate.Other.total}</div>
+                <div class="name">Ind. {senate.Ind.total >= 51 ? winnerIcon : ""}</div>
+                <div class="votes">{senate.Ind.total}</div>
               </div>
             : ""}
-            {100 - senate.Dem.total - senate.GOP.total - senate.Other.total ?
+            {100 - senate.Dem.total - senate.GOP.total - senate.Ind.total ?
               <div class="candidate uncalled">
                 <div class="name">Not yet called</div>
-                <div class="votes">{100 - senate.Dem.total - senate.GOP.total - senate.Other.total}</div>
+                <div class="votes">{100 - senate.Dem.total - senate.GOP.total - senate.Ind.total}</div>
               </div>
             : ""}
             <div class="candidate gop">
@@ -116,8 +108,8 @@ export default class BarsSenate extends Component {
             <div class="bar dem" style={"width: " + (senate.Dem.total) + "%"}>
               {/*<div class="label">Dem. {senate.Dem.total >= 51 ? winnerIcon : ""}<span class="number">{senate.Dem.total}</span></div>*/}
             </div>
-            <div class="bar other" style={"width: " + (senate.Other.total) + "%"}>
-              {/*<div class="label">Ind. {senate.Other.total >= 51 ? winnerIcon : ""}<span class="number">{senate.Other.total}</span></div>*/}
+            <div class="bar other" style={"width: " + (senate.Ind.total) + "%"}>
+              {/*<div class="label">Ind. {senate.Ind.total >= 51 ? winnerIcon : ""}<span class="number">{senate.Ind.total}</span></div>*/}
             </div>
             <div class="bar gop" style={"width: " + (senate.GOP.total) + "%"}>
               {/*<div class="label">GOP {senate.GOP.total >= 51 ? winnerIcon : ""}<span class="number">{senate.GOP.total}</span></div>*/}

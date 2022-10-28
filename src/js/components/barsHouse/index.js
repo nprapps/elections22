@@ -2,6 +2,8 @@
 import { h, Component, Fragment } from "preact";
 import gopher from "../gopher.js";
 
+import {getParty} from "../util.js"
+
 import $ from "../../lib/qsa";
 
 
@@ -18,8 +20,6 @@ export default class BarsHouse extends Component {
   }
 
   onData(data) {
-    console.log("onData");
-    console.log(data);
     var latest = Math.max(...data.results.map((r) => r.updated));
     this.setState({ ...data, latest });
   }
@@ -40,14 +40,11 @@ export default class BarsHouse extends Component {
       return;
     }
     var results = (this.props.data);
-    console.log("Results::: ");
-    console.log(results);
-
 
     var house = {
       Dem: {total: 0},
       GOP: {total: 0},
-      Other: {total: 0}
+      Ind: {total: 0}
     }
 
     // Tally vote/seat totals and gains (TODO: clean up the grossness)
@@ -55,7 +52,8 @@ export default class BarsHouse extends Component {
   
     results.forEach(function(r) {
       if ( r.hasOwnProperty('called')  && r.called == true ) {
-          house[r.winnerParty].total += 1;  
+          var winnerParty = getParty(r.winnerParty);
+          house[winnerParty].total += 1;  
       } 
     });
 
@@ -84,16 +82,16 @@ export default class BarsHouse extends Component {
               <div class="name">Dem. {house.Dem.total >= 218 ? winnerIcon : ""}</div>
               <div class="votes">{house.Dem.total}</div>
             </div>
-            {house.Other.total ?
+            {house.Ind.total ?
               <div class="candidate other">
-                <div class="name">Ind. {house.Other.total >= 218 ? winnerIcon : ""}</div>
-                <div class="votes">{house.Other.total}</div>
+                <div class="name">Ind. {house.Ind.total >= 218 ? winnerIcon : ""}</div>
+                <div class="votes">{house.Ind.total}</div>
               </div>
             : ""}
-            {435 - house.Dem.total - house.GOP.total - house.Other.total ?
+            {435 - house.Dem.total - house.GOP.total - house.Ind.total ?
               <div class="candidate uncalled">
                 <div class="name">Not yet called</div>
-                <div class="votes">{435 - house.Dem.total - house.GOP.total - house.Other.total}</div>
+                <div class="votes">{435 - house.Dem.total - house.GOP.total - house.Ind.total}</div>
               </div>
             : ""}
             <div class="candidate gop">
@@ -106,8 +104,8 @@ export default class BarsHouse extends Component {
             <div class="bar dem" style={"width: " + (house.Dem.total / 435 * 100) + "%"}>
               {/*<div class="label">Dem. {house.Dem.total >= 218 ? winnerIcon : ""}<span class="number">{house.Dem.total}</span></div>*/}
             </div>
-            <div class="bar other" style={"width: " + (house.Other.total / 435 * 100) + "%"}>
-              {/*{house.Other.total ? <div class="label">Ind. {house.Other.total >= 218 ? winnerIcon : ""}<span class="number">{house.Other.total}</span></div> : ""}*/}
+            <div class="bar other" style={"width: " + (house.Ind.total / 435 * 100) + "%"}>
+              {/*{house.Ind.total ? <div class="label">Ind. {house.Ind.total >= 218 ? winnerIcon : ""}<span class="number">{house.Ind.total}</span></div> : ""}*/}
             </div>
             <div class="bar gop" style={"width: " + (house.GOP.total / 435 * 100) + "%"}>
               {/*<div class="label">GOP {house.GOP.total >= 218 ? winnerIcon : ""}<span class="number">{house.GOP.total}</span></div>*/}
