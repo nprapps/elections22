@@ -268,7 +268,7 @@ export default class ElectoralBubbles extends Component {
           </div>`
         ).join("")}</div>
         <div class="reporting">${reportingPercentage(
-          data.eevp || data.reportingPercent
+          data.eevp 
         )}% in</div>
       `;
       this.lastHover = key;
@@ -388,7 +388,7 @@ export default class ElectoralBubbles extends Component {
               <h4>{titles[rating]}</h4>
               <ul class="circles">
                 {uncalled[rating].sort((a, b) => b.electoral - a.electoral).map(result => {
-                  var reporting = result.eevp || result.reportingPercent;
+                  var reporting = result.eevp ;
                   var r = Math.max(this.nodeRadius(result), MIN_RADIUS);
                   var size = r * .5;
                   return <li>
