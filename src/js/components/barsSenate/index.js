@@ -43,15 +43,32 @@ export default class BarsSenate extends Component {
       Ind: {total: InactiveSenateRaces.Other, gains: 0}
     }
 
-    // Tally vote/seat totals and gains (TODO: clean up the grossness)
+    // Tally vote/seat totals and gains (TODO: embrace the grossness)
 
-  
     results.forEach(function(r) {
       if ( r.hasOwnProperty('called')  && r.called == true ) {
           var winnerParty = getParty(r.winnerParty);
           senate[winnerParty].total += 1;  
       } 
     });
+
+
+    var mcmullinWon = false;
+  
+    results.forEach(function(r) {
+      if ( r.hasOwnProperty('called')  && r.called == true ) {
+        if (r.id == '46329' && r.winnerParty == 'Ind') {
+              console.log("barsSenate: Evan McMullin is victor, bar chart asterisk")
+              mcmullinWon = true;
+            }
+      }
+    });
+
+    senate.Ind.width = senate.Ind.total;
+    if (mcmullinWon) {
+      senate.Ind.width = (senate.Ind.total)-1;
+    }
+
 
     senate.netGainParty = "none";
     var [topSenate] = Object.keys(senate)
@@ -89,10 +106,10 @@ export default class BarsSenate extends Component {
             {senate.Ind.total ?
               <div class="candidate other">
                 <div class="name">Ind. {senate.Ind.total >= 51 ? winnerIcon : ""}</div>
-                <div class="votes">{senate.Ind.total}</div>
+                <div class="votes">{senate.Ind.total}{mcmullinWon ? "*" : ""}</div>
               </div>
             : ""}
-            {100 - senate.Dem.total - senate.GOP.total - senate.Ind.total ?
+            {100 - senate.Dem.total - senate.GOP.total - senate.Ind.width ?
               <div class="candidate uncalled">
                 <div class="name">Not yet called</div>
                 <div class="votes">{100 - senate.Dem.total - senate.GOP.total - senate.Ind.total}</div>
@@ -108,8 +125,9 @@ export default class BarsSenate extends Component {
             <div class="bar dem" style={"width: " + (senate.Dem.total) + "%"}>
               {/*<div class="label">Dem. {senate.Dem.total >= 51 ? winnerIcon : ""}<span class="number">{senate.Dem.total}</span></div>*/}
             </div>
-            <div class="bar other" style={"width: " + (senate.Ind.total) + "%"}>
-              {/*<div class="label">Ind. {senate.Ind.total >= 51 ? winnerIcon : ""}<span class="number">{senate.Ind.total}</span></div>*/}
+            <div class="bar other" style={"width: " + (senate.Ind.width) + "%"}>
+              {/*<div class="label">Ind. {senate.Ind.total >= 51 ? winnerIcon : ""}<span class="number">{senate.Ind.total}
+            </span></div>*/}
             </div>
             <div class="bar gop" style={"width: " + (senate.GOP.total) + "%"}>
               {/*<div class="label">GOP {senate.GOP.total >= 51 ? winnerIcon : ""}<span class="number">{senate.GOP.total}</span></div>*/}

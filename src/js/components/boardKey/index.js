@@ -8,6 +8,25 @@ export default function BoardKey(props) {
 	var hasIncumbent = race == "house" || race == "senate" || race == "gov";
 	var hasEEVP = race !== "house" && race !== "ballot";
 
+  console.log("props");
+  console.log(props);
+
+  // Do we need an asterisk b/c Evan McMullin won in 2022? 
+  var mcmullinWon = false;
+
+  if (this.props.data) {
+
+    var results = (this.props.data);
+ 
+    results.forEach(function(r) {
+      if ( r.hasOwnProperty('called')  && r.called == true ) {
+        if (r.id == '46329' && r.winnerParty == 'Ind') {
+              console.log("boardkey: Evan McMullin is victor, bar chart asterisk")
+              mcmullinWon = true;
+            }
+      }
+    });
+  }
 
   return <div class="board-key">
     {full && <h3>Key</h3>}
@@ -25,6 +44,8 @@ export default function BoardKey(props) {
       </>}
       {full && <li class="eevp"><span class="perc">76% in</span> {hasEEVP ? <span>Expected vote*</span> : "Precincts reporting"}</li>}
       {full && hasIncumbent && <li class="incumbent">● Incumbent</li>}
+
     </ul>
+     {mcmullinWon && <div id="mcmullin_note"><span style="color:#15b16e; font-family: Helvetica, Arial, sans-serif; font-weight: normal; font-weight: 400; font-size: 20px; font-weight: bold;">*</span><span id="mcmullin_text" style="font-style:italic;">In the Senate, Bernie Sanders (I-VT) and Angus King (I-ME) caucus with Democrats. The bar chart does not include newly-elected Evan McMullin (I-UT), who has said he will not caucus with either party.</span></div> }
   </div>
 }

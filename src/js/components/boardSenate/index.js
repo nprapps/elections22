@@ -72,7 +72,7 @@ export default class BoardSenate extends Component {
             <Results races={buckets.likelyR} hed="Likely Republican" office="Senate" addClass="last"/>
           </>}
         </div>
-        <BoardKey race="senate"/>
+        <BoardKey race="senate" data={results}/>
         <div class="source">
           <div class="note">
             <strong>Note:</strong> <em>% in</em> is an Associated Press estimate of the share of total ballots cast in an election that have been counted. <a href="https://www.ap.org/about/our-role-in-elections/counting-the-vote">Read more about how EEVP is calculated</a>.
