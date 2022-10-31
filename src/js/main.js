@@ -33,8 +33,8 @@ $.one(".about-box .close").addEventListener("click", hideBox);
 // check the cookie and hide if found
 if (document.cookie.indexOf(COOKIE) > -1) hideBox();
 // hide if there's a URL param
-var search = new URLSearchParams(window.location.search);
-if (search.has("hide-note")) hideBox();
+// var search = new URLSearchParams(window.location.search);
+// if (search.has("hide-note")) hideBox();
 
 // temporarily hide the note, while language is updated
-hideBox();
+// hideBox();
