@@ -27,7 +27,6 @@ function CandidateCells(race, winner) {
 }
 
 export default function ResultsBoardNamed(props) {
-  // console.log("props",props)
 
   var hasFlips = props.races.some(function(r) {
     var [ winner ] = r.candidates.filter(c => c.winner);

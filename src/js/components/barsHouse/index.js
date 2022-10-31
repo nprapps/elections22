@@ -36,7 +36,6 @@ export default class BarsHouse extends Component {
 
   render() {
     if (!this.props.data) {
-      console.log("missing this.props.data");
       return;
     }
     var results = (this.props.data);

@@ -32,7 +32,6 @@ export default class BarsSenate extends Component {
 
   render() {
     if (!this.props.data) {
-      console.log("missing this.props.data");
       return;
     }
     var results = (this.props.data);
@@ -58,7 +57,6 @@ export default class BarsSenate extends Component {
     results.forEach(function(r) {
       if ( r.hasOwnProperty('called')  && r.called == true ) {
         if (r.id == '46329' && r.winnerParty == 'Ind') {
-              console.log("barsSenate: Evan McMullin is victor, bar chart asterisk")
               mcmullinWon = true;
             }
       }

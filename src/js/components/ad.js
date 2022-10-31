@@ -24,7 +24,7 @@ var gptSetup = false;
 
 var ccpaCookie = document.cookie.split(";").filter(c => c.includes("ccpa_rdp=true")).length > 0;
 
-var storyId = "elections20-interactive";
+var storyId = "election-results-live-2022";
 var isStagingServer = window.location.hostname == "stage-apps.npr.org";
 var adSizes = {
   tall: ["fluid", [300,600], [300, 250]],
@@ -44,6 +44,8 @@ var observer = new IntersectionObserver(function([event]) {
     gptLoaded = true;
   }
 });
+
+
 
 var guid = 0;
 
@@ -93,10 +95,14 @@ class GoogleAd extends HTMLElement {
 
       googletag.defineSlot(adUnitString, adSizeArray, id).addService(adService);
       adService.addEventListener("slotRenderEnded", event => {
-        if (event.slot.getSlotElementId() != id) return;
+        if (event.slot.getSlotElementId() != id) {
+          console.log(" ...slotRenderEnded... ");
+          return;
+        }
         this.classList.remove("pending");
         if (!event.isEmpty) {
           this.classList.add("has-ad");
+          console.log((`ad returned for ${id}`))
         } else {
           console.log(`No ad returned for ${id}`);
         }

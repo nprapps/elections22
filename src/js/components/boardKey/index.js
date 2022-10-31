@@ -8,8 +8,6 @@ export default function BoardKey(props) {
 	var hasIncumbent = race == "house" || race == "senate" || race == "gov";
 	var hasEEVP = race !== "house" && race !== "ballot";
 
-  console.log("props");
-  console.log(props);
 
   // Do we need an asterisk b/c Evan McMullin won in 2022? 
   var mcmullinWon = false;
@@ -21,7 +19,6 @@ export default function BoardKey(props) {
     results.forEach(function(r) {
       if ( r.hasOwnProperty('called')  && r.called == true ) {
         if (r.id == '46329' && r.winnerParty == 'Ind') {
-              console.log("boardkey: Evan McMullin is victor, bar chart asterisk")
               mcmullinWon = true;
             }
       }
