@@ -62,6 +62,7 @@ class GoogleAd extends HTMLElement {
   }
 
   connectedCallback() {
+    console.log("Ad instrumentation: running connectedCallback on ad elements");
     if (this.connected) return;
     this.connected = true;
     
@@ -128,6 +129,8 @@ class GoogleAd extends HTMLElement {
         this.classList.remove("pending");
         if (!event.isEmpty) {
           this.classList.add("has-ad");
+
+
           console.log((`ad returned for ${id}`))
 
           // Record details of the rendered ad.

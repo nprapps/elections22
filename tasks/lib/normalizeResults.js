@@ -103,8 +103,20 @@ var sortCandidates = function (votes, candidates) {
 var mergeOthers = function (candidates, raceID) {
   // always take the top two
   var total = candidates.reduce((total, c) => total + c.votes, 0);
-  var merged = candidates.slice(0, 2);
-  var remaining = candidates.slice(2);
+  var merged;
+  var remaining;
+
+  if (raceID == 38019) {
+      console.log("candidates 38019");
+      console.log(candidates);
+      merged = candidates.slice(0, 3);
+      remaining = candidates.slice(3);
+      console.log("num remaining: " + remaining.length);
+  } else {
+    merged = candidates.slice(0, 2);
+    remaining = candidates.slice(2);
+  }
+
   var other = {
     first: "",
     last: "Other",
@@ -122,6 +134,11 @@ var mergeOthers = function (candidates, raceID) {
       merged.push(c);
       continue;
     }
+
+    if (raceID == 38019) {
+      console.log("adding votes from candidate");
+      console.log(c);
+    }
     other.votes += c.votes || 0;
     other.avotes += c.avotes || 0;
     other.electoral += c.electoral || 0;
@@ -130,6 +147,10 @@ var mergeOthers = function (candidates, raceID) {
     }
   }
   merged.push(other);
+  if (raceID == 38019) {
+    console.log("merged");
+    console.log(merged);
+  }
   return merged;
 };
 
@@ -224,7 +245,9 @@ module.exports = function (resultArray, overrides = {}) {
           // console.log(
           //   `Overriding the roster for race #${unitMeta.id} - ${roster.size} candidates`
           // );
-          ballot = ballot.filter(c => roster.has(c.id));
+
+          // // KEEP THE CANDIDATES SO WE CAN ROLL UP THE REMAINDER !!! 
+          //ballot = ballot.filter(c => roster.has(c.id));
         }
 
         sortCandidates(total, ballot);
@@ -234,7 +257,7 @@ module.exports = function (resultArray, overrides = {}) {
         // - Independent candidate(s) exist and
         // - they're not marked as exceptions in a sheet
         // TODO: handle "jungle primary" races (LA and CA)
-        if (!roster && ballot.length > 2 && unitMeta.level != "county") {
+        if (ballot.length > 2 && unitMeta.level != "county") {
           ballot = mergeOthers(ballot, raceMeta.id);
         }
 

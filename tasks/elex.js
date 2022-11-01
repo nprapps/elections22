@@ -144,13 +144,6 @@ module.exports = function(grunt) {
         results: states[state]
       };
 
-
-      // grunt.log.writeln("longform");
-      // grunt.log.writeflags(longform);
-
-
-
-
       var stateChatter = longform.statePages[state.toLowerCase()];
       if (stateChatter) {
         stateOutput.chatter = grunt.template.renderMarkdown(stateChatter);
