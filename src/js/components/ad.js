@@ -24,7 +24,8 @@ var gptSetup = false;
 
 var ccpaCookie = document.cookie.split(";").filter(c => c.includes("ccpa_rdp=true")).length > 0;
 
-var storyId = "election-results-live-2022";
+// var storyId = "election-results-live-2022";
+var storyId = "elections20-interactive";
 var isStagingServer = window.location.hostname == "stage-apps.npr.org";
 var adSizes = {
   tall: ["fluid", [300,600], [300, 250]],
@@ -32,18 +33,22 @@ var adSizes = {
 }
 var advelvetTargeting = [String(Math.floor(Math.random() * 20) + 1)];
 
-var observer = new IntersectionObserver(function([event]) {
-  if (event.isIntersecting) {
-    observer.disconnect();
-    var gpt = document.createElement("script");
-    gpt.src = "https://securepubads.g.doubleclick.net/tag/js/gpt.js";
-    gpt.async = true;
-    gpt.defer = true;
-    document.body.appendChild(gpt);
-    console.log("Lazy-loading ad code...");
-    gptLoaded = true;
-  }
-});
+
+
+// Load the code on page. 
+
+// var observer = new IntersectionObserver(function([event]) {
+//   if (event.isIntersecting) {
+//     observer.disconnect();
+//     var gpt = document.createElement("script");
+//     gpt.src = "https://securepubads.g.doubleclick.net/tag/js/gpt.js";
+//     gpt.async = true;
+//     gpt.defer = true;
+//     document.body.appendChild(gpt);
+//     console.log("Lazy-loading ad code...");
+//     gptLoaded = true;
+//   }
+// });
 
 
 
@@ -52,7 +57,7 @@ var guid = 0;
 class GoogleAd extends HTMLElement {
   constructor() {
     super();
-    if (!gptLoaded) observer.observe(this);
+    //if (!gptLoaded) observer.observe(this);
     this.connected = false;
   }
 
