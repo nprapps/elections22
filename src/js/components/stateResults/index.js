@@ -58,11 +58,6 @@ export default class StateResults extends Component {
 
     let office = props.subview || "key";
 
-    console.log("\n\noffice: ");
-    console.log(office);
-
-
-
     let viewTitle =
       office == "key"
         ? "Key Results"
@@ -176,10 +171,6 @@ export default class StateResults extends Component {
   }
 
   getRaceWithCountyResults(race, oneOfMultiple) {
-
-    console.log("race.office");
-    console.log(race.office);
-
 
     var order = race.candidates;
     var isSpecial = !!race.seat;

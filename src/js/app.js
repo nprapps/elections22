@@ -24,7 +24,7 @@ export default class App extends Component {
     this.router = new Scrapple();
     // this.router.onhit = () => {};
     this.router.onmiss = e => {
-      console.log(`Route for "/${e}" does not exist, resetting app location...`);
+      //console.log(`Route for "/${e}" does not exist, resetting app location...`);
       window.location = "#/house";
     }
 
@@ -57,7 +57,7 @@ export default class App extends Component {
       if (headline && !isEmbedded) {
         setTimeout(() => {
           headline.focus();
-          console.log(`Updating route focus to "${headline.textContent}"`);
+          //console.log(`Updating route focus to "${headline.textContent}"`);
         });
       }
     }
