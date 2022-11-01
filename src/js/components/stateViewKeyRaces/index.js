@@ -6,6 +6,9 @@ import stateLookup from "states.sheet.json";
 
 const STATES_WITHOUT_COUNTY_INFO = ["AK"];
 
+const STATES_LACKING_KEY_RACES = ["MS", "DE"];
+
+
 export default class KeyRaces extends Component {
   constructor(props) {
     super();
@@ -55,7 +58,12 @@ export default class KeyRaces extends Component {
       var data = grouped[o];
       // Filter house races for keyRaces
       if (o == "H") {
-        data = data.filter(d => d.keyRace);
+        data = data.filter(function(d) {
+
+          return d.keyRace || STATES_LACKING_KEY_RACES.includes(d.state);
+
+        });
+
         data.sort(numberSort);
         if (!data.length) return;
       }
