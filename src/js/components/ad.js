@@ -103,17 +103,53 @@ class GoogleAd extends HTMLElement {
       console.log("googletag.defineSlot( " + adUnitString + ", " + adSizeArray + ", " +  id  + ")");
 
 
+
+      // This listener will be called when an impression is considered viewable.
+      adService.addEventListener('impressionViewable', function(event) {
+        var slotId = event.slot.getSlotElementId();
+        console.log('Impression has become viewable.', slotId);
+      });
+
+      // This listener will be called when a slots creative iframe load event fires.
+      adService.addEventListener('slotOnload', function(event) {
+        var slotId = event.slot.getSlotElementId();
+        console.log('Creative iframe load event has fired.', slotId);
+      });
+
+
+
       adService.addEventListener("slotRenderEnded", event => {
         if (event.slot.getSlotElementId() != id) {
           console.log("slot element id mismatch " + event.slot.getSlotElementId() + " <> " + id + " ignoring... ");
           return;
         }
-        console.log("Processing event slot " + event.slot.getSlotElementId() + " and id " + id );
+        console.log("Processing ads for slot " + event.slot.getSlotElementId() );
 
         this.classList.remove("pending");
         if (!event.isEmpty) {
           this.classList.add("has-ad");
           console.log((`ad returned for ${id}`))
+
+          // Record details of the rendered ad.
+          var details = {
+            'Advertiser ID': event.advertiserId,
+            'Campaign ID': event.campaignId,
+            'Company IDs': event.companyIds,
+            'Creative ID': event.creativeId,
+            'Creative Template ID': event.creativeId,
+            'Is backfill?': event.isBackfill,
+            'Is empty?': event.isEmpty,
+            'Label IDs': event.labelIds,
+            'Line Item ID': event.lineItemId,
+            'Size': event.size.join('x'),
+            'Slot content changed?': event.slotContentChanged,
+            'Source Agnostic Creative ID': event.sourceAgnosticCreativeId,
+            'Source Agnostic Line Item ID': event.sourceAgnosticLineItemId,
+            'Yield Group IDs': event.yieldGroupIds
+          }
+
+          console.log(details);
+
         } else {
           console.log(`No ad returned for ${id}`);
         }
