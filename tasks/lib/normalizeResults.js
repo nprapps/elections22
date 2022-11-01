@@ -124,10 +124,6 @@ var mergeOthers = function (candidates, raceID, top_n) {
       continue;
     }
 
-    if (raceID == 38019) {
-      console.log("adding votes from candidate");
-      console.log(c);
-    }
     other.votes += c.votes || 0;
     other.avotes += c.avotes || 0;
     other.electoral += c.electoral || 0;
@@ -136,10 +132,6 @@ var mergeOthers = function (candidates, raceID, top_n) {
     }
   }
   merged.push(other);
-  if (raceID == 38019) {
-    console.log("merged");
-    console.log(merged);
-  }
   return merged;
 };
 
@@ -244,11 +236,10 @@ module.exports = function (resultArray, overrides = {}) {
         // create "other" merged candidate if:
         // - More than two candidates and
         // - Independent candidate(s) exist and
-        // - they're not marked as exceptions in a sheet
-        // TODO: handle "jungle primary" races (LA and CA)
+        // If they are an exception in the 'rosters' sheet
+        // Be sure to include the right number
         if (ballot.length > 2 && unitMeta.level != "county") {
           if (roster) {
-            console.log("Roster has length of " + roster.size);
             ballot = mergeOthers(ballot, raceMeta.id, roster.size);
           } else {
             ballot = mergeOthers(ballot, raceMeta.id, 2);
