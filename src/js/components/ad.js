@@ -108,6 +108,8 @@ class GoogleAd extends HTMLElement {
           console.log("slot element id mismatch " + event.slot.getSlotElementId() + " <> " + id + " ignoring... ");
           return;
         }
+        console.log("Processing event slot " + event.slot.getSlotElementId() + " and id " + id );
+
         this.classList.remove("pending");
         if (!event.isEmpty) {
           this.classList.add("has-ad");
