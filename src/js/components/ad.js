@@ -76,6 +76,7 @@ class GoogleAd extends HTMLElement {
     var adUnitString = "/6735/n6735.npr/news_politics/news_politics_liveblog";
     // Medium and small breakpoints
     if (window.innerWidth < 1024) {
+      console.log("ad instrumentation: window.innerWidth < 1024")
       adUnitString = "/6735/n6735.nprmobile/news_politics/news_politics_liveblog";
       adSizeArray.push([300, 250]);
     }
@@ -99,9 +100,12 @@ class GoogleAd extends HTMLElement {
       }
 
       googletag.defineSlot(adUnitString, adSizeArray, id).addService(adService);
+      console.log("googletag.defineSlot( " + adUnitString + ", " + adSizeArray + ", " +  id  + ")");
+
+
       adService.addEventListener("slotRenderEnded", event => {
         if (event.slot.getSlotElementId() != id) {
-          console.log(" ...slotRenderEnded... ");
+          console.log("slot element id mismatch " + event.slot.getSlotElementId() + " <> " + id + " ignoring... ");
           return;
         }
         this.classList.remove("pending");
