@@ -100,22 +100,11 @@ var sortCandidates = function (votes, candidates) {
   candidates.sort(compare);
 };
 
-var mergeOthers = function (candidates, raceID) {
+var mergeOthers = function (candidates, raceID, top_n) {
   // always take the top two
   var total = candidates.reduce((total, c) => total + c.votes, 0);
-  var merged;
-  var remaining;
-
-  if (raceID == 38019) {
-      console.log("candidates 38019");
-      console.log(candidates);
-      merged = candidates.slice(0, 3);
-      remaining = candidates.slice(3);
-      console.log("num remaining: " + remaining.length);
-  } else {
-    merged = candidates.slice(0, 2);
-    remaining = candidates.slice(2);
-  }
+  var merged = candidates.slice(0, top_n);
+  var remaining = candidates.slice(top_n);
 
   var other = {
     first: "",
@@ -258,7 +247,12 @@ module.exports = function (resultArray, overrides = {}) {
         // - they're not marked as exceptions in a sheet
         // TODO: handle "jungle primary" races (LA and CA)
         if (ballot.length > 2 && unitMeta.level != "county") {
-          ballot = mergeOthers(ballot, raceMeta.id);
+          if (roster) {
+            console.log("Roster has length of " + roster.size);
+            ballot = mergeOthers(ballot, raceMeta.id, roster.size);
+          } else {
+            ballot = mergeOthers(ballot, raceMeta.id, 2);
+          }
         }
 
         var [call] = calls.filter(function (row) {
