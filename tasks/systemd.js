@@ -27,7 +27,9 @@ module.exports = function(grunt) {
 
     grunt.file.write("elections.service", template);
     grunt.log.writeln("Wrote service file output to ./elections.service\n");
+    grunt.log.writeln("Run the command '$ sudo cp ./elections.service /etc/systemd/system/' to move this file into place\n");
     grunt.log.writeln("** The service is configured to deploy the app live, please edit the file by hand if you want to deploy to staging.\n");
+    grunt.log.writeln("After editing the service file, reload the changes with `sudo systemctl daemon-reload` and the restart with 'sudo systemctl restart service_name'\n\n");
 
   });
 };
