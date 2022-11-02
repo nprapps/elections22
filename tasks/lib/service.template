@@ -7,7 +7,7 @@
 # 5. Follow logs with `journalctl -a -u elections.service -f`
 
 [Unit]
-Description=NPR Election Results 2020
+Description=NPR Election Results 2022
 StartLimitIntervalSec=0
 
 [Service]
