@@ -77,12 +77,9 @@ async function init(results) {
   results.senate.forEach(function(r) {
 
     var winnerParty = getParty(r.winner);
-    console.log(r);
-
 
     if ( r.hasOwnProperty('winner') ) {
       if (r.id == '46329' && r.winner == 'Ind') {
-        console.log("embedbop.js: Evan McMullin is victor, bar chart asterisk")
         mcmullinWon = true;
       }
     }
