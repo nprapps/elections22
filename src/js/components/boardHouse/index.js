@@ -2,6 +2,7 @@ import { h, Component, Fragment } from "preact";
 import gopher from "../gopher.js";
 import Results from "../resultsBoardNamed";
 import BalanceOfPower from "../balanceOfPower";
+import BarsHouse from "../barsHouse";
 import TestBanner from "../testBanner";
 import DateFormatter from "../dateFormatter";
 import BoardKey from "../boardKey";
@@ -35,13 +36,15 @@ export default class BoardHouse extends Component {
     var { results = [], test, latest, alert } = this.state;
 
     var sorted = results.slice().sort((a, b) =>
-      a.state > b.state ? 1 : 
-      a.state < b.state ? -1 : 
-      parseInt(a.seatNumber) > parseInt(b.seatNumber) ? 1 : 
+      a.state > b.state ? 1 :
+      a.state < b.state ? -1 :
+      parseInt(a.seatNumber) > parseInt(b.seatNumber) ? 1 :
       parseInt(a.seatNumber) < parseInt(b.seatNumber) ? -1 : 0
     );
 
-    sorted = sorted.filter(r => r.keyRace || (r.winnerParty && r.winnerParty != r.previousParty));
+    // Don't show flipped races in '22 after redistricting.
+    //sorted = sorted.filter(r => r.keyRace || (r.winnerParty && r.winnerParty != r.previousParty));
+    sorted = sorted.filter(r => r.keyRace );
 
     var buckets = {
       likelyD: [],
@@ -77,7 +80,7 @@ export default class BoardHouse extends Component {
             <div class="alert" dangerouslySetInnerHTML={({ __html: alert })} />
           </div>
           <div class="bop-wrapper">
-            <BalanceOfPower race="house" data={results}/>
+            <BarsHouse race="house" data={results}/>
           </div>
         </div>
         <div class="board-container House">
@@ -107,7 +110,20 @@ export default class BoardHouse extends Component {
           )}
         </div>
         <BoardKey race="house"/>
-        <div class="source">Source: AP (as of <DateFormatter value={latest} />). U.S. House race ratings from the nonpartisan <a href="https://cookpolitical.com/ratings/house-race-ratings">Cook Political Report</a>.</div>
+
+        <div class="source">
+          <div class="note">
+            <strong>Note:</strong> <em>% in</em> is an Associated Press estimate of
+            the share of total ballots cast in an election that have been
+            counted. <a href="https://www.ap.org/about/our-role-in-elections/counting-the-vote">Read more about how EEVP is calculated</a>.
+          </div>
+          <div class="note">
+            Seat flips are not shown for House races. Districts were redrawn during redistricting, so comparison to prior seatholders is meaningless.
+          </div>
+
+          <div class="source">Source: AP (as of <DateFormatter value={latest} />). U.S. House race ratings come from the nonpartisan <a href="https://cookpolitical.com/ratings/house-race-ratings">Cook Political Report</a>.</div>
+        </div>
+
       </>
     );
   }

@@ -228,7 +228,7 @@ function ResultsRowCounty(props) {
   }
 
   var leadingCand = row.reportingPercent > 0.5 ? row.candidates[0] : "";
-  var reportingPercent = reportingPercentage(row.reportingPercent) + "% in";
+  var reportingPercent = reportingPercentage(row.eevp) + "% in";
 
   return (
     <tr>

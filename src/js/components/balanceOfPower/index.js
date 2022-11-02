@@ -28,17 +28,22 @@ export default class BalanceOfPower extends Component {
     return (
       <div class="leaderboard">
         <div class="results-header-group net-gain">
-          <h2 class={"party " + results.netGainParty.toLowerCase()} title="">
-            <label>
-              Net gain
-            </label>
-            <abbr title="">
-              {results.netGainParty != "none"
-                ? results.netGainParty + " +" + results.netGain
-                : "No change"}
-            </abbr>
-          </h2>
+
+          { this.isSenate ?
+            <h2 class={"party " + results.netGainParty.toLowerCase()} title="">
+              <label>
+                Net gain
+              </label>
+              <abbr title="">
+                {results.netGainParty != "none" 
+                  ? results.netGainParty + " +" + results.netGain
+                  : "No change"}
+              </abbr>
+            </h2>
+           : <></>
+          }
         </div>
+
         <div class="results-header-group dem">
           <h2 class="party">
             <label> Dem. {this.getWinnerIcon(results.Dem.total)}</label>
@@ -107,7 +112,7 @@ export default class BalanceOfPower extends Component {
       if (winner) {
         var winnerParty = getParty(winner.party);
         var previousWinner = getParty(race.previousParty);
-        results[winner.party].total += 1;
+        results[winnerParty].total += 1;
         if (winnerParty != previousWinner) {
           results[winnerParty].gains += 1;
           results[previousWinner].gains -= 1;

@@ -49,14 +49,14 @@ module.exports = function(grunt) {
     // ];
 
     var tickets = [{
-        date: "2020-11-03",
+        date: "2022-11-08",
         params: {
           officeID: "G,S",
           level: "FIPSCode"
         }
       },
       {
-        date: "2020-11-03",
+        date: "2022-11-08",
         params: {
           officeID: "H,I",
           level: "state"
@@ -81,13 +81,19 @@ module.exports = function(grunt) {
     }
     // turn AP into normalized race objects
     var results = normalize(rawResults, grunt.data.json);
-    grunt.log.writeln("results");
 
-    // for (var result of results) {
-    //   grunt.log.writeflags(result);
-    // };
+    // Systematically exclude the results of ranked choice contests
+    // As of '22 these are returned on from Alaska and Maine. 
+    // AK won't be populated until 14 days after the race.
+    // Not clear on Maine. 
+    results = results.filter(race => race.type != 'RCV General Election');
 
-    // filter generator for states that split their electoral college votes. 
+    // Ignore contest for end of 2016 CA term held during 2022
+    // https://www.capradio.org/articles/2022/10/17/us-sen-alex-padilla-will-appear-on-californias-june-primary-ballot-twice-heres-why/
+    // And ignore contest for unexpired term in Indiana, House seat 2
+    results = results.filter(race => race.id != 8964 && race.id != 15766);
+
+    // filter generator for states that split their electoral college votes.
     var stateOrDistrictFilter = function(level) {
       return function(result) {
         if (result.id != "0") return true;
@@ -133,19 +139,10 @@ module.exports = function(grunt) {
       states[state].push(result);
     });
     for (var state in states) {
-      grunt.log.writeln("iterating states");
-      grunt.log.writeln(state);
       var stateOutput = {
         test,
         results: states[state]
       };
-
-
-      // grunt.log.writeln("longform");
-      // grunt.log.writeflags(longform);
-
-
-
 
       var stateChatter = longform.statePages[state.toLowerCase()];
       if (stateChatter) {

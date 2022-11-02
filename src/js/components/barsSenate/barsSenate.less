@@ -1,0 +1,176 @@
+@import "../../../css/values";
+
+.winner-icon {
+  width: 1em;
+  height: 1em;
+  display: none;
+  display: inline-block;
+}
+
+.leaderboard {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  text-align: center;
+
+  @media @mobile {
+    width: 100%;
+  }
+
+  .ballot &,
+  .governor & {
+    display: none;
+  }
+
+  &.senate,
+  &.house {
+    width: 50%;
+    max-width: 500px;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .change {
+    padding-left: 5px;
+  }
+
+  .results-header-group {
+    box-sizing: border-box;
+    display: block;
+    overflow: hidden;
+    width: 17.5%;
+
+    @media @tiny {
+      width: 17%;
+    }
+
+    &:nth-child(2) {
+      padding-left: 0;
+    }
+    &:last-child {
+      padding-right: 0;
+    }
+    &.hidden {
+      display: none;
+    }
+  }
+
+  .dem .party {
+    color: @dem;
+    path { fill: @dem; }
+  }
+  .gop .party {
+    color: @gop;
+    path { fill: @gop; }
+  }
+  .other .party {
+    color: @ind;
+    path { fill: @ind; }
+  }
+  .net .party {
+    color: @gray;
+  }
+  .not-called .party {
+    color: @gray-light;
+  }
+
+  .dem .party,
+  .gop .party {
+    .icon.icon-ok {
+      color: @gray-dark;
+    }
+  }
+
+  h2 {
+    font-weight: normal;
+    line-height: 1;
+
+    label {
+      display: block;
+      font-family: @knockout;
+      font-size: 16px;
+      margin-bottom: 0.3rem;
+
+      @media @tiny {
+        font-size: 14px;
+      }
+
+      &.hidden {
+        display: none;
+      }
+    }
+    abbr {
+      -webkit-font-smoothing: antialiased;
+      display: block;
+      font-size: 32px;
+      font-family: @gotham;
+      font-weight: 700;
+      font-size: 100%;
+      padding-bottom: 5px;
+    }
+  }
+
+  .net-gain {
+    border-right: 1px solid @gray-lighter;
+    padding-right: 10px;
+    width: 25%;
+
+    @media @tiny {
+      width: 32%;
+    }
+
+    h2 {
+      color: #666;
+
+      abbr {
+        background-color: #ccc;
+        font-size: 0.9rem;
+        padding: 0.45rem 0;
+        text-decoration: none;
+        white-space: nowrap;
+
+        @media @tiny {
+          font-size: 0.8rem;
+        }
+      }
+
+      label {
+        margin-bottom: 0.2rem;
+        // text-transform: uppercase;
+      }
+
+      &.party.dem abbr {
+        background-color: @dem;
+        color: #fff;
+      }
+
+      &.party.gop abbr {
+        background-color: @gop;
+        color: #fff;
+      }
+    }
+  }
+
+  .leaderboard-detail {
+    color: @gray-medium;
+    font-family: @sans;
+    font-size: 1rem;
+    line-height: 1.2;
+    padding-top: 9px;
+    text-align: left;
+    width: 100%;
+
+    span {
+      font-weight: bold;
+    }
+
+    .dem {
+      color: @dem;
+    }
+    .gop {
+      color: @gop;
+    }
+  }
+}

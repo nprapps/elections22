@@ -20,6 +20,7 @@ module.exports = function (results, data) {
     }
 
     // Add electoral college winners to states
+    // Not done in 2022 since we don't are about EC. 
     if (r.id == 0 && (r.level == "state" || r.level == "district")) {
       var state16 = data.csv.prior_states
         .filter(s => s.votes * 1 && s.state == r.state)
@@ -39,7 +40,7 @@ module.exports = function (results, data) {
         };
       });
 
-      r.president16 = candidates;
+      r.president20 = candidates;
       if (candidates.length) {
         r.previousParty = candidates[0].party;
       }
@@ -57,16 +58,17 @@ module.exports = function (results, data) {
       past_margin.margin = top.votepct - second.votepct;
 
       var census = data.csv.census_data[r.fips];
-      var covid = data.csv.covid_county_cases[r.fips]
-        ? (data.csv.covid_county_cases[r.fips] / census.population * 1000)
-        : null;
+      // var covid = data.csv.covid_county_cases[r.fips]
+      //   ? (data.csv.covid_county_cases[r.fips] / census.population * 1000)
+      //   : null;
 
       var bls = data.csv.unemployment_data[r.fips] || {};
       var { unemployment } = bls;
 
       var countyName = data.csv.county_names[r.fips] || "At large";
 
-      r.county = { past_margin, ...census, unemployment, covid, countyName };
+      //r.county = { past_margin, ...census, unemployment, covid, countyName };
+      r.county = { past_margin, ...census, unemployment, countyName };
     }
   });
 

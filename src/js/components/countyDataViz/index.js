@@ -90,7 +90,7 @@ export class CountyDataViz extends Component {
     var lead = order[0].party;
     var second = order[1].party;
 
-    var resultsIn = data.filter(d => d.reportingPercent > 0.5);
+    var resultsIn = data.filter(d => d.eevp > 0.5);
 
     // Filter out counties whose top 2 candidates don't match state.
     var filtered = resultsIn.filter(function (d) {
@@ -143,7 +143,7 @@ export class CountyDataViz extends Component {
 
 // Source: https://gist.github.com/matt-west/6500993//
 /**
- *  Calculate the person correlation score between two items in a dataset.
+ *  Calculate the Pearson correlation score between two items in a dataset.
  *
  *  @param  {object}  prefs The dataset containing data about both items that
  *                    are being compared.

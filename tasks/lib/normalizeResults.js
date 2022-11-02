@@ -100,11 +100,12 @@ var sortCandidates = function (votes, candidates) {
   candidates.sort(compare);
 };
 
-var mergeOthers = function (candidates, raceID) {
+var mergeOthers = function (candidates, raceID, top_n) {
   // always take the top two
   var total = candidates.reduce((total, c) => total + c.votes, 0);
-  var merged = candidates.slice(0, 2);
-  var remaining = candidates.slice(2);
+  var merged = candidates.slice(0, top_n);
+  var remaining = candidates.slice(top_n);
+
   var other = {
     first: "",
     last: "Other",
@@ -122,6 +123,7 @@ var mergeOthers = function (candidates, raceID) {
       merged.push(c);
       continue;
     }
+
     other.votes += c.votes || 0;
     other.avotes += c.avotes || 0;
     other.electoral += c.electoral || 0;
@@ -224,7 +226,9 @@ module.exports = function (resultArray, overrides = {}) {
           // console.log(
           //   `Overriding the roster for race #${unitMeta.id} - ${roster.size} candidates`
           // );
-          ballot = ballot.filter(c => roster.has(c.id));
+
+          // // KEEP THE CANDIDATES SO WE CAN ROLL UP THE REMAINDER !!! 
+          //ballot = ballot.filter(c => roster.has(c.id));
         }
 
         sortCandidates(total, ballot);
@@ -232,10 +236,14 @@ module.exports = function (resultArray, overrides = {}) {
         // create "other" merged candidate if:
         // - More than two candidates and
         // - Independent candidate(s) exist and
-        // - they're not marked as exceptions in a sheet
-        // TODO: handle "jungle primary" races (LA and CA)
-        if (!roster && ballot.length > 2 && unitMeta.level != "county") {
-          ballot = mergeOthers(ballot, raceMeta.id);
+        // If they are an exception in the 'rosters' sheet
+        // Be sure to include the right number
+        if (ballot.length > 2 && unitMeta.level != "county") {
+          if (roster) {
+            ballot = mergeOthers(ballot, raceMeta.id, roster.size);
+          } else {
+            ballot = mergeOthers(ballot, raceMeta.id, 2);
+          }
         }
 
         var [call] = calls.filter(function (row) {

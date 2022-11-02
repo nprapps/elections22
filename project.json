@@ -6,7 +6,7 @@
     },
     "live": {
       "bucket": "apps.npr.org",
-      "path": "election-2022-results"
+      "path": "election-results-live-2022"
     }
   },
   "styles": {
@@ -25,7 +25,7 @@
   },
   "title": "2022 Elections",
   "description": "",
-  "url": "https://apps.npr.org/election-2022-results/",
+  "url": "https://apps.npr.org/election-results-live-2022/",
   "image": "assets/social.jpg",
   "analytics": {
     "topicIDs": [],

@@ -32,14 +32,14 @@ export default class BoardGovernor extends Component {
 
   render() {
     var { results, test, latest } = this.state;
-    
+
     if (results) {
       var sorted = results.slice().sort((a,b) => a.name > b.name ? 1 : a.name < b.name ? -1 : 0);
     }
 
     return <>
       { test ? <TestBanner /> : "" }
-      
+
       <h1 tabindex="-1">Governor Results</h1>
       <div class="board-container Gov">
         {results && <>
@@ -47,9 +47,16 @@ export default class BoardGovernor extends Component {
         </>}
       </div>
       <BoardKey race="gov"/>
+
       <div class="source">
-        <div class="note">*Note: Expected vote is an Associated Press estimate of the share of total ballots cast in an election that have been counted. <a href="https://www.ap.org/en-us/topics/politics/elections/counting-the-vote">Read more about how EEVP is calculated</a>.</div>
-        Source: AP (as of <DateFormatter value={latest} />)
+        <div class="note">
+          <strong>Note:</strong> <em>% in</em> is an Associated Press estimate of
+        the share of total ballots cast in an election that have been
+        counted. <a href="https://www.ap.org/about/our-role-in-elections/counting-the-vote">Read more about how EEVP is calculated</a>.
+        </div>
+        <div class="source">
+          Source: AP (as of <DateFormatter value={latest} />)
+        </div>
       </div>
     </>;
   }

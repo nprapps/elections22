@@ -24,6 +24,7 @@ var gptSetup = false;
 
 var ccpaCookie = document.cookie.split(";").filter(c => c.includes("ccpa_rdp=true")).length > 0;
 
+// var storyId = "election-results-live-2022";
 var storyId = "elections20-interactive";
 var isStagingServer = window.location.hostname == "stage-apps.npr.org";
 var adSizes = {
@@ -32,29 +33,36 @@ var adSizes = {
 }
 var advelvetTargeting = [String(Math.floor(Math.random() * 20) + 1)];
 
-var observer = new IntersectionObserver(function([event]) {
-  if (event.isIntersecting) {
-    observer.disconnect();
-    var gpt = document.createElement("script");
-    gpt.src = "https://securepubads.g.doubleclick.net/tag/js/gpt.js";
-    gpt.async = true;
-    gpt.defer = true;
-    document.body.appendChild(gpt);
-    console.log("Lazy-loading ad code...");
-    gptLoaded = true;
-  }
-});
+
+
+// Load the code on page. 
+
+// var observer = new IntersectionObserver(function([event]) {
+//   if (event.isIntersecting) {
+//     observer.disconnect();
+//     var gpt = document.createElement("script");
+//     gpt.src = "https://securepubads.g.doubleclick.net/tag/js/gpt.js";
+//     gpt.async = true;
+//     gpt.defer = true;
+//     document.body.appendChild(gpt);
+//     console.log("Lazy-loading ad code...");
+//     gptLoaded = true;
+//   }
+// });
+
+
 
 var guid = 0;
 
 class GoogleAd extends HTMLElement {
   constructor() {
     super();
-    if (!gptLoaded) observer.observe(this);
+    //if (!gptLoaded) observer.observe(this);
     this.connected = false;
   }
 
   connectedCallback() {
+    console.log("Ad instrumentation: running connectedCallback on ad elements");
     if (this.connected) return;
     this.connected = true;
     
@@ -69,6 +77,7 @@ class GoogleAd extends HTMLElement {
     var adUnitString = "/6735/n6735.npr/news_politics/news_politics_liveblog";
     // Medium and small breakpoints
     if (window.innerWidth < 1024) {
+      console.log("ad instrumentation: window.innerWidth < 1024")
       adUnitString = "/6735/n6735.nprmobile/news_politics/news_politics_liveblog";
       adSizeArray.push([300, 250]);
     }
@@ -92,11 +101,58 @@ class GoogleAd extends HTMLElement {
       }
 
       googletag.defineSlot(adUnitString, adSizeArray, id).addService(adService);
+      console.log("googletag.defineSlot( " + adUnitString + ", " + adSizeArray + ", " +  id  + ")");
+
+
+
+      // This listener will be called when an impression is considered viewable.
+      adService.addEventListener('impressionViewable', function(event) {
+        var slotId = event.slot.getSlotElementId();
+        console.log('Impression has become viewable.', slotId);
+      });
+
+      // This listener will be called when a slots creative iframe load event fires.
+      adService.addEventListener('slotOnload', function(event) {
+        var slotId = event.slot.getSlotElementId();
+        console.log('Creative iframe load event has fired.', slotId);
+      });
+
+
+
       adService.addEventListener("slotRenderEnded", event => {
-        if (event.slot.getSlotElementId() != id) return;
+        if (event.slot.getSlotElementId() != id) {
+          console.log("slot element id mismatch " + event.slot.getSlotElementId() + " <> " + id + " ignoring... ");
+          return;
+        }
+        console.log("Processing ads for slot " + event.slot.getSlotElementId() );
+
         this.classList.remove("pending");
         if (!event.isEmpty) {
           this.classList.add("has-ad");
+
+
+          console.log((`ad returned for ${id}`))
+
+          // Record details of the rendered ad.
+          var details = {
+            'Advertiser ID': event.advertiserId,
+            'Campaign ID': event.campaignId,
+            'Company IDs': event.companyIds,
+            'Creative ID': event.creativeId,
+            'Creative Template ID': event.creativeId,
+            'Is backfill?': event.isBackfill,
+            'Is empty?': event.isEmpty,
+            'Label IDs': event.labelIds,
+            'Line Item ID': event.lineItemId,
+            'Size': event.size.join('x'),
+            'Slot content changed?': event.slotContentChanged,
+            'Source Agnostic Creative ID': event.sourceAgnosticCreativeId,
+            'Source Agnostic Line Item ID': event.sourceAgnosticLineItemId,
+            'Yield Group IDs': event.yieldGroupIds
+          }
+
+          console.log(details);
+
         } else {
           console.log(`No ad returned for ${id}`);
         }

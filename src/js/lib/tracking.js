@@ -29,7 +29,12 @@ var track = function(eventAction, eventLabel, eventValue) {
     eventCategory: "apps-" + slug
   }
 
-  console.log(`Tracking: ${eventAction} / ${eventLabel} / ${eventValue}`)
+
+
+
+
+
+  //console.log(`Tracking: ${eventAction} / ${eventLabel} / ${eventValue}`)
 
   var search = window.location.search.replace(/^\?/, "");
   var query = {};
@@ -56,7 +61,7 @@ track.page = function(url) {
 
   var page = new URL(url, window.location.href);
   page = page.toString();
-  console.log(`Virtual pageview: ${page}`);
+  // console.log(`Virtual pageview: ${page}`);
   if (window.ga) {
     ga("set", "page", page);
     ga("send", "pageview");

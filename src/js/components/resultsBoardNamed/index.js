@@ -5,7 +5,7 @@ import states from "states.sheet.json";
 function CandidateCells(race, winner) {
   var sorted = race.candidates.slice(0, 2).sort(sortByParty);
   var leading = race.candidates[0];
-  var reporting = "eevp" in race ? race.eevp : race.reportingPercent;
+  var reporting = race.eevp;
 
   return sorted.map(function(c) {
     var className = ["candidate", c.party];
@@ -27,7 +27,6 @@ function CandidateCells(race, winner) {
 }
 
 export default function ResultsBoardNamed(props) {
-  // console.log("props",props)
 
   var hasFlips = props.races.some(function(r) {
     var [ winner ] = r.candidates.filter(c => c.winner);
@@ -72,7 +71,7 @@ export default function ResultsBoardNamed(props) {
 
                 {races.map(function(r,i) {
                   var hasResult = r.eevp || r.reporting || r.called || r.runoff;
-                  var reporting = r.eevp || r.reportingPercent;
+                  var reporting = r.eevp;
                   var percentIn = reporting || reporting == 0 
                     ? <span>{reportingPercentage(reporting)}%<span class="in"> in</span></span>
                     : "";
@@ -119,10 +118,15 @@ export default function ResultsBoardNamed(props) {
                       <td class={"reporting"} role="cell">{percentIn}</td>
 
                       {/* Runoff or Flip */}
-                      {props.office !== "Ballot" && <>
+                      {props.office == "Senate" && <>
                         <td class={"little-label " + (flipped ? winner.party : "")} role="cell">
                           <span class={r.runoff ? "runoff-label" : ""}>{r.runoff ? "R.O." : ""}</span>
                           <span class={flipped ? "flip-label" : ""}>{flipped ? "Flip" : ""}</span>
+                        </td>
+                      </>}
+                      {props.office == "House" && <>
+                        <td class={"little-label "} role="cell">
+                          <span class={r.runoff ? "runoff-label" : ""}>{r.runoff ? "R.O." : ""}</span>
                         </td>
                       </>}
                     </tr>

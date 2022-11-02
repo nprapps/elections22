@@ -103,7 +103,7 @@ const availableMetrics = {
     format: formatters.comma,
   },
   past_margin: {
-    name: "2016 Presidential Margin",
+    name: "2020 Presidential Margin",
     format: formatters.voteMargin,
   },
   unemployment: {
@@ -129,10 +129,6 @@ const availableMetrics = {
   percent_bachelors: {
     name: "% College-Educated",
     format: formatters.percent,
-  },
-  covid: {
-    name: "COVID-19 Cases Per 1,000",
-    format: formatters.comma,
   },
   countyName: {
     name: "County",

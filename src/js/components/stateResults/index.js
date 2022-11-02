@@ -58,11 +58,6 @@ export default class StateResults extends Component {
 
     let office = props.subview || "key";
 
-    console.log("\n\noffice: ");
-    console.log(office);
-
-
-
     let viewTitle =
       office == "key"
         ? "Key Results"
@@ -92,14 +87,12 @@ export default class StateResults extends Component {
           )}
           <div class="source">
             <div class="note">
-              Note: <em>% in</em> for presidential, U.S. Senate and governor
-              races represents expected vote, an Associated Press estimate of
+              <strong>Notes:</strong> <em>% in</em> is an Associated Press estimate of
               the share of total ballots cast in an election that have been
               counted.{" "}
-              <a href="https://www.ap.org/en-us/topics/politics/elections/counting-the-vote">
+              <a href="https://www.ap.org/about/our-role-in-elections/counting-the-vote">
                 Read more about how EEVP is calculated.
               </a>{" "}
-              <em>% in</em> for U.S. House, state ballot and county-level results represents percent of precincts reporting.
             </div>
             {stateName !== "Alaska" && props.subview && (
               <div class="note">
@@ -109,12 +102,7 @@ export default class StateResults extends Component {
             Source: AP (as of <DateFormatter value={state.latest} />
             ). Candidates receiving less than 5% support not shown individually.
             Demographic, income and education data from the Census Bureau.
-            COVID-19 case data from{" "}
-            <a href="https://github.com/CSSEGISandData/COVID-19">
-              Center for Systems Science and Engineering at Johns Hopkins
-              University
-            </a>
-            . Unemployment rates from the Bureau of Labor Statistics. 2016
+            Unemployment rates from the Bureau of Labor Statistics. 2020
             presidential margins from the AP and may vary slightly from
             state-certified final results.
           </div>
@@ -183,10 +171,6 @@ export default class StateResults extends Component {
   }
 
   getRaceWithCountyResults(race, oneOfMultiple) {
-
-    console.log("race.office");
-    console.log(race.office);
-
 
     var order = race.candidates;
     var isSpecial = !!race.seat;

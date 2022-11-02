@@ -2,6 +2,7 @@ import { h, Component, Fragment } from "preact";
 import gopher from "../gopher.js";
 import Results from "../resultsBoardNamed";
 import BalanceOfPower from "../balanceOfPower";
+import BarsSenate from "../barsSenate";
 import TestBanner from "../testBanner";
 import DateFormatter from "../dateFormatter";
 import BoardKey from "../boardKey";
@@ -58,7 +59,9 @@ export default class BoardSenate extends Component {
             <div class="alert" dangerouslySetInnerHTML={({ __html: alert })} />
           </div>
           <div class="bop-wrapper">
-            <BalanceOfPower race="senate" data={results}/>
+
+            <BarsSenate race="senate" data={results}/>
+
           </div>
         </div>
 
@@ -69,10 +72,14 @@ export default class BoardSenate extends Component {
             <Results races={buckets.likelyR} hed="Likely Republican" office="Senate" addClass="last"/>
           </>}
         </div>
-        <BoardKey race="senate"/>
+        <BoardKey race="senate" data={results}/>
         <div class="source">
-          <div class="note">*Note: Expected vote is an Associated Press estimate of the share of total ballots cast in an election that have been counted. <a href="https://www.ap.org/en-us/topics/politics/elections/counting-the-vote">Read more about how EEVP is calculated</a>.</div>
-          Source: AP (as of <DateFormatter value={latest} />). U.S. Senate race ratings from the nonpartisan <a href="https://cookpolitical.com/ratings/senate-race-ratings">Cook Political Report</a>. Seats listed as Likely Democratic or Likely Republican include contests rated as "Solid" and "Likely" for a particular party. Seats listed as Competitive include contests rated as leaning to a particular party, or a toss-up.
+          <div class="note">
+            <strong>Note:</strong> <em>% in</em> is an Associated Press estimate of the share of total ballots cast in an election that have been counted. <a href="https://www.ap.org/about/our-role-in-elections/counting-the-vote">Read more about how EEVP is calculated</a>.
+          </div>
+          <div class="source">
+            Source: AP (as of <DateFormatter value={latest} />). U.S. Senate race ratings come from the nonpartisan <a href="https://cookpolitical.com/ratings/senate-race-ratings">Cook Political Report</a>. Seats listed as Likely Democratic or Likely Republican include contests rated as "Solid" and "Likely" for a particular party. Seats listed as Competitive include contests rated as leaning to a particular party, or a toss-up.
+          </div>
         </div>
       </Fragment>
     );

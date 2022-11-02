@@ -1,4 +1,4 @@
-elections20-interactive
+elections22
 ======================================================
 
 This news app is built on our `interactive template <https://github.com/nprapps/interactive-template>`_. Check the readme for that template for more details about the structure and mechanics of the app, as well as how to start your own project.
@@ -36,6 +36,12 @@ Common tasks that you may want to run include:
   * ``publish:live`` uploads to production
   * ``publish:simulated`` does a dry run of uploaded files and their compressed sizes
 
+**Notable flags and combinations of tasks:**
+
+* ``grunt local --test`` — run an AP test on your local machine on a 60-second cron
+* ``grunt --offline`` — run the project with the AP data you have locally
+* ``grunt clean sheets docs static publish:live`` — republishes assets + code to the live server but doesn’t touch the data (helpful when results are live)
+
 Tracked events
 --------------
 
@@ -51,9 +57,9 @@ Additional links and params
 --------------
 
 * Homepage embed: ``/homepage.html``
-   
+
   * ``display=margins,cartogram,map`` controls which viz displays on load
-   
+
 * Balance of Power embed (House and Senate bars): ``/embedBOP.html``
 
   * ``president=true`` adds electoral totals to the top (for use on homepage)
@@ -61,7 +67,7 @@ Additional links and params
   * ``onlyPresident=true`` hides House and Senate bars on all views
   * ``inline=true`` for side-by-side display (for use on liveblog)
   * ``theme=dark`` for dark theme
-    
+
 * Internal ballot initiative board: ``/#/ballots``
 * Results embed customizer: ``/customizer.html``
 * Share pages, with metadata for social cards
@@ -71,6 +77,56 @@ Additional links and params
   * ``/share/senate.html`` - Senate big board
   * ``/share/house.html`` - House big board
   * ``/share/governor.html`` - Governors big board
+  
+Social share pages
+------------------
+
+The way the results rig is built, links shared over social always show an image / headline that have to do with the overall project, not the particular view of the page you were looking at. (It’s a similar case with the `annotations rig <https://github.com/nprapps/anno-docs>`_ and the `News Apps liveblog <https://github.com/nprapps/liveblog-standalone>`_.)
+
+To address this, there are “share links” generated for all the top-level pages (house/senate/gov boards, each state) that have appropriate headlines/teasers/images and redirect.
+
+* Example: https://apps.npr.org/elections20-interactive/share/CO.html
+* Which redirects to: https://apps.npr.org/elections20-interactive/#/states/CO
+
+The templates for them live in the `src folder <https://github.com/nprapps/elections22/tree/main/src>`_ as ``_office_social.html`` and ``_state_social.html``. The text lives in the longform text doc. The pages are rendered as part of the `build task <https://github.com/nprapps/elections22/blob/main/tasks/build.js#L66-L80>`_.
+
+Setting overrides
+-----------------
+
+**Candidate-specific medatadata** — ``candidates`` tab
+
+You can use this to override metadata like party affiliation or name.
+
+For a given row, fill in the `key` for the candidate's AP identifier. (Make sure this cell is cast as a NUMBER.) And then fill in the column (or create one if it doesn't exist) that corresponds to the data attribute from AP that you want to override. For example, Candidate X is reported with party affiliation "Una" (for "unaffiliated") and you want to override that to "Ind" ("independent").  Add a comment in the spreadsheet so others know what this is for.
+
+.. list-table::
+   :widths: 50 50
+   :header-rows: 1
+
+   * - key
+     - party
+   * - 12345
+     - Ind
+
+
+**Race rosters** — ``rosters`` tab
+
+You can use this to specify which candidates appear by default in results tables. Relevant use cases:
+
+* Specify who appears in the results table when there's no data yet
+* Ensure, once data starts coming in, that a candidate always appears in the data regardless of the vote. (Note: Once data starts coming in, any candidate who receives above a set threshold of the vote will appear in the table. But those below the threshold will be grouped into "other" unless explicitly added to a roster.)
+
+For a given row, fill in the `key` for AP race ID. (Make sure this cell is cast as a NUMBER.) And then fill in the candidate IDs for the candidates you want to make sure display, comma-delimited. Add a comment in the spreadsheet so others know what this is for.
+
+.. list-table::
+   :widths: 50 50
+   :header-rows: 1
+
+   * - key
+     - value
+   * - 12345
+     - 456, 2345, 2359
+
 
 Troubleshooting
 ---------------

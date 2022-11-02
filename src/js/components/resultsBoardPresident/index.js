@@ -10,7 +10,7 @@ var sortParty = function(p) {
 function CandidateCells(race, winner) {
   var sorted = race.candidates.slice(0, 2).sort((a, b) => sortParty(a.party) - sortParty(b.party));
   var leading = race.candidates[0];
-  var reporting = race.eevp || race.reportingPercent;
+  var reporting = race.eevp ;
 
   return sorted.map(function(c) {
     var className = ["candidate", c.party];
@@ -69,7 +69,7 @@ export default function ResultsBoardPresident(props) {
 
                 {races.map(function(r, i) {
                   var hasResult = r.eevp || r.reporting || r.called || r.runoff;
-                  var reporting = "eevp" in r ? r.eevp : r.reportingPercent;
+                  var reporting = r.eevp ;
                   var percentIn = reporting || reporting == 0 
                     ? <span>{reportingPercentage(reporting)}%<span class="in"> in</span></span>
                     : "";
