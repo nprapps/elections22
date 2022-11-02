@@ -26,7 +26,8 @@ module.exports = function(grunt) {
     template = template.replace("%ENV%", envString);
 
     grunt.file.write("elections.service", template);
-    grunt.log.writeln("Writing output to ./elections.service\n");
+    grunt.log.writeln("Wrote service file output to ./elections.service\n");
+    grunt.log.writeln("** The service is configured to deploy the app live, please edit the file by hand if you want to deploy to staging.\n");
 
   });
 };
