@@ -28,9 +28,9 @@
   "url": "https://apps.npr.org/election-results-live-2022/",
   "image": "assets/social.jpg",
   "analytics": {
-    "topicIDs": [],
-    "primaryTopic": "",
-    "secondaryTopics": []
+    "topicIDs": [ "p139482413" ],
+    "primaryTopic": "Elections",
+    "secondaryTopics": [ 1014, 139482413 ]
   },
   "sheets": ["1CgCzbwvTiqxk21qWIienUsKL_OUyGI5o42GPstbfgcs"],
   "docs": {"longform": "1JD3yn_jWkC8vPHEyZe8S_idHFAnEOwvptJ79CAR1BAA"},
