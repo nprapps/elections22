@@ -131,7 +131,7 @@ async function init(results) {
         {/*PRESIDENT*/}
 
         {params.president && <>
-          <a class="link-container president" href="http://apps.npr.org/elections20-interactive/#/president" target="_top">
+          <a class="link-container president" href="http://apps.npr.org/elections20-interactive/#/president" target="_blank">
             
             <h3>President</h3>
             
@@ -174,7 +174,7 @@ async function init(results) {
 
         {/*HOUSE*/}
 
-        <a class="link-container house" href="http://apps.npr.org/election-results-live-2022/#/house" target="_top">
+        <a class="link-container house" href="http://apps.npr.org/election-results-live-2022/#/house" target="_blank">
           
           <h3>House</h3>
   
@@ -232,7 +232,7 @@ async function init(results) {
 
         {/*SENATE*/}
 
-        <a class="link-container senate" href="http://apps.npr.org/election-results-live-2022/#/senate" target="_top">
+        <a class="link-container senate" href="http://apps.npr.org/election-results-live-2022/#/senate" target="_blank">
           
           <h3>Senate</h3>
           
