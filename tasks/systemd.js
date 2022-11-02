@@ -26,6 +26,7 @@ module.exports = function(grunt) {
     template = template.replace("%ENV%", envString);
 
     grunt.file.write("elections.service", template);
+    grunt.log.writeln("Writing output to ./elections.service\n");
 
   });
 };
