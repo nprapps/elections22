@@ -17,7 +17,6 @@ export default class BoardHouse extends Component {
   }
 
   onData(data) {
-    console.log("boardHouse: ondata");
     var latest = Math.max(...data.results.map((r) => r.updated));
     this.setState({ ...data, latest });
   }
