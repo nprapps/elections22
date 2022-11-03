@@ -17,6 +17,7 @@ export default class BoardHouse extends Component {
   }
 
   onData(data) {
+    console.log("boardHouse: ondata");
     var latest = Math.max(...data.results.map((r) => r.updated));
     this.setState({ ...data, latest });
   }
@@ -35,8 +36,17 @@ export default class BoardHouse extends Component {
   render() {
 
     var { results = [], test, latest, alert } = this.state;
-    console.log("boardHouse render, alert is " + alert);
 
+    if (!alert) {
+      alert = '';
+      console.log("setting alert empty")
+    }
+    if (alert.includes("~")) {
+      console.log("Found ~ in alert, setting to empty");
+      alert = '';
+    } else {
+      console.log("Found alert: '"  + alert + "'");
+    }
 
     var sorted = results.slice().sort((a, b) =>
       a.state > b.state ? 1 :
