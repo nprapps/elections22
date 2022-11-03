@@ -39,14 +39,10 @@ export default class BoardHouse extends Component {
 
     if (!alert) {
       alert = '';
-      console.log("setting alert empty")
     }
     if (alert.includes("~")) {
-      console.log("Found ~ in alert, setting to empty");
       alert = '';
-    } else {
-      console.log("Found alert: '"  + alert + "'");
-    }
+    } 
 
     var sorted = results.slice().sort((a, b) =>
       a.state > b.state ? 1 :

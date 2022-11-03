@@ -35,6 +35,14 @@ export default class BoardSenate extends Component {
   render() {
     var { results, test, latest, alert } = this.state;
 
+    if (!alert) {
+      alert = '';
+    }
+    if (alert.includes("~")) {
+      alert = '';
+    } 
+
+
     if (results) {
       var sorted = results.slice().sort((a,b) => a.name > b.name ? 1 : a.name < b.name ? -1 : 0);
 
