@@ -25,7 +25,7 @@ module.exports = function(grunt) {
       var docs = google.docs({ auth, version: "v1" }).documents;
 
       var formatters = {
-        link: (text, style) => `<a href="${style.link.url}">${text}</a>`,
+        link: (text, style) => `<a href="${style.link.url}" target="_blank">${text}</a>`,
         bold: text => `<b>${text}</b>`,
         italic: text => `<i>${text}</i>`
       };
