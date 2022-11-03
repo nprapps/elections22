@@ -175,6 +175,8 @@ async function init(results) {
 
         {/*HOUSE*/}
 
+        <h2 class="bop">Balance of Power</h2>
+
         <a class="link-container house" href="http://apps.npr.org/election-results-live-2022/#/house" target="_blank">
 
           <h3>House</h3>
