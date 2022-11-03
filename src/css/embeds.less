@@ -102,6 +102,19 @@ main.embed-bop {
       @media @inline {
         right: 0;
       }
+
+      @media @tiny {
+        position: relative;
+        left: auto;
+        right: auto;
+        bottom: 0;
+        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .gain-label { margin-right: 5px; }
+      }
     }
 
     .house {
@@ -109,7 +122,7 @@ main.embed-bop {
         text-align: right;
 
         @media @tiny {
-          text-align: left;
+          text-align: center;
         }
       }
       .net-gain-container {
@@ -121,24 +134,39 @@ main.embed-bop {
         }
 
         @media @tiny {
+          position: relative;
           left: auto;
-          right: 0;
+          right: auto;
+          // left: auto;
+          // right: 0;
         }
+      }
+    }
+
+    .senate {
+      @media @tiny {
+        display: flex;
+        flex-direction: row;
       }
     }
 
     .full-link {
       text-align: left;
       margin-top: 23px;
+
+      @media @tiny {
+        text-align: center;
+        margin-top: 10px;
+      }
     }
 
     .second.divider {
       display: none;
 
-      @media @tiny {
-        display: block;
-        margin-top: 15px;
-      }
+      // @media @tiny {
+      //   display: block;
+      //   margin-top: 15px;
+      // }
     }
 
     .president {
@@ -220,11 +248,11 @@ main.embed-bop {
         // }
       }
 
-      @media @tiny {
-        &.senate, &.house {
-          width: 100%;
-        }
-      }
+      // @media @tiny {
+      //   &.senate, &.house {
+      //     width: 100%;
+      //   }
+      // }
 
       &:last-child {
         border-right: 0;
@@ -240,9 +268,11 @@ main.embed-bop {
       text-align: center;
 
       @media @tiny {
-        margin-top: 20px;
-        text-align: left;
-        padding-left: 5px;
+        padding-top: 5px;
+        margin-top: 0;
+        // text-align: left;
+        // padding-left: 5px;
+        clear: both;
       }
     }
   }
@@ -361,6 +391,10 @@ main.embed-bop {
     font-size: 12px;
     .gotham();
     color: #666;
+
+    @media @tiny {
+      font-size: 11px;
+    }
   }
 
   .winner-icon {
@@ -396,7 +430,10 @@ main.embed-bop {
         line-height: 1.2em;
         text-transform: uppercase;
 
-        @media @sidebar {
+        // @media @sidebar {
+        //   font-size: 12px;
+        // }
+        @media @tiny {
           font-size: 12px;
         }
       }
@@ -404,6 +441,10 @@ main.embed-bop {
         .gotham();
         font-size: 30px;
         font-weight: bold;
+
+        @media @tiny {
+          font-size: 20px;
+        }
       }
     }
 

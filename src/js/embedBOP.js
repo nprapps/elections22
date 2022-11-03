@@ -16,7 +16,8 @@ var params = {
   inline: null,
   theme: null,
   hideCongress: null,
-  onlyPresident: null
+  onlyPresident: null,
+  nprone: null
 };
 
 for (var k in params) params[k] = search.get(k);
@@ -57,7 +58,7 @@ async function init(results) {
 
   results.president.forEach(r => president[r.winner] += r.electoral);
 
-  // Do we need an asterisk b/c Evan McMullin won in 2022? 
+  // Do we need an asterisk b/c Evan McMullin won in 2022?
   var mcmullinWon = false;
 
   results.house.forEach(function(r) {
@@ -125,16 +126,16 @@ async function init(results) {
 
   var template = <>
 
-    <div class={(params.inline ? "inline " : "") + (params.theme ? "dark " : "") + (params.hideCongress? "hide-congress" : "") + (params.onlyPresident? "only-pres" : "")}>
+    <div class={(params.inline ? "inline " : "") + (params.theme ? "dark " : "") + (params.hideCongress? "hide-congress" : "") + (params.onlyPresident? "only-pres" : "") + (params.nprone ? "nprone " : "")}>
       <div class="container">
 
         {/*PRESIDENT*/}
 
         {params.president && <>
           <a class="link-container president" href="http://apps.npr.org/elections20-interactive/#/president" target="_blank">
-            
+
             <h3>President</h3>
-            
+
             <div class="number-container">
               <div class="candidate dem">
                 <div class="name">Biden {president.Dem >= 270 ? winnerIcon : ""}</div>
@@ -175,9 +176,9 @@ async function init(results) {
         {/*HOUSE*/}
 
         <a class="link-container house" href="http://apps.npr.org/election-results-live-2022/#/house" target="_blank">
-          
+
           <h3>House</h3>
-  
+
           <div class="number-container">
             <div class="candidate dem">
               <div class="name">Dem. {house.Dem.total >= 218 ? winnerIcon : ""}</div>
@@ -216,9 +217,7 @@ async function init(results) {
 
           <div class="chatter"><strong>218</strong> seats for majority </div>
 
-          <div class="full-link"><a>See full results ›</a></div>
-
-          {/*  Ignore net gain after redistricting. 
+          {/*  Ignore net gain after redistricting.
           <div class="net-gain-container">
             <div class="gain-label">Net gain</div>
             <div class={"net-gain " + house.netGainParty}>{house.netGainParty != "none"
@@ -227,15 +226,17 @@ async function init(results) {
           </div>
           */}
 
+          <div class="full-link"><a>See full results ›</a></div>
+
         </a>
         <div class="second divider" />
 
         {/*SENATE*/}
 
         <a class="link-container senate" href="http://apps.npr.org/election-results-live-2022/#/senate" target="_blank">
-          
+
           <h3>Senate</h3>
-          
+
           <div class="number-container">
             <div class="candidate dem">
               <div class="name">Dem. {senate.Dem.total >= 51 ? winnerIcon : ""}</div>
@@ -274,7 +275,6 @@ async function init(results) {
 
           <div class="chatter"><strong>51</strong> seats for majority</div>
 
-          <div class="full-link"><a>See full results ›</a></div>
           <div class="net-gain-container">
             <div class="gain-label">Net gain</div>
             <div class={"net-gain " + senate.netGainParty}>{senate.netGainParty != "none"
@@ -282,6 +282,7 @@ async function init(results) {
                     : "No change"}</div>
           </div>
 
+          <div class="full-link"><a>See full results ›</a></div>
         </a>
       </div>
 
@@ -290,6 +291,6 @@ async function init(results) {
 
     </div>
   </>;
-  
+
   render(template, container);
 }
