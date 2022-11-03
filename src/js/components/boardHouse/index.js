@@ -33,7 +33,10 @@ export default class BoardHouse extends Component {
   }
 
   render() {
+
     var { results = [], test, latest, alert } = this.state;
+    console.log("boardHouse render, alert is " + alert);
+
 
     var sorted = results.slice().sort((a, b) =>
       a.state > b.state ? 1 :
