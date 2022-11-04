@@ -241,7 +241,7 @@ class Customizer extends Component {
     if (state.inline) src.searchParams.set("inline", true)
     if (state.onlyPresident) src.searchParams.set("onlyPresident", true);
 
-    var screenshotSrc;
+    var screenshotSrc = src.toString();
     if (src.toString().indexOf('localhost') > -1) {
       var screenshotUrl = new URL('https://apps.npr.org/elections20-interactive/' + `embedBOP.html`);
       if (state.dark) screenshotUrl.searchParams.set("theme", "dark");
