@@ -11,8 +11,8 @@
 
   var description = shareStrings[`${state.toLowerCase()}Description`] || defaultDescription;
   description = description.replace("%STATE%", stateName);
-  
-  var base = `https://apps.npr.org/election-results-live-2022`;
+
+  var base = grunt.data.json.project.url;
   var image = `${base}/assets/social_states/${state}.jpg`;
 
   var there = `${base}/#/states/${state}`;
@@ -43,7 +43,7 @@
     <!-- Social sharing meta -->
     <meta property="og:type" content="article">
     <meta property="og:title" content="<%= title %>">
-    <meta property="og:site_name" content="NPR Visuals">
+    <meta property="og:site_name" content="NPR">
     <meta property="og:url" content="<%= here %>">
     <meta property="og:image" content="<%= image %>">
     <meta property="og:description" content="<%= description %>">

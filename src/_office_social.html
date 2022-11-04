@@ -5,9 +5,9 @@
   var title = shareStrings[`${office}Title`];
 
   var description = shareStrings[`${office}Description`];
-  
-  var base = `https://apps.npr.org/election-results-live-2022`;
-  var image = `${base}/assets/social_office/${office}.jpg`;
+
+  var base = grunt.data.json.project.url;
+  var image = `${base}/assets/social_office/${office}.png`;
 
   var there = `${base}/#/${office}`;
   var here = `${base}/share/${office}.html`;
@@ -37,7 +37,7 @@
     <!-- Social sharing meta -->
     <meta property="og:type" content="article">
     <meta property="og:title" content="<%= title %>">
-    <meta property="og:site_name" content="NPR Visuals">
+    <meta property="og:site_name" content="NPR">
     <meta property="og:url" content="<%= here %>">
     <meta property="og:image" content="<%= image %>">
     <meta property="og:description" content="<%= description %>">
