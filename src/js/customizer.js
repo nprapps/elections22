@@ -23,7 +23,8 @@ class Customizer extends Component {
       onlyPresident: false,
       inline: false,
       image: null,
-      loadingImage: false
+      loadingImage: false,
+      imageError: false,
     }
 
     this.selectStatePage = this.selectStatePage.bind(this);
@@ -44,8 +45,11 @@ class Customizer extends Component {
       || (prevState.showPresident !== this.state.showPresident)
       || (prevState.onlyPresident !== this.state.onlyPresident)
       || (prevState.inline !== this.state.inline)
+      || (prevState.raceID !== this.state.raceID )
     ) {
       this.setState({ image: null })
+      this.setState({ loadingImage: false })
+      this.setState({ imageError: false })
     }
   }
 
@@ -81,19 +85,23 @@ class Customizer extends Component {
     this.setState({ image: null });
     this.setState({ loadingImage: true });
 
-    // TODO: does this need to be axios
-    var response = await axios({
-      url: lambdaUrl,
-      params: {
-        'embedUrl': src,
-        'cssUrl': lambdaCssUrl
-      },
-      headers: { Accept: "*/*" },
-      validateStatus: status => status == 200,
-    });
-    // TODO: error check
-    let imageStr = `data:image/png;base64, ${response.data}`;
-    this.setState({ image: imageStr })
+    try {
+      // TODO: does this need to be axios
+      var response = await axios({
+        url: lambdaUrl,
+        params: {
+          'embedUrl': src,
+          'cssUrl': lambdaCssUrl
+        },
+        headers: { Accept: "*/*" },
+        validateStatus: status => status == 200,
+      });
+      let imageStr = `data:image/png;base64, ${response.data}`;
+      this.setState({ image: imageStr })
+    } catch (err) {
+      this.setState({ image: null })
+      this.setState({ imageError: true })
+    }
   }
 
   embeds(src, id) {
@@ -116,7 +124,7 @@ class Customizer extends Component {
           <h3>Sidechain</h3>
           <textarea rows="6" style="width:100%">
           {`<side-chain src="${src}"></side-chain>
-          <script src="https://apps.npr.org/elections20-interactive/sidechain.js"></script>`.replace(/\s{2,}|\n/g, " ")}
+          <script src="https://apps.npr.org/election-results-live-2022/sidechain.js"></script>`.replace(/\s{2,}|\n/g, " ")}
           </textarea>
         </div>
       </div>
@@ -125,22 +133,27 @@ class Customizer extends Component {
 
   socialShare(screenshotSrc) {
     return (<>
-      <h2>Get social image</h2>
+      <h2>Social image</h2>
       <div>
         <button onClick={() => this.getScreenshot(screenshotSrc).then(() => {
           this.setState({ loadingImage: false });
-        })}>Get screenshot!</button>
+        })}>Get social image</button>
 
-        <div class={ `social-image-preview ${this.state.loadingImage || this.state.image ? '' : 'is-hidden'}`}>
+        <div class={ `social-image-preview ${this.state.loadingImage || this.state.image || this.state.imageError  ? '' : 'is-hidden'}`}>
           { 
-            this.state.loadingImage 
+            this.state.loadingImage
               ? <div class="loading"><div class='loader'></div>Loading image...this may take a little while</div> 
               : "" 
           }
           { 
-            this.state.image ? ( 
-            <a id="download" download="image.png" href={`${this.state.image}`}><img class="preview-image" src={`${this.state.image}`} alt="generated social image"/></a>
-            ) : ''
+            this.state.image 
+              ? ( <a id="download" download="image.png" href={`${this.state.image}`}><img class="preview-image" src={`${this.state.image}`} alt="generated social image"/></a> )
+              : ""
+          }
+          {
+            this.state.imageError
+              ? <div class="error">There was an error loading the image. Try again?</div>
+              : ""
           }
         </div>
 
@@ -152,7 +165,7 @@ class Customizer extends Component {
     var { url } = free;
     var src = url + `#/${state.mode}`;
     var screenshotSrc = src.indexOf('localhost') > -1 
-      ? `https://apps.npr.org/elections20-interactive/#/${state.mode}`
+      ? `https://apps.npr.org/election-results-live-2022/#/${state.mode}`
       : src
     
     return (<>
@@ -170,7 +183,7 @@ class Customizer extends Component {
     var { url, offices, postals } = free;
     var src = `${url}#/states/${state.selectedState}/${state.selectedOffice || ''}`;
     var screenshotSrc = src.indexOf('localhost') > -1 
-      ? `https://apps.npr.org/elections20-interactive/#/states/${state.selectedState}/${state.selectedOffice || ''}`
+      ? `https://apps.npr.org/election-results-live-2022/#/states/${state.selectedState}/${state.selectedOffice || ''}`
       : src
 
     return (<>
@@ -204,7 +217,7 @@ class Customizer extends Component {
     }
     var screenshotSrc = src;
     if (state.raceID && src.indexOf('localhost') > -1) {
-      var assembly = new URL('https://apps.npr.org/elections20-interactive/' + "./embed.html");
+      var assembly = new URL('https://apps.npr.org/election-results-live-2022/' + "./embed.html");
       assembly.searchParams.set("file", `states/${state.selectedState}`);
       assembly.searchParams.set("race", state.raceID);
       screenshotSrc = assembly.toString();
@@ -243,7 +256,7 @@ class Customizer extends Component {
 
     var screenshotSrc = src.toString();
     if (src.toString().indexOf('localhost') > -1) {
-      var screenshotUrl = new URL('https://apps.npr.org/elections20-interactive/' + `embedBOP.html`);
+      var screenshotUrl = new URL('https://apps.npr.org/election-results-live-2022/' + `embedBOP.html`);
       if (state.dark) screenshotUrl.searchParams.set("theme", "dark");
       if (state.showPresident) screenshotUrl.searchParams.set("president", true);
       if (state.inline) screenshotUrl.searchParams.set("inline", true)
@@ -280,7 +293,7 @@ class Customizer extends Component {
     var { url } = free;
     var src = new URL(url + `homepage.html`);
     var screenshotSrc = src.toString().indexOf('localhost') > -1 
-      ? 'https://apps.npr.org/elections20-interactive/homepage.html'
+      ? 'https://apps.npr.org/election-results-live-2022/homepage.html'
       : src.toString()
     return (<>
       {this.embeds(src, "responsive-embed-electoral-college")}
