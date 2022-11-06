@@ -64,13 +64,15 @@ main.embed-bop {
     background-color: #fff;
     padding: 7px 0;
 
-    h2.bop {
-      .knockout-header();
-      text-align: center;
-      margin: 0 0 -3px 0;
-      font-size: 13px;
-      color: #666;
-      display: block;
+    @media @tiny {
+      h2.bop {
+        .knockout-header();
+        text-align: center;
+        margin: 0 0 -3px 0;
+        font-size: 13px;
+        color: #666;
+        display: block;
+      }
     }
   }
 
