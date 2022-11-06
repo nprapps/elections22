@@ -84,6 +84,7 @@ class Customizer extends Component {
   async getScreenshot(src) {
     this.setState({ image: null });
     this.setState({ loadingImage: true });
+    this.setState({ imageError: false });
 
     try {
       // TODO: does this need to be axios
@@ -93,7 +94,10 @@ class Customizer extends Component {
           'embedUrl': src,
           'cssUrl': lambdaCssUrl
         },
-        headers: { Accept: "*/*" },
+        headers: {
+          Accept: "*/*",
+          'x-npr': {}
+        },
         validateStatus: status => status == 200,
       });
       let imageStr = `data:image/png;base64, ${response.data}`;
