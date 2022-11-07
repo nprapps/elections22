@@ -3,10 +3,13 @@ var $ = require("../lib/qsa");
 // ad filtering code
 window.grumi = window.grumi || {
     cfg: {
-        pubIds: {
-            'ca-pub-8864803855381259': true,
-            'ca-mb-app-pub-8864803855381259': true,
-            'ca-pub-6055882063795349': true,
+        advs: {
+            '19566752': true, // Google Inc
+            '4952276315': true, // IntowowBillable
+            '88382072': true, // NPR - Programmatic
+            '5056504790': true, // Pubmatic
+            '5116496584': true, // Index Exchange
+            '5212620189': true, // Pubmatic
         },
     },
     key: '880a45f2-0015-49d2-b38f-2d26be44ae09',
@@ -24,8 +27,7 @@ var gptSetup = false;
 
 var ccpaCookie = document.cookie.split(";").filter(c => c.includes("ccpa_rdp=true")).length > 0;
 
-// var storyId = "election-results-live-2022";
-var storyId = "elections20-interactive";
+var storyId = "election-results-live-2022";
 var isStagingServer = window.location.hostname == "stage-apps.npr.org";
 var adSizes = {
   tall: ["fluid", [300,600], [300, 250]],
@@ -35,7 +37,7 @@ var advelvetTargeting = [String(Math.floor(Math.random() * 20) + 1)];
 
 
 
-// Load the code on page. 
+// Load the code on page.
 
 // var observer = new IntersectionObserver(function([event]) {
 //   if (event.isIntersecting) {
@@ -65,7 +67,7 @@ class GoogleAd extends HTMLElement {
     console.log("Ad instrumentation: running connectedCallback on ad elements");
     if (this.connected) return;
     this.connected = true;
-    
+
     var elements = this.illuminate();
     var id = "google-ad-" + guid++;
     elements.container.id = id;
