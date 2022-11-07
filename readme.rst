@@ -14,8 +14,8 @@ To run this project you will need:
 
 With those installed, you can then set the project up using your terminal:
 
-#. Pull the code - ``git clone git@github.com:nprapps/elections20-interactive``
-#. Enter the project folder - ``cd elections20-interactive``
+#. Pull the code - ``git clone git@github.com:nprapps/elections22``
+#. Enter the project folder - ``cd elections22``
 #. Install dependencies from NPM - ``npm install``
 #. Start the server - ``grunt``
 
