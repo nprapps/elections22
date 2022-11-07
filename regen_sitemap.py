@@ -1,10 +1,14 @@
 from datetime import date
 
-todayobj = date.today()
-todays_datestring = "%s-%s-%s" % (todayobj.year, todayobj.month, todayobj.day)
+#todayobj = date.today()
+#todays_datestring = "%s-%s-0%s" % (todayobj.year, todayobj.month, todayobj.day)
 
-datestring = todays_datestring
-# datestring = "2021-01-09"
+#datestring = todays_datestring
+
+datestring = "2022-11-06"
+
+print(datestring)
+
 
 url_base = "https://apps.npr.org/election-results-live-2022/"
 
@@ -22,9 +26,9 @@ header = """<?xml version="1.0" encoding="UTF-8"?>"""
 urlset_start = """<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">"""
 urlset_end = """</urlset>\n"""
 
-url_frag = """\t<url>\n\t\t<loc>%s</loc>\n\t\t<lastmod>%s</lastmod>\n\t\t<changefreq>hourly</changefreq>\n\t</url>"""
+#url_frag = """\t<url>\n\t\t<loc>%s</loc>\n\t\t<lastmod>%s</lastmod>\n\t\t<changefreq>hourly</changefreq>\n\t</url>"""
 
-#url_frag = """\t<url>\n\t\t<loc>%s</loc>\n\t\t<lastmod>%s</lastmod>\n\t\t<changefreq>daily</changefreq>\n\t</url>"""
+url_frag = """\t<url>\n\t\t<loc>%s</loc>\n\t\t<lastmod>%s</lastmod>\n\t\t<changefreq>daily</changefreq>\n\t</url>"""
 
 
 url_frag_nothourly = """\t<url>\n\t\t<loc>%s</loc>\n\t\t<lastmod>%s</lastmod>\n\t\t<changefreq>weekly</changefreq>\n\t</url>"""
