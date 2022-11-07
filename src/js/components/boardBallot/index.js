@@ -56,7 +56,14 @@ export default class BoardBallot extends Component {
       </div>
       <BoardKey race="ballot"/>
       <div class="source">
-        Source: AP (as of <DateFormatter value={latest} />)
+        <div class="note">
+          <strong>Note:</strong> <em>% in</em> is an Associated Press estimate of
+          the share of total ballots cast in an election that have been
+          counted. <a href="https://www.ap.org/about/our-role-in-elections/counting-the-vote">Read more about how EEVP is calculated</a>.
+        </div>
+        <div class="source">
+          Source: AP (as of <DateFormatter value={latest} />)
+        </div>
       </div>
     </>;
   }

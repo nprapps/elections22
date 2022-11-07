@@ -6,16 +6,17 @@ export default function BoardKey(props) {
 	var hasParties = race !== "ballot";
   var hasPickup = race == "senate"; // suppress flips in house '22 race b/c redistricting
 	var hasIncumbent = race == "house" || race == "senate" || race == "gov";
-	var hasEEVP = race !== "house" && race !== "ballot";
+	// var hasEEVP = race !== "ballot";
+	var hasEEVP = true;
 
 
-  // Do we need an asterisk b/c Evan McMullin won in 2022? 
+  // Do we need an asterisk b/c Evan McMullin won in 2022?
   var mcmullinWon = false;
 
   if (this.props.data) {
 
     var results = (this.props.data);
- 
+
     results.forEach(function(r) {
       if ( r.hasOwnProperty('called')  && r.called == true ) {
         if (r.id == '46329' && r.winnerParty == 'Ind') {
@@ -39,7 +40,7 @@ export default function BoardKey(props) {
       	<li class="yes">Yes / <span class="leading">Leading</span> <span class="winner">Winner</span></li>
       	<li class="no">No / <span class="leading">Leading</span> <span class="winner">Winner</span></li>
       </>}
-      {full && <li class="eevp"><span class="perc">76% in</span> {hasEEVP ? <span>Expected vote*</span> : "Precincts reporting"}</li>}
+      {full && <li class="eevp"><span class="perc">76% in</span> {hasEEVP ? <span>Estimated share of votes counted*</span> : "Precincts reporting"}</li>}
       {full && hasIncumbent && <li class="incumbent">● Incumbent</li>}
 
     </ul>

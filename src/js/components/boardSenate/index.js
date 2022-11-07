@@ -40,7 +40,7 @@ export default class BoardSenate extends Component {
     }
     if (alert.includes("~")) {
       alert = '';
-    } 
+    }
 
 
     if (results) {
@@ -76,8 +76,8 @@ export default class BoardSenate extends Component {
         <div class="board-container Senate">
           {results && <>
             <Results races={buckets.tossup} hed="Competitive Seats" office="Senate" addClass="middle" split={true}/>
-            <Results races={buckets.likelyD} hed="Likely Democratic" office="Senate" addClass="first"/>
-            <Results races={buckets.likelyR} hed="Likely Republican" office="Senate" addClass="last"/>
+            <Results races={buckets.likelyD} hed="Likely/Solid Democratic" office="Senate" addClass="first"/>
+            <Results races={buckets.likelyR} hed="Likely/Solid Republican" office="Senate" addClass="last"/>
           </>}
         </div>
         <BoardKey race="senate" data={results}/>
