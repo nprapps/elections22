@@ -63,6 +63,19 @@ module.exports = function (grunt) {
     "publish",
     "cron:30:publish"
   ]);
+  grunt.registerTask("stage-noap", "Push once to stage without AP update. Use after restore.", [
+    "sheets",
+    "docs",
+    "static",
+    "publish",
+  ]);
+  grunt.registerTask("stage-nodocs", "Push to stage without docs update. Use after restore.", [
+    "sheets",
+    "clean",
+    "static",
+    "elex",
+    "publish",
+  ]);
   grunt.registerTask("deploy-live", "Deploy HTML to live on a timer", [
     "sheets",
     "docs",
@@ -71,5 +84,18 @@ module.exports = function (grunt) {
     "elex",
     "publish:live",
     "cron:30:publishLive"
+  ]);
+  grunt.registerTask("deploy-noap", "Push once to live without AP update. Use after restore.", [
+    "sheets",
+    "docs",
+    "static",
+    "publish:live",
+  ]);
+  grunt.registerTask("deploy-nodocs", "Push to live without docs update. Use after restore.", [
+    "sheets",
+    "clean",
+    "static",
+    "elex",
+    "publish:live",
   ]);
 };
