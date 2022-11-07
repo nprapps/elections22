@@ -144,13 +144,13 @@ class Customizer extends Component {
         })}>Get social image</button>
 
         <div class={ `social-image-preview ${this.state.loadingImage || this.state.image || this.state.imageError  ? '' : 'is-hidden'}`}>
-          { 
+          {
             this.state.loadingImage
-              ? <div class="loading"><div class='loader'></div>Loading image...this may take a little while</div> 
-              : "" 
+              ? <div class="loading"><div class='loader'></div>Loading image...this may take a little while</div>
+              : ""
           }
-          { 
-            this.state.image 
+          {
+            this.state.image
               ? ( <a id="download" download="image.png" href={`${this.state.image}`}><img class="preview-image" src={`${this.state.image}`} alt="generated social image"/></a> )
               : ""
           }
@@ -168,10 +168,10 @@ class Customizer extends Component {
   board(free, props, state) {
     var { url } = free;
     var src = url + `#/${state.mode}`;
-    var screenshotSrc = src.indexOf('localhost') > -1 
+    var screenshotSrc = src.indexOf('localhost') > -1
       ? `https://apps.npr.org/election-results-live-2022/#/${state.mode}`
       : src
-    
+
     return (<>
       {this.embeds(src, `responsive-embed-election-${state.selectedState}-${state.mode}`)}
       {this.socialShare(screenshotSrc)}
@@ -186,7 +186,7 @@ class Customizer extends Component {
   statePage(free, props, state) {
     var { url, offices, postals } = free;
     var src = `${url}#/states/${state.selectedState}/${state.selectedOffice || ''}`;
-    var screenshotSrc = src.indexOf('localhost') > -1 
+    var screenshotSrc = src.indexOf('localhost') > -1
       ? `https://apps.npr.org/election-results-live-2022/#/states/${state.selectedState}/${state.selectedOffice || ''}`
       : src
 
@@ -204,8 +204,8 @@ class Customizer extends Component {
       {this.embeds(src, `responsive-embed-election-${state.selectedState}-${state.selectedOffice || "X"}`)}
       {this.socialShare(screenshotSrc)}
       <h2>Preview</h2>
-      <side-chain 
-        key={state.selectedState} 
+      <side-chain
+        key={state.selectedState}
         src={src} />
     </>);
   }
@@ -270,17 +270,17 @@ class Customizer extends Component {
 
     return (<>
       <div class="options">
-        <input 
-          id="bop_dark" 
-          type="checkbox" 
-          value={state.dark} 
+        <input
+          id="bop_dark"
+          type="checkbox"
+          value={state.dark}
           onInput={() => this.setFlag("dark", !state.dark)} />
         <label for="bop_dark">Dark theme</label>
-        
-        <input 
-          id="bop_triplet" 
-          type="checkbox" 
-          value={state.inline} 
+
+        <input
+          id="bop_triplet"
+          type="checkbox"
+          value={state.inline}
           onInput={() => this.setFlag("inline", !state.inline)} />
         <label for="bop_inline">Row layout</label>
       </div>
@@ -296,7 +296,7 @@ class Customizer extends Component {
   homepage(free, props, state) {
     var { url } = free;
     var src = new URL(url + `homepage.html`);
-    var screenshotSrc = src.toString().indexOf('localhost') > -1 
+    var screenshotSrc = src.toString().indexOf('localhost') > -1
       ? 'https://apps.npr.org/election-results-live-2022/homepage.html'
       : src.toString()
     return (<>
@@ -317,8 +317,7 @@ class Customizer extends Component {
       ["house", "House"],
       ["state", "State page"],
       ["race", "Individual race"],
-      ["sidebar", "Balance of power"],
-      ["homepage", "Homepage topper"]
+      ["sidebar", "Balance of power"]
     ];
 
     var offices = [
