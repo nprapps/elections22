@@ -20,7 +20,7 @@ function CandidateCells(race, winner) {
           <div class="last">{c.last}</div>
           <div class="incumbent">{c.incumbent ? "●" : ""}</div>
         </div>
-        <div class="perc">{Math.round(c.percent*100)}%</div> 
+        <div class="perc">{ Math.round(c.percent * 1000) / 10 }%</div> 
       </td>
     );
   });
@@ -41,7 +41,7 @@ export default function ResultsBoardNamed(props) {
   var tables = [ props.races ];
 
   if (props.split) {
-    var half = Math.ceil(props.races.length / 2);    
+    var half = Math.ceil(props.races.length / 2);
     var firstHalf = props.races.splice(0, half);
     var secondHalf = props.races.splice(-half);
     tables = [ firstHalf, secondHalf ];
@@ -72,7 +72,7 @@ export default function ResultsBoardNamed(props) {
                 {races.map(function(r,i) {
                   var hasResult = r.eevp || r.reporting || r.called || r.runoff;
                   var reporting = r.eevp;
-                  var percentIn = reporting || reporting == 0 
+                  var percentIn = reporting || reporting == 0
                     ? <span>{reportingPercentage(reporting)}%<span class="in"> in</span></span>
                     : "";
                   var [ winner ] = r.candidates.filter(c => c.winner == "X");
@@ -110,7 +110,7 @@ export default function ResultsBoardNamed(props) {
 
                       {/* Open */}
                       <td class="open-label" colspan="3" role="cell">Last polls close at {states[r.state].closingTime} ET</td>
-                      
+
                       {/* Candidates */}
                       {CandidateCells(r, winner)}
 
