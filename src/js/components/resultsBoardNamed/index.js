@@ -1,5 +1,5 @@
 import { h, Fragment } from "preact";
-import { reportingPercentage, sortByParty } from "../util";
+import { reportingPercentage, sortByParty, goingToRCVRunOff } from "../util";
 import states from "states.sheet.json";
 
 function CandidateCells(race, winner) {
@@ -28,15 +28,31 @@ function CandidateCells(race, winner) {
 
 export default function ResultsBoardNamed(props) {
 
-  var hasFlips = props.races.some(function(r) {
+
+
+  var hasFlips = false;
+
+  props.races.some(function(r) {
     var [ winner ] = r.candidates.filter(c => c.winner);
-    return winner && (
+    if (goingToRCVRunOff(r.id) ) {
+      hasFlips = true;
+    }
+    
+    if (winner && (
       // seat flipped
       r.previousParty !== winner.party ||
       // runoff
-      winner.winner == "R"
-    );
+      winner.winner == "R")
+      ) {
+        hasFlips = true;
+      }
+    
+    
   });
+
+  console.log("hasflips: " + hasFlips);
+
+  hasFlips = true;
 
   var tables = [ props.races ];
 
@@ -70,7 +86,16 @@ export default function ResultsBoardNamed(props) {
                 </tr>*/}
 
                 {races.map(function(r,i) {
+
+
+                  var goingToRCV = goingToRCVRunOff(r.id);
+                  if (goingToRCV) {
+                    console.log("Found RCV race...")
+                    console.log(r);
+                  }
+
                   var hasResult = r.eevp || r.reporting || r.called || r.runoff;
+
                   var reporting = r.eevp;
                   var percentIn = reporting || reporting == 0
                     ? <span>{reportingPercentage(reporting)}%<span class="in"> in</span></span>
@@ -117,15 +142,20 @@ export default function ResultsBoardNamed(props) {
                       {/* EEVP */}
                       <td class={"reporting"} role="cell">{percentIn}</td>
 
+                      
+
                       {/* Runoff or Flip */}
                       {props.office == "Senate" && <>
                         <td class={"little-label " + (flipped ? winner.party : "")} role="cell">
+
+                          <span class={goingToRCV ? "rcv-label" : ""}>{goingToRCV ? "RCV" : ""}</span>
                           <span class={r.runoff ? "runoff-label" : ""}>{r.runoff ? "R.O." : ""}</span>
                           <span class={flipped ? "flip-label" : ""}>{flipped ? "Flip" : ""}</span>
                         </td>
                       </>}
                       {props.office == "House" && <>
                         <td class={"little-label "} role="cell">
+                          <span class={goingToRCV ? "runoff-label" : ""}>{goingToRCV ? "RCV" : ""}</span>
                           <span class={r.runoff ? "runoff-label" : ""}>{r.runoff ? "R.O." : ""}</span>
                         </td>
                       </>}
