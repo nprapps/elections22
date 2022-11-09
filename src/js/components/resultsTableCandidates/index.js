@@ -144,7 +144,7 @@ function CandidateNameCell(candidate, office) {
     name = (
       <Fragment>
         <span class="first">{candidate.first || ""}</span> {candidate.last}
-        {office === "I" ? "" : ` (${getParty(candidate.party)}) `}
+        {office === "I" ? "" : ` (${ candidate.party }) `}
       </Fragment>
     );
   }
