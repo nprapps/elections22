@@ -43,8 +43,6 @@ export default function BoardKey(props) {
       {full && <li class="eevp"><span class="perc">76% in</span> {hasEEVP ? <span>Estimated share of votes counted*</span> : "Precincts reporting"}</li>}
       {full && hasIncumbent && <li class="incumbent">● Incumbent</li>}
 
-      <li class="runoff"><span>RCV</span> Headed to ranked choice vote tabulation</li>
-
     </ul>
      {mcmullinWon && <div id="mcmullin_note"><span style="color:#15b16e; font-family: Helvetica, Arial, sans-serif; font-weight: normal; font-weight: 400; font-size: 20px; font-weight: bold;">*</span><span id="mcmullin_text" style="font-style:italic;">In the Senate, Bernie Sanders (I-VT) and Angus King (I-ME) caucus with Democrats. The bar chart does not include newly-elected Evan McMullin (I-UT), who has said he will not caucus with either party.</span></div> }
   </div>
