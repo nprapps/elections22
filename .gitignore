@@ -9,5 +9,6 @@ data/*.docs.txt
 src/assets/synced
 src/assets/data
 env/*
+extras/api_key.py
 votecast.sh
 stage-elections22.json
