@@ -136,7 +136,7 @@ export class CountyChart extends Component {
 
     var yLabel;
     if (this.props.variable == "past_margin") {
-      yLabel = "More Democratic in 2016 →";
+      yLabel = "More Democratic in 2020 →";
     } else {
       yLabel = `Higher ${this.props.title} →`;
     }
