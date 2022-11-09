@@ -51,11 +51,9 @@ export default class BarsSenate extends Component {
       if ( r.hasOwnProperty('called')  && r.called == true ) {
         if (r.id == '46329' && r.winnerParty == 'Ind') {
               mcmullinWon = true;
-              console.log("Mcmullin won");
             }
 
         var winnerParty = getParty(r.winnerParty);
-        console.log("winner party" + winnerParty);
         var previousWinner = getParty(r.previousParty);
 
         senate[winnerParty].total += 1;
@@ -75,9 +73,6 @@ export default class BarsSenate extends Component {
     var [topSenate] = Object.keys(senate)
       .map(k => ({ party: k, gains: senate[k].gains }))
       .sort((a, b) => b.gains - a.gains);
-
-    console.log("top senate is " + topSenate.party);
-    console.log("top senate gains " + topSenate.gains);
 
     if (topSenate.gains > 0) {
       senate.netGainParty = topSenate.party;
