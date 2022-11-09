@@ -143,8 +143,6 @@ module.exports = function (resultArray, overrides = {}) {
   var { calls = [], candidates = {}, rosters = {}, states = {} } = overrides;
 
 
-  console.log("*** Normalize results: CALLS ***")
-  console.log(calls)
 
   var nprMetadata = {
     H: overrides.house,
@@ -214,9 +212,9 @@ module.exports = function (resultArray, overrides = {}) {
             for (var k in override) {
               if (override[k]) c[k] = override[k];
             }
-            console.log(
-              `Applying candidate overrides for #${c.id} (${c.first} ${c.last})`
-            );
+            // console.log(
+            //   `Applying candidate overrides for #${c.id} (${c.first} ${c.last})`
+            // );
           }
           total += c.votes;
           parties.add(c.party);
@@ -227,9 +225,9 @@ module.exports = function (resultArray, overrides = {}) {
         var roster = rosters[raceMeta.id];
         if (roster) {
           roster = new Set(roster.toString().split(/,\s*/));
-          console.log(
-            `Overriding the roster for race #${unitMeta.id} - ${roster.size} candidates`
-          );
+          // console.log(
+          //   `Overriding the roster for race #${unitMeta.id} - ${roster.size} candidates`
+          // );
 
           // // KEEP THE CANDIDATES SO WE CAN ROLL UP THE REMAINDER !!! 
           ballot = ballot.filter(c => roster.has(c.id));

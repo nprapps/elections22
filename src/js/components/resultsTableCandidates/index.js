@@ -1,6 +1,6 @@
 import { h, Component, Fragment } from "preact";
 import gopher from "../gopher.js";
-import { reportingPercentage, getParty } from "../util.js";
+import { reportingPercentage, getParty, candidateRCVRunOff } from "../util.js";
 
 const activeMugshots = {
   Biden:
@@ -104,7 +104,10 @@ export default function ResultsTableCandidates(props) {
 }
 
 export function ResultsTableCandidatesRow(props) {
+
   var result = props.data;
+
+
   if (!result.votes && result.last == "Other") {
     return;
   }
@@ -182,8 +185,18 @@ function CandidateNameCell(candidate, office) {
         </svg>
       </span>
     );
-  } else if (candidate.winner == "R") {
-    winner = <span class="runoff-text"> - runoff</span>;
+  } else {
+    if (candidate.winner == "R") {
+      winner = <span class="runoff-text"> - runoff</span>;
+    }
+    console.log("checking candidate id for RCV " + candidate.id);
+    if (candidateRCVRunOff(candidate.id)) {
+
+      winner = <span class="runoff-text"> - Will be decided by ranked choice votes </span>;
+
+    }
+
+
   }
 
   return (
