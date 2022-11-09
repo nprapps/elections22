@@ -44,13 +44,6 @@ export default class BarsSenate extends Component {
 
     // Tally vote/seat totals and gains (TODO: embrace the grossness)
 
-    results.forEach(function(r) {
-      if ( r.hasOwnProperty('called')  && r.called == true ) {
-          var winnerParty = getParty(r.winnerParty);
-          senate[winnerParty].total += 1;  
-      } 
-    });
-
 
     var mcmullinWon = false;
   
@@ -58,7 +51,18 @@ export default class BarsSenate extends Component {
       if ( r.hasOwnProperty('called')  && r.called == true ) {
         if (r.id == '46329' && r.winnerParty == 'Ind') {
               mcmullinWon = true;
+              console.log("Mcmullin won");
             }
+
+        var winnerParty = getParty(r.winnerParty);
+        console.log("winner party" + winnerParty);
+        var previousWinner = getParty(r.previousParty);
+
+        senate[winnerParty].total += 1;
+        if (winnerParty != previousWinner) {
+          senate[winnerParty].gains += 1;
+          senate[previousWinner].gains -= 1;
+        }
       }
     });
 
@@ -67,11 +71,14 @@ export default class BarsSenate extends Component {
       senate.Ind.width = (senate.Ind.total)-1;
     }
 
-
     senate.netGainParty = "none";
     var [topSenate] = Object.keys(senate)
       .map(k => ({ party: k, gains: senate[k].gains }))
       .sort((a, b) => b.gains - a.gains);
+
+    console.log("top senate is " + topSenate.party);
+    console.log("top senate gains " + topSenate.gains);
+
     if (topSenate.gains > 0) {
       senate.netGainParty = topSenate.party;
       senate.netGain = topSenate.gains;
