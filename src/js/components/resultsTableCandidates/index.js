@@ -34,6 +34,8 @@ export default function ResultsTableCandidates(props) {
     Object.keys(activeMugshots).includes(c.last)
   );
 
+  var hasFlags = results.flags;
+
   var footnote;
   var uncontestedText = isUncontested ? (
     <div class="footnote uncontested">
@@ -43,6 +45,15 @@ export default function ResultsTableCandidates(props) {
   ) : (
     ""
   );
+
+  var flagText = hasFlags ? (
+    <div class="footnote flags">
+      { results.flags[0] }
+    </div>
+  ) : (
+    ""
+  );
+
   var hasIncumbent = results.candidates.some(c => c.incumbent);
   var incumbentText = hasIncumbent ? <div>● - Incumbent</div> : "";
 
@@ -87,6 +98,7 @@ export default function ResultsTableCandidates(props) {
         <span class="right">{isUncontested ? "" : reporting}</span>
       </div>
       {uncontestedText}
+      {flagText}
     </div>
   );
 }
