@@ -2,13 +2,13 @@ import requests, csv, json, datetime
 from requests.exceptions import HTTPError
 from api_key import api_key
 
-# returnformat = "json"
-# offices = "G,S,H,I"
-# resultslevel = "FIPSCode"
-
 returnformat = "json"
 offices = "G,S,H,I"
-resultslevel = "state"
+resultslevel = "FIPSCode"
+
+# returnformat = "json"
+# offices = "G,S,H,I"
+# resultslevel = "state"
 
 timestamp = str(datetime.datetime.now()).replace(" ", "_")
 params_arg = offices + "=" + resultslevel + "=" 
