@@ -15,24 +15,13 @@ export function reportingPercentage(pct) {
 /* 
 
 
-
+One off to deal with new alaska stuff, 2022. 
 */
 export function goingToRCVRunOff(raceID) {
   
   var RCV_race_list = ["2933"];
 
   if (RCV_race_list.includes(raceID) ) {
-      return true;
-    }
-  return false;
-}
-
-export function candidateRCVRunOff(polID) {
-  /* This requires the *PolId* not the candidate id */
-
-  var RCV_race_list = ["71386", "1799", "71383", "71387"];
-
-  if (RCV_race_list.includes(polID) ) {
       return true;
     }
   return false;
