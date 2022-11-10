@@ -12,6 +12,8 @@ export function reportingPercentage(pct) {
 }
 
 
+
+
 /* 
 
 
@@ -19,7 +21,8 @@ One off to deal with new alaska stuff, 2022.
 */
 export function goingToRCVRunOff(raceID) {
   
-  var RCV_race_list = ["2933"];
+
+  var RCV_race_list = [];
 
   if (RCV_race_list.includes(raceID) ) {
       return true;

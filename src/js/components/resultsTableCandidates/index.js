@@ -187,6 +187,8 @@ function CandidateNameCell(candidate, office) {
     );
   } 
 
+ 
+
   return (
     <div role="cell" class="td name">
       {name}
