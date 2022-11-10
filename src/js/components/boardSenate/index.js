@@ -83,7 +83,8 @@ export default class BoardSenate extends Component {
         <BoardKey race="senate" data={results}/>
         <div class="source">
           <div class="note">
-            <strong>Note:</strong> <em>% in</em> is an Associated Press estimate of the share of total ballots cast in an election that have been counted. <a href="https://www.ap.org/about/our-role-in-elections/counting-the-vote">Read more about how EEVP is calculated</a>.
+            <strong>Note:</strong> <em>% in</em> is an Associated Press estimate of the share of total ballots cast in an election that have been counted. <a href="https://www.ap.org/about/our-role-in-elections/counting-the-vote">Read more about how EEVP is calculated</a>.<br />
+            While the winner of the Alaska Senate race has not yet been decided, <a href="https://apnews.com/article/2022-midterm-elections-alaska-donald-trump-congress-2c2f7b1fe9fd1c91a74a7f7687b3a27b">AP has called that the winner will be a Republican</a>. The balance of power chart reflects that GOP seat.
           </div>
           <div class="source">
             Source: AP (as of <DateFormatter value={latest} />). U.S. Senate race ratings come from the nonpartisan <a href="https://cookpolitical.com/ratings/senate-race-ratings">Cook Political Report</a>. Seats listed as Likely Democratic or Likely Republican include contests rated as "Solid" and "Likely" for a particular party. Seats listed as Competitive include contests rated as leaning to a particular party, or a toss-up.
