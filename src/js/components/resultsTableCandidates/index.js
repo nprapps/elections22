@@ -182,9 +182,8 @@ function CandidateNameCell(candidate, office) {
         </svg>
       </span>
     );
-  } else if (candidate.winner == "R") {
-    winner = <span class="runoff-text"> - runoff</span>;
-  }
+  } 
+ 
 
   return (
     <div role="cell" class="td name">
