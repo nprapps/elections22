@@ -42,7 +42,7 @@ for row in source_data_rows:
 	race_id_dict[hash_key] += int(row['voteCount'])
 	print("Total votes in race %s = %s " % (hash_key, race_id_dict[hash_key]))
 
-# Finally, say add the vote percent and whether it's a winner
+# Finally, add the vote percent and whether it's a winner
 for row in source_data_rows:
 	hash_key = row['raceID'] + "-" + row['reportingunitID']
 	total_votes = race_id_dict[hash_key]
