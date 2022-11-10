@@ -185,9 +185,9 @@ function CandidateNameCell(candidate, office) {
         </svg>
       </span>
     );
-  } 
+  }
 
- 
+
 
   return (
     <div role="cell" class="td name">
@@ -207,7 +207,7 @@ function CandidateVoteCell(candidate, uncontested) {
     );
   }
   var candPercent = candidate.percent
-    ? `${Math.round(candidate.percent*1000)/10}%`
+    ? `${Math.round(candidate.percent*10000)/100}%`
     : "-";
   return (
     <div role="cell" class="td percentage">
