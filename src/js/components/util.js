@@ -11,25 +11,17 @@ export function reportingPercentage(pct) {
   }
 }
 
-
-
-
 /* 
-
-
 One off to deal with new alaska stuff, 2022. 
+raceID's should be listed as string, e.g. "2933"
 */
 export function goingToRCVRunOff(raceID) {
-  
-
   var RCV_race_list = [];
-
   if (RCV_race_list.includes(raceID) ) {
       return true;
     }
   return false;
 }
-
 
 /*
   Sort a list of candidates by party, with Dems always first and GOP always last
