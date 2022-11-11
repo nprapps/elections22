@@ -44,9 +44,9 @@ async function init(results) {
     winner: ""
   }
   var house = {
-    Dem: {total: 0, gains: 0},
-    GOP: {total: 0, gains: 0},
-    Ind: {total: 0, gains: 0}
+    Dem: {total: parseInt(InactiveSenateRaces["house_Dem"]), gains: 0},
+    GOP: {total: parseInt(InactiveSenateRaces["house_GOP"]), gains: 0},
+    Ind: {total: parseInt(InactiveSenateRaces["house_Other"]), gains: 0}
   }
   var senate = {
     Dem:  {total: InactiveSenateRaces.Dem, gains: 0},

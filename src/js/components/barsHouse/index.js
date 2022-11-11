@@ -7,7 +7,7 @@ import {getParty} from "../util.js"
 import $ from "../../lib/qsa";
 
 
-//import InactiveSenateRaces from "inactive_senate_races.sheet.json";
+import InactiveSenateRaces from "inactive_senate_races.sheet.json";
 
 import DateFormatter from "../dateFormatter";
 
@@ -38,22 +38,27 @@ export default class BarsHouse extends Component {
     if (!this.props.data) {
       return;
     }
+
+    var inactiveGOP = parseInt(InactiveSenateRaces["house_GOP"]);
+    var inactiveDem = parseInt(InactiveSenateRaces["house_Dem"]);
+    var inactiveInd = parseInt(InactiveSenateRaces["house_Other"]);
+
     var results = (this.props.data);
 
     var house = {
-      Dem: {total: 0},
-      GOP: {total: 0},
-      Ind: {total: 0}
+      Dem: { total: (0 + inactiveDem) },
+      GOP: { total: (0 + inactiveGOP) },
+      Ind: { total: (0 + inactiveInd) }
     }
 
     // Tally vote/seat totals and gains (TODO: clean up the grossness)
 
-  
+
     results.forEach(function(r) {
       if ( r.hasOwnProperty('called')  && r.called == true ) {
           var winnerParty = getParty(r.winnerParty);
-          house[winnerParty].total += 1;  
-      } 
+          house[winnerParty].total += 1;
+      }
     });
 
     var winnerIcon =
@@ -70,12 +75,12 @@ export default class BarsHouse extends Component {
         </svg>
       </span>;
 
-    
+
     return (
         <div id="embed-bop-on-page">
 
           <a class="link-container house" href="http://apps.npr.org/election-results-live-2022/#/house" target="_top">
-            
+
           <div class="number-container">
             <div class="candidate dem">
               <div class="name">Dem. {house.Dem.total >= 218 ? winnerIcon : ""}</div>
@@ -114,7 +119,7 @@ export default class BarsHouse extends Component {
 
           <div class="chatter"><strong>218</strong> seats for majority </div>
 
-          {/*  Ignore net gain after redistricting. 
+          {/*  Ignore net gain after redistricting.
           <div class="net-gain-container">
             <div class="gain-label">Net gain</div>
             <div class={"net-gain " + house.netGainParty}>{house.netGainParty != "none"
