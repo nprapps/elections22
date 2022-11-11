@@ -2,13 +2,69 @@ import requests, csv, json, datetime
 from requests.exceptions import HTTPError
 from api_key import api_key
 
+
+"""
+Office ID Examples: These Office IDs are unique at the national level (across all states):
+ OfficeID    OfficeName
+ G   Governor 
+ H   U.S. House
+ I   Amendment, Ballot Measure, Initiative, Proposal, Proposition, Referendum or Question
+ P   President
+ S   U.S. Senate
+ Y   State House, State Assembly, General Assembly or House of Delegates
+ Z   State Senate
+State-Specific Office IDs These are examples only and may vary from state to state (for example, "L" may be associated with "Lieutenant Governor" in one state and "City Comptroller" in another state). These IDs are only unique within a state for a given election date.
+ ID  Name
+ A  Attorney General
+ C  Controller or Comptroller
+ D  District Attorney
+ E  Education Commissioner or Supt Public Instruction
+ J  Insurance Commissioner
+ L  Lieutenant Governor
+ M  Mayor
+ N  City Council
+ R  Secretary of State
+ T  Treasurer
+Race Type IDs:
+ ID  Name
+ D  Dem Primary
+ R  GOP Primary
+ G  General
+ E  Dem Caucus
+ S  GOP Caucus
+ X  Open Primary or special use cases
+"""
+
+
 # returnformat = "json"
 # offices = "G,S,H,I"
 # resultslevel = "FIPSCode"
 
+# returnformat = "json"
+# offices = "G,S,H,I"
+# resultslevel = "FIPSCode"
+
+
+
+# returnformat = "json"
+# offices = "G,S,H,I"
+# resultslevel = "FIPSCode"
+
+
+# all ballot initiatives
 returnformat = "json"
-offices = "G,S,H,I"
+offices = "I"
 resultslevel = "FIPSCode"
+
+# for AG's
+# returnformat = "json"
+# offices = "A"
+# resultslevel = "state"
+
+# for SOS
+# returnformat = "json"
+# offices = "A"
+# resultslevel = "state"
 
 # returnformat = "json"
 # offices = "G,S,H,I"
