@@ -107,7 +107,6 @@ export default class BalanceOfPower extends Component {
       inactiveDem = parseInt(InactiveSenateRaces["house_Dem"]);
       inactiveInd = parseInt(InactiveSenateRaces["house_Other"]);
     }
-    console.log(this.isHouse, inactiveGOP, inactiveDem, inactiveInd);
 
     var results = {
       GOP: { total: inactiveGOP, gains: 0 },
