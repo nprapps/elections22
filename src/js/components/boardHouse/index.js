@@ -41,7 +41,7 @@ export default class BoardHouse extends Component {
     }
     if (alert.includes("~")) {
       alert = '';
-    } 
+    }
 
     var sorted = results.slice().sort((a, b) =>
       a.state > b.state ? 1 :
@@ -123,7 +123,8 @@ export default class BoardHouse extends Component {
           <div class="note">
             <strong>Note:</strong> <em>% in</em> is an Associated Press estimate of
             the share of total ballots cast in an election that have been
-            counted. <a href="https://www.ap.org/about/our-role-in-elections/counting-the-vote">Read more about how EEVP is calculated</a>.
+            counted. <a href="https://www.ap.org/about/our-role-in-elections/counting-the-vote">Read more about how EEVP is calculated</a>.<br />
+            While the winners of the U.S. House races for California's 15th and 34th districts have not yet been decided, AP has called that the winners will be Democrats. The balance of power chart reflects those Democratic seats.
           </div>
           <div class="note">
             Seat flips are not shown for House races. Districts were redrawn during redistricting, so comparison to prior seatholders is meaningless.

@@ -6,6 +6,7 @@ export default class BalanceOfPower extends Component {
   constructor(props) {
     super();
 
+    this.isHouse = props.race == "house";
     this.isSenate = props.race == "senate";
     // Hardcoded # of seats needed for majority in Senate/house
     this.seatsNeeded = this.isSenate ? 51 : 218;
@@ -35,7 +36,7 @@ export default class BalanceOfPower extends Component {
                 Net gain
               </label>
               <abbr title="">
-                {results.netGainParty != "none" 
+                {results.netGainParty != "none"
                   ? results.netGainParty + " +" + results.netGain
                   : "No change"}
               </abbr>
@@ -93,11 +94,19 @@ export default class BalanceOfPower extends Component {
 
   getCongressBOP(data) {
     // Get inactive races (pre-set in sheet)
-    var inactiveGOP = this.isSenate ? parseInt(InactiveSenateRaces["GOP"]) : 0;
-    var inactiveDem = this.isSenate ? parseInt(InactiveSenateRaces["Dem"]) : 0;
-    var inactiveInd = this.isSenate
-      ? parseInt(InactiveSenateRaces["Other"])
-      : 0;
+    var inactiveGOP = 0;
+    var inactiveDem = 0;
+    var inactiveInd = 0;
+    if (this.isSenate) {
+      inactiveGOP = parseInt(InactiveSenateRaces["GOP"]);
+      inactiveDem = parseInt(InactiveSenateRaces["Dem"]);
+      inactiveInd = parseInt(InactiveSenateRaces["Other"]);
+    }
+    if (this.isHouse) {
+      inactiveGOP = parseInt(InactiveSenateRaces["house_GOP"]);
+      inactiveDem = parseInt(InactiveSenateRaces["house_Dem"]);
+      inactiveInd = parseInt(InactiveSenateRaces["house_Other"]);
+    }
 
     var results = {
       GOP: { total: inactiveGOP, gains: 0 },
