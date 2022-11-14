@@ -16,7 +16,8 @@ One off to deal with new alaska stuff, 2022.
 raceID's should be listed as string, e.g. "2933"
 */
 export function goingToRCVRunOff(raceID) {
-  var RCV_race_list = [];
+  // 20645  is ME-02, tabulation 
+  var RCV_race_list = ["20645"];
   if (RCV_race_list.includes(raceID) ) {
       return true;
     }
