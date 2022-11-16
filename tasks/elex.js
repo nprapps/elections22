@@ -84,18 +84,10 @@ module.exports = function(grunt) {
 
 
     // Exclude ALL RCV EXCEPT ME-O2
-    //results = results.filter(race => race.type != 'RCV General Election');
+    // Exclude the "normal" race when results are up on 11/16
 
     results = results.filter(race => race.id != 3153 && race.id != 3154 && race.id != 3156 && race.id != 21404 && race.id != 20645  );
 
-    console.log(results)
-
-  // 3153, 3154, 3156, 21404
-
-
-
-  // me 02 rcv 21405 
-  // me 02 20645
 
     // Ignore contest for end of 2016 CA term held during 2022
     // https://www.capradio.org/articles/2022/10/17/us-sen-alex-padilla-will-appear-on-californias-june-primary-ballot-twice-heres-why/
