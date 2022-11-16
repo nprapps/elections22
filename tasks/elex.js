@@ -82,11 +82,20 @@ module.exports = function(grunt) {
     // turn AP into normalized race objects
     var results = normalize(rawResults, grunt.data.json);
 
-    // Systematically exclude the results of ranked choice contests
-    // As of '22 these are returned on from Alaska and Maine. 
-    // AK won't be populated until 14 days after the race.
-    // Not clear on Maine. 
-    results = results.filter(race => race.type != 'RCV General Election');
+
+    // Exclude ALL RCV EXCEPT ME-O2
+    //results = results.filter(race => race.type != 'RCV General Election');
+
+    results = results.filter(race => race.id != 3153 && race.id != 3154 && race.id != 3156 && race.id != 21404 && race.id != 20645  );
+
+    console.log(results)
+
+  // 3153, 3154, 3156, 21404
+
+
+
+  // me 02 rcv 21405 
+  // me 02 20645
 
     // Ignore contest for end of 2016 CA term held during 2022
     // https://www.capradio.org/articles/2022/10/17/us-sen-alex-padilla-will-appear-on-californias-june-primary-ballot-twice-heres-why/
