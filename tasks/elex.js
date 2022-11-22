@@ -16,37 +16,25 @@ module.exports = function(grunt) {
 
   var elex = {};
 
+  
+   
+
   // Grunt doesn't like top-level async, so define this here and call it immediately
   var task = async function() {
+
+    // var RCV_linkages = [
+    // {'general_race_id':20645, 'rcv_race_id':21405},
+    // ]
+  
+
+    var RCV_linkages = grunt.data.json.rcv;
+
+    grunt.log.write("rcv overrides:");
+    grunt.log.write(RCV_linkages);
 
     var test = grunt.option("test");
     var offline = grunt.option("offline");
     var zero = grunt.option("zero");
-
-    // probably move this into a sheet to be safe
-    // also, should we use the ticket merging system?
-    // var tickets = [{
-    //     date: "2020-11-03",
-    //     params: {
-    //       officeID: "P,G,S",
-    //       level: "FIPSCode"
-    //     }
-    //   },
-    //   {
-    //     date: "2020-11-03",
-    //     params: {
-    //       officeID: "P",
-    //       level: "district"
-    //     }
-    //   },
-    //   {
-    //     date: "2020-11-03",
-    //     params: {
-    //       officeID: "H,I",
-    //       level: "state"
-    //     }
-    //   }
-    // ];
 
     var tickets = [{
         date: "2022-11-08",
@@ -83,16 +71,38 @@ module.exports = function(grunt) {
     var results = normalize(rawResults, grunt.data.json);
 
 
-    // Exclude ALL RCV EXCEPT ME-O2
-    // Exclude the "normal" race when results are up on 11/16
+    // Only include general election results if an RCV runoff is not available
+    RCV_linkages.forEach(function(rcv_linkage) {
+      this_rcv_race = results.filter(race => race.id == rcv_linkage['rcv_race_id'])[0];
+      
+      if (this_rcv_race.called) {
 
-    results = results.filter(race => race.id != 3153 && race.id != 3154 && race.id != 3156 && race.id != 21404 && race.id != 20645  );
+        // If the rcv race has been called, use it and filter out the "normal" race
+        console.log("RCV " + this_rcv_race.id  + " has been called, using it");
+
+        // Set the new race to have the same status as the old race before filtering it out
+        var thisGeneralRaceIsKey = results.find(race => race.id == rcv_linkage['general_race_id']).keyRace;
+
+        if (typeof thisGeneralRaceIsKey !== 'undefined') {
+          results.find(race => race.id == rcv_linkage['rcv_race_id']).keyRace = thisGeneralRaceIsKey;
+        }
+
+        // Ignore the general election race details 
+        results = results.filter(race => race.id != rcv_linkage['general_race_id'] )
+
+      } else {
+        console.log("RCV "+ this_rcv_race.id  + " has NOT been called yet, NOT using the RCV result");
+        results = results.filter(race => race.id != rcv_linkage['rcv_race_id'] )
+      }
+
+    });
 
 
     // Ignore contest for end of 2016 CA term held during 2022
     // https://www.capradio.org/articles/2022/10/17/us-sen-alex-padilla-will-appear-on-californias-june-primary-ballot-twice-heres-why/
     // And ignore contest for unexpired term in Indiana, House seat 2
     results = results.filter(race => race.id != 8964 && race.id != 15766);
+
 
     // filter generator for states that split their electoral college votes.
     var stateOrDistrictFilter = function(level) {
@@ -124,8 +134,8 @@ module.exports = function(grunt) {
       county: results.filter(r => r.level == "county")
     };
 
-    //grunt.log.writeln("Geo.national: ");
-    //grunt.log.writeflags(geo.national);
+    grunt.log.writeln("Geo.national: ");
+    grunt.log.writeflags(geo.national);
 
 
     // national results
