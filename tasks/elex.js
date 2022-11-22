@@ -22,16 +22,8 @@ module.exports = function(grunt) {
   // Grunt doesn't like top-level async, so define this here and call it immediately
   var task = async function() {
 
-    // var RCV_linkages = [
-    // {'general_race_id':20645, 'rcv_race_id':21405},
-    // ]
-  
-
+    // ranked choice voting for 22. 
     var RCV_linkages = grunt.data.json.rcv;
-
-    grunt.log.write("rcv overrides:");
-    grunt.log.write(RCV_linkages);
-
     var test = grunt.option("test");
     var offline = grunt.option("offline");
     var zero = grunt.option("zero");
@@ -78,7 +70,7 @@ module.exports = function(grunt) {
       if (this_rcv_race.called) {
 
         // If the rcv race has been called, use it and filter out the "normal" race
-        console.log("RCV " + this_rcv_race.id  + " has been called, using it");
+        console.log("RCV " + this_rcv_race.district + " " + this_rcv_race.id  + " has been called, using it");
 
         // Set the new race to have the same status as the old race before filtering it out
         var thisGeneralRaceIsKey = results.find(race => race.id == rcv_linkage['general_race_id']).keyRace;
@@ -91,7 +83,7 @@ module.exports = function(grunt) {
         results = results.filter(race => race.id != rcv_linkage['general_race_id'] )
 
       } else {
-        console.log("RCV "+ this_rcv_race.id  + " has NOT been called yet, NOT using the RCV result");
+        console.log("RCV " + this_rcv_race.district + " " + this_rcv_race.id  + " has NOT been called yet, NOT using the RCV result");
         results = results.filter(race => race.id != rcv_linkage['rcv_race_id'] )
       }
 
