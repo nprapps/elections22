@@ -128,6 +128,21 @@ For a given row, fill in the `key` for AP race ID. (Make sure this cell is cast 
      - 456, 2345, 2359
 
 
+Ranked Choice Voting
+---------------
+
+During the 2022 elections, races in Maine and Alaska went to RCV runoff elections. Little documentation on how AP's API is currently available, so this is an attempt to characterize how returns worked this year and what could be done to address this in the future. AP did answer some questions about how these results would look--but the answers were often aspirational rather than accurate. 
+
+### Config-based approach used in 2022
+
+What's missing in the AP's API is a formal linkage between the general election result and the RCV result. The raceIDs for the general election and RCV runoff should be entered in the rcv tab of the config spreadsheet. 
+
+With the race ID's present, the rig will prefer the RCV runoff result, but use the general election result if the RCV race hasn't been called. 
+
+This behavior is set to match AP's actions in 2022, which news orgs weren't given much heads up about. They may provide more details or tweak how this works in subsequent years. 
+
+
+
 Troubleshooting
 ---------------
 
