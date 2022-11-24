@@ -74,16 +74,23 @@ module.exports = function(grunt) {
 
         // Set the new race to have the same status as the old race before filtering it out
         var thisGeneralRaceIsKey = results.find(race => race.id == rcv_linkage['general_race_id']).keyRace;
+        var thisGeneralRaceRating = results.find(race => race.id == rcv_linkage['general_race_id']).rating
+
+
+
+        console.log(results.find(race => race.id == rcv_linkage['general_race_id']));
 
         if (typeof thisGeneralRaceIsKey !== 'undefined') {
           results.find(race => race.id == rcv_linkage['rcv_race_id']).keyRace = thisGeneralRaceIsKey;
+          results.find(race => race.id == rcv_linkage['rcv_race_id']).rating = thisGeneralRaceRating;
+
         }
 
         // Ignore the general election race details 
         results = results.filter(race => race.id != rcv_linkage['general_race_id'] )
 
       } else {
-        console.log("RCV " + this_rcv_race.district + " " + this_rcv_race.id  + " has NOT been called yet, NOT using the RCV result");
+        console.log("RCV race " + this_rcv_race.id  + " has NOT been called yet, NOT using the RCV result");
         results = results.filter(race => race.id != rcv_linkage['rcv_race_id'] )
       }
 
