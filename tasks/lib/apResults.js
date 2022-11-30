@@ -46,14 +46,22 @@ var issueTickets = function(races) {
       return true;
     });
 
+
+    if (r.resultstype == 't') {
+      
+    }
+
     tickets.push({
       date: apDate(r.date),
       params: {
         raceID: [...new Set(r.ids.concat(similar))].join(","),
         statePostal: r.state,
         level: r.office == "H" ? "state" : "FIPScode"
+        
       }
     });
+
+
   }
 
   // split into at least two sets of tickets, based on geographic specificity

@@ -41,13 +41,30 @@ module.exports = function(grunt) {
           officeID: "H,I",
           level: "state"
         }
+      },
+      {
+        date: "2022-12-06",
+        params: {
+          officeID: "S",
+          level: "state",
+          resultstype: "t"
+        }
       }
     ];
+
+
+// https://api.ap.org/v3/elections/2022-12-06?resultstype=t&apikey=RVGiAOYnGopS2woJyoKDPPol5zbGvbNZ
+
 
     // get results from AP
     var rawResults = [];
     for (var t of tickets) {
-      var response = await redeemTicket(t, { test, offline });
+      var use_test = false;
+      if (t.date == "2022-12-06") {
+        use_test = true 
+        console.log("Using test data for GA runoff...");
+      }
+      var response = await redeemTicket(t, {use_test , offline });
       if (!response) continue;
       // filter state results out of district requests
       if (t.params.level == "district") {
