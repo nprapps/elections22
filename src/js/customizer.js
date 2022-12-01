@@ -78,6 +78,20 @@ class Customizer extends Component {
     this.setState({ selectedState: state, races: [], raceID: null });
     var response = await fetch(`./data/states/${state}.json`);
     var json = await response.json();
+
+    // Hack for special election 
+    json.results.forEach(function (race) {
+      if (race.id == '12597') {
+        race.seat = "(Runoff, 12/6)";
+        race.seatNumber = -1;
+      }
+      if (race.id == '12588') {
+        race.seat = "(General Election, 11/8)";
+        race.seatNumber = -1;
+      }      
+
+    });
+
     this.setState({ races: json.results });
   }
 

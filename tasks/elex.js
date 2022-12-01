@@ -42,6 +42,14 @@ module.exports = function(grunt) {
           level: "state"
         }
       }
+      ,
+      {
+        date: "2022-12-06",
+        params: {
+          officeID: "S",
+          level: "state",
+        }
+      }
     ];
 
     // get results from AP
@@ -76,9 +84,6 @@ module.exports = function(grunt) {
         var thisGeneralRaceIsKey = results.find(race => race.id == rcv_linkage['general_race_id']).keyRace;
         var thisGeneralRaceRating = results.find(race => race.id == rcv_linkage['general_race_id']).rating
 
-
-
-        console.log(results.find(race => race.id == rcv_linkage['general_race_id']));
 
         if (typeof thisGeneralRaceIsKey !== 'undefined') {
           results.find(race => race.id == rcv_linkage['rcv_race_id']).keyRace = thisGeneralRaceIsKey;
