@@ -56,6 +56,19 @@ export default class StateResults extends Component {
 
     let stateName = stateLookup[this.props.state].name;
 
+
+    // Hack for GA runoff. 
+    if (typeof results !== 'undefined') {
+      results.forEach(function (race) {
+        if (race.id == '12597') {
+          race.seatNumber = "( Runoff 12/6 )";
+        }
+        if (race.id == '12588') {
+          race.seatNumber = "( General Election 11/8)";
+        }      
+      });
+    };
+
     let office = props.subview || "key";
 
     let viewTitle =
