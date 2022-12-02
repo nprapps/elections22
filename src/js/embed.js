@@ -33,12 +33,19 @@ async function init() {
     results = results.filter(r => r.id == params.race);
   }
   var container = $.one("main.embed");
+
   console.log("embed.js results are:")
   console.log(results)
+
 
   var template = <>
     {results.map(function(r) {
       var office = strings["office-" + r.office];
+
+      // Hack for GA runoff
+      if (r.id == '12597') {
+        office = "Senate (Dec. 6 runoff)"
+      }
       return (<>
         <ResultsTableCandidates data={r} title={office} />
 
