@@ -47,7 +47,8 @@ module.exports = function(grunt) {
         date: "2022-12-06",
         params: {
           officeID: "S",
-          level: "state",
+          level: "FIPSCode",
+          resultstype
         }
       }
     ];
