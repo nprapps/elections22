@@ -82,11 +82,11 @@ class Customizer extends Component {
     // Hack for special election 
     json.results.forEach(function (race) {
       if (race.id == '12597') {
-        race.seat = "(Runoff, 12/6)";
+        race.seat = "(Dec. 6 runoff)";
         race.seatNumber = -1;
       }
       if (race.id == '12588') {
-        race.seat = "(General Election, 11/8)";
+        race.seat = "(Nov. 8 election)";
         race.seatNumber = -1;
       }      
 

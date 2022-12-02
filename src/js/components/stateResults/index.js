@@ -61,10 +61,10 @@ export default class StateResults extends Component {
     if (typeof results !== 'undefined') {
       results.forEach(function (race) {
         if (race.id == '12597') {
-          race.seatNumber = "( Runoff 12/6 )";
+          race.seatNumber = "(Dec. 6 runoff)";
         }
         if (race.id == '12588') {
-          race.seatNumber = "( General Election 11/8)";
+          race.seatNumber = "(Nov. 8 election)";
         }      
       });
     };
