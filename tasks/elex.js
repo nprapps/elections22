@@ -48,7 +48,6 @@ module.exports = function(grunt) {
         params: {
           officeID: "S",
           level: "FIPSCode",
-          resultstype
         }
       }
     ];
