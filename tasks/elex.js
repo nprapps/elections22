@@ -28,7 +28,15 @@ module.exports = function(grunt) {
     var offline = grunt.option("offline");
     var zero = grunt.option("zero");
 
-    var tickets = [{
+    var tickets = [
+      {
+        date: "2022-12-06",
+        params: {
+          officeID: "S",
+          level: "FIPSCode",
+        }
+      },
+      {
         date: "2022-11-08",
         params: {
           officeID: "G,S",
@@ -40,14 +48,6 @@ module.exports = function(grunt) {
         params: {
           officeID: "H,I",
           level: "state"
-        }
-      }
-      ,
-      {
-        date: "2022-12-06",
-        params: {
-          officeID: "S",
-          level: "FIPSCode",
         }
       }
     ];
