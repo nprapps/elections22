@@ -20,6 +20,14 @@ export class CountyDataViz extends Component {
 
   // Lifecycle: Called whenever our component is created
   async componentDidMount() {
+
+    // Hack to suppress GA general election correlations during the runoff
+    // These are getting intermingled b/c we are sorta abusing the page by doubling it up. 
+    var raceid = this.props.data[0].id;
+    if (raceid == 12588) {
+      return null;
+    }
+
     // Sort by party for consistent display.
     var sorted = this.props.order.slice().sort(sortByParty);
     var cleanedData = this.getCleanedData(this.props.data, sorted);
